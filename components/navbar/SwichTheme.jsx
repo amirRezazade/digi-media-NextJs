@@ -3,21 +3,24 @@
 import { useEffect, useState } from "react";
 
 export default function SwichTheme(params) {
-  // let [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  let [theme, setTheme] = useState("");
+  let [theme, setTheme] = useState("dark");
 
   useEffect(() => {
-    if (theme == "dark") document.body.classList.add("dark");
+    let t = localStorage.getItem("theme") || "dark";
+    if (t == "dark") {
+      setTheme("dark");
+      document.body.classList.add("dark");
+    } else setTheme("light");
   }, []);
 
   useEffect(() => {
-    // localStorage.setItem("theme", theme);
+    localStorage.setItem("theme", theme);
     if (theme == "dark") document.body.classList.add("dark");
     else document.body.classList.remove("dark");
   }, [theme]);
 
   return (
-    <button onClick={() => setTheme((prev) => (prev == "dark" ? "light" : "dark"))} className="flex items-center justify-around rounded-full w-16 dark:bg-orange-400 bg-gray-800 relative p-1 py-1.5 cursor-pointer">
+    <button onClick={() => setTheme((prev) => (prev == "dark" ? "light" : "dark"))} className="flex items-center justify-around rounded-full w-16 bg-orange-400 dark:bg-gray-800 relative p-1 py-1.5 cursor-pointer">
       <span>
         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -49,7 +52,7 @@ export default function SwichTheme(params) {
           </g>
         </svg>
       </span>
-      <span className="absolute bg-white rounded-full w-6 h-6 left-1 transition-all duration-300 dark:translate-x-7.5"></span>
+      <span className="absolute bg-white rounded-full w-6 h-6 left-1 transition-all duration-300 translate-x-7.5 dark:translate-x-0"></span>
     </button>
   );
 }

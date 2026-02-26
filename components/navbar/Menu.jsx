@@ -14,7 +14,7 @@ export default function Menu(params) {
   const { isOpen, closeMenu } = useMenu();
 
   return (
-    <div onClick={(e) => e.target.classList.contains("menu-bg") && closeMenu()} className={`menu-bg fixed w-screen h-screen top-0  right-0 bg-black/60 transition-transform duration-700 lg:static lg:bg-transparent lg:items-center lg:h-auto lg:grow lg:w-auto xl:w-auto xl:grow-0 ${isOpen ? " " : "translate-x-5/4"} lg:translate-x-0`}>
+    <div onClick={(e) => e.target.classList.contains("menu-bg") && closeMenu()} className={`menu-bg fixed w-screen h-screen top-0  right-0 bg-black/60 transition-transform duration-700 lg:static z-10 lg:bg-transparent lg:items-center lg:h-auto lg:grow lg:w-auto xl:w-auto xl:grow-0 ${isOpen ? " " : "translate-x-5/4"} lg:translate-x-0`}>
       <ul className="w-8/10 xs:max-w-80 sm:max-w-100 lg:max-w-max h-full bg-white lg:bg-transparent dark:bg-gray-800 flex flex-col gap-3 p-5 pb-20 overflow-auto hidden-scrollbar text-sm lg:w-full lg:h-auto lg:flex-row lg:p-0 lg:overflow-visible lg:dark:bg-transparent lg:justify-between xl:justify-start xl:gap-10">
         <div className="flex items-center justify-between mb-5 lg:hidden">
           <Link href="/">
