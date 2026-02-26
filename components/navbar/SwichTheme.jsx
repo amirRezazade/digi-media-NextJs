@@ -3,14 +3,15 @@
 import { useEffect, useState } from "react";
 
 export default function SwichTheme(params) {
-  let [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  // let [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  let [theme, setTheme] = useState("");
 
   useEffect(() => {
     if (theme == "dark") document.body.classList.add("dark");
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    // localStorage.setItem("theme", theme);
     if (theme == "dark") document.body.classList.add("dark");
     else document.body.classList.remove("dark");
   }, [theme]);

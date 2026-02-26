@@ -7,5 +7,5 @@ export default function ScrollToTop(params) {
       behavior: "smooth",
     });
   };
-  return <button onClick={scrollToTop} class="w-13 h-13 bg-[url(/images/top.png)]  bg-no-repeat grayscale-100 hover:grayscale-0 transition-all duration-300"></button>;
+  return <button onClick={scrollToTop} className="w-13 h-13 bg-[url(/images/top.png)]  bg-no-repeat grayscale-100 hover:grayscale-0 transition-all duration-300"></button>;
 }

@@ -4,13 +4,13 @@ import ScrollToTop from "./ScrollToTop";
 export default function Footer(params) {
   return (
     <footer className="theme mt-5 lg:mt-10 pt-7 text-black dark:text-gray-200 ">
-      <div class="  pb-10 lg:pb-4 px-3 md:px-6 lg:px-8 xl:px-12 xl:py-8  bg-[url('/images/footer-bg.png')]  bg-cover flex flex-col gap-5 md:flex-row md:justify-between">
-        <div class="flex flex-col items-center gap-6 md:gap-4 md:w-auto md:order-2 lg:px-10">
-          <p class="text-xs lg:text-sm leading-9 text-center">هدف از ایجاد دیجی مدیا ارائه خدمات کیفی در سطح عالی بود که سایت های فیلم و سریال قادر به رقابت با سایت های قدرتمند خارجی و ایرانی باشند. دیجی مدیا متشکل از بهترین و کامل ترین امکانات هر سایت فیلم و سریال می باشد و سطح کیفی خود را تا آخر حفظ خواهد نمود</p>
-          <h3 class=" ">دیجی مدیا در شبکه های اجتماعی</h3>
-          <div class="flex gap-2 items-center">
-            <button class="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg class="transition-all duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <div className="  pb-10 lg:pb-4 px-3 md:px-6 lg:px-8 xl:px-12 xl:py-8  bg-[url('/images/footer-bg.png')]  bg-cover flex flex-col gap-5 md:flex-row md:justify-between">
+        <div className="flex flex-col items-center gap-6 md:gap-4 md:w-auto md:order-2 lg:px-10">
+          <p className="text-xs lg:text-sm leading-9 text-center">هدف از ایجاد دیجی مدیا ارائه خدمات کیفی در سطح عالی بود که سایت های فیلم و سریال قادر به رقابت با سایت های قدرتمند خارجی و ایرانی باشند. دیجی مدیا متشکل از بهترین و کامل ترین امکانات هر سایت فیلم و سریال می باشد و سطح کیفی خود را تا آخر حفظ خواهد نمود</p>
+          <h3 className=" ">دیجی مدیا در شبکه های اجتماعی</h3>
+          <div className="flex gap-2 items-center">
+            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-all duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -18,8 +18,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button class="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg class="transition-all duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-all duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -33,8 +33,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button class="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg class="transition-all duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-all duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -46,8 +46,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button class="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg class="transition-all duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="26" height="26" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-all duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="26" height="26" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0" fill="none" width="20" height="20" />
 
                 <g>
@@ -55,8 +55,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button class="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg class="transition-all duration-300 group-hover:fill-blue-500 fill-gray-500 dark:fill-white" width="26px" height="26px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-all duration-300 group-hover:fill-blue-500 fill-gray-500 dark:fill-white" width="26px" height="26px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -67,8 +67,8 @@ export default function Footer(params) {
           </div>
           <ScrollToTop />
         </div>
-        <div class="felx flex-col  md:order-1 md:min-w-1/6 lg:min-w-1/4">
-          <div class="flex items-center">
+        <div className="felx flex-col  md:order-1 md:min-w-1/6 lg:min-w-1/4">
+          <div className="flex items-center">
             <span>
               <svg width="30px" height="30px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -78,42 +78,42 @@ export default function Footer(params) {
                 </g>
               </svg>
             </span>
-            <span class="">دسترسی سریع</span>
+            <span className="">دسترسی سریع</span>
           </div>
-          <ul class=" mt-4 px-3 ">
+          <ul className=" mt-4 px-3 ">
             <li>
-              <Link href="/" class="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
+              <Link href="/" className="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
                 صفحه نخست
               </Link>
             </li>
-            <li class="my-3">
-              <button class="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">بلاگ</button>
+            <li className="my-3">
+              <button className="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">بلاگ</button>
             </li>
             <li>
-              <Link href="/my-account" class=" text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
+              <Link href="/my-account" className=" text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
                 پنل کاربری
               </Link>
             </li>
           </ul>
         </div>
-        <div class="felx flex-col  mt-4 md:order-3 md:min-w-2/6 lg:min-w-1/4">
-          <div class="flex items-center">
+        <div className="felx flex-col  mt-4 md:order-3 md:min-w-2/6 lg:min-w-1/4">
+          <div className="flex items-center">
             <span>
               <svg width="22" height="22" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M32.3132966,17.0344534 L34.0729071,16.8698521 C34.3335679,16.8443847 34.57558,16.7305148 34.7589541,16.5470578 L36.8668846,14.4391273 C37.172093,14.1339189 37.627781,14.0315805 38.0439657,14.1747785 C38.4601504,14.3179765 38.7653918,14.6821303 38.8324303,15.1154189 C39.2283687,17.6352909 38.2060823,20.1342578 36.1745622,21.6125455 C34.1430421,23.0908333 31.4340401,23.3070343 29.1313599,22.174652 L15.2822892,36.0237227 C14.3694733,36.9365386 12.8895062,36.9365386 11.9766903,36.0237227 C11.0638743,35.1109067 11.0638743,33.6309397 11.9766903,32.7181237 L25.8273725,18.8674415 C24.6967399,16.5647203 24.913721,13.8567631 26.3915992,11.8258058 C27.8694775,9.79484853 30.3672209,8.77212658 32.8866056,9.16637107 C33.3198942,9.23340957 33.684048,9.53865096 33.827246,9.95483565 C33.970444,10.3710203 33.8681056,10.8267084 33.5628972,11.1319168 L31.4678593,13.2269547 C31.2760448,13.4196585 31.1611383,13.6762881 31.1438887,13.9505032 L31.0242247,15.7840591 C31.0021934,16.1256399 31.1335511,16.4630069 31.3826662,16.7046475 C31.6317812,16.9462881 31.9728284,17.0671517 32.3132966,17.0344534 Z M13.3994135,34.6043006 C13.7899378,34.9948249 14.4231027,34.9948249 14.813627,34.6043006 C15.2041513,34.2137764 15.2041513,33.5806114 14.813627,33.1900871 C14.4231027,32.7995628 13.7899378,32.7995628 13.3994135,33.1900871 C13.0088892,33.5806114 13.0088892,34.2137764 13.3994135,34.6043006 Z"
                   fill="#fff"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   transform="translate(-11 -9)"
                 />
               </svg>
             </span>
-            <span class="  mx-2"> ابزار های سایت</span>
+            <span className="  mx-2"> ابزار های سایت</span>
           </div>
-          <button class="flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mt-5 mb-3">
-            <div class="flex flex-col gap-1.5">
-              <span class="text-orange-400 text-sm">درخواستی دارید</span>
-              <span class="text-xs">دیجی مدیا برای شما قرار میدهد</span>
+          <button className="flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mt-5 mb-3">
+            <div className="flex flex-col gap-1.5">
+              <span className="text-orange-400 text-sm">درخواستی دارید</span>
+              <span className="text-xs">دیجی مدیا برای شما قرار میدهد</span>
             </div>
             <span>
               <svg width="28px" height="28px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -126,20 +126,20 @@ export default function Footer(params) {
               </svg>
             </span>
           </button>
-          <button class="flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mb-3">
-            <div class="flex flex-col gap-1.5">
-              <span class="text-sky-500 text-sm">وبلاگ دیجی مدیا</span>
-              <span class="text-xs">اخبار دنیای فیلم و سریال را با ما تجربه کنید</span>
+          <button className="flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mb-3">
+            <div className="flex flex-col gap-1.5">
+              <span className="text-sky-500 text-sm">وبلاگ دیجی مدیا</span>
+              <span className="text-xs">اخبار دنیای فیلم و سریال را با ما تجربه کنید</span>
             </div>
           </button>
         </div>
       </div>
-      <div class="flex items-center justify-center gap-2 pt-2 pb-12 xs:pb-2!">
-        <p class="text-xs">«طراحی و توسعه توسط امیر رضازاده — 2026»</p>
-        <a href="https://github.com/amirRezazade" target="-blank" class="px-2 py-1 fill-white">
-          <svg width="25px" height="25px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-github">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <div className="flex items-center justify-center gap-2 pt-2 pb-12 xs:pb-2!">
+        <p className="text-xs">«طراحی و توسعه توسط امیر رضازاده — 2026»</p>
+        <a href="https://github.com/amirRezazade" target="-blank" className="px-2 py-1 fill-white">
+          <svg width="25px" height="25px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" className="jam jam-github">
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
             <g id="SVGRepo_iconCarrier">
               <path d="M18.88 1.099C18.147.366 17.265 0 16.233 0H3.746C2.714 0 1.832.366 1.099 1.099.366 1.832 0 2.714 0 3.746v12.487c0 1.032.366 1.914 1.099 2.647.733.733 1.615 1.099 2.647 1.099H6.66c.19 0 .333-.007.429-.02a.504.504 0 0 0 .286-.169c.095-.1.143-.245.143-.435l-.007-.885c-.004-.564-.006-1.01-.006-1.34l-.3.052c-.19.035-.43.05-.721.046a5.555 5.555 0 0 1-.904-.091 2.026 2.026 0 0 1-.872-.39 1.651 1.651 0 0 1-.572-.8l-.13-.3a3.25 3.25 0 0 0-.41-.663c-.186-.243-.375-.407-.566-.494l-.09-.065a.956.956 0 0 1-.17-.156.723.723 0 0 1-.117-.182c-.026-.061-.004-.111.065-.15.07-.04.195-.059.378-.059l.26.04c.173.034.388.138.643.311a2.1 2.1 0 0 1 .631.677c.2.355.44.626.722.813.282.186.566.28.852.28.286 0 .533-.022.742-.065a2.59 2.59 0 0 0 .585-.196c.078-.58.29-1.028.637-1.34a8.907 8.907 0 0 1-1.333-.234 5.314 5.314 0 0 1-1.223-.507 3.5 3.5 0 0 1-1.047-.872c-.277-.347-.505-.802-.683-1.365-.177-.564-.266-1.215-.266-1.952 0-1.049.342-1.942 1.027-2.68-.32-.788-.29-1.673.091-2.652.252-.079.625-.02 1.119.175.494.195.856.362 1.086.5.23.14.414.257.553.352a9.233 9.233 0 0 1 2.497-.338c.859 0 1.691.113 2.498.338l.494-.312a6.997 6.997 0 0 1 1.197-.572c.46-.174.81-.221 1.054-.143.39.98.424 1.864.103 2.653.685.737 1.028 1.63 1.028 2.68 0 .737-.089 1.39-.267 1.957-.177.568-.407 1.023-.689 1.366-.282.343-.633.63-1.053.865-.42.234-.828.403-1.223.507a8.9 8.9 0 0 1-1.333.235c.45.39.676 1.005.676 1.846v3.11c0 .147.021.266.065.357a.36.36 0 0 0 .208.189c.096.034.18.056.254.064.074.01.18.013.318.013h2.914c1.032 0 1.914-.366 2.647-1.099.732-.732 1.099-1.615 1.099-2.647V3.746c0-1.032-.367-1.914-1.1-2.647z"></path>
             </g>

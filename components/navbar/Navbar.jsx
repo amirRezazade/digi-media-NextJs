@@ -6,7 +6,7 @@ import Menu from "./Menu";
 
 export default function Navbar(params) {
   return (
-    <nav className="bg-[url('/images/navbar/navbar.png')]  transition-all duration-300 lg:sticky lg:top-0   bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3">
+    <nav className="bg-[url('/images/navbar/navbar.png')]  transition-all duration-300 lg:sticky lg:top-0  z-99 bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3">
       <span className="text-white ml-auto mr-1 sm:mr-4 md:mr-8 text-xs sm:text-sm hidden xs:inline-block">
         <span className="hidden sm:inline">جهت نمایش عکس ها و تریلر ها</span> vpn خود را روشن کنید
       </span>
