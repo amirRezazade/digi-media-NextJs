@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "./header.css";
+import "swiper/css";
+
 import Image from "next/image";
 
 export default function HeaderSlider({ onActiveIndex }) {
@@ -40,7 +42,7 @@ export default function HeaderSlider({ onActiveIndex }) {
             <span className="text-orange-400 lg:text-base">برگزیده ها</span>
           </div>
           <Swiper
-            className="mySwiper p-8 md:mt-2 min-h-auto overflow-hidden!"
+            className="mySwiper py-4! md:mt-2 min-h-auto overflow-hidden!"
             slidesPerView={"auto"}
             centeredSlides={true}
             modules={[Navigation, Autoplay]}

@@ -45,3 +45,7 @@ label {
     @apply bg-stone-200 dark:bg-gray-900;
   }
 }
+.test-swiper .swiper-wrapper {
+  min-width: 100% !important;
+  /* justify-content: center !important; */
+}

@@ -23,7 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={` font-[iran-sans] `}>
+      <body className={` dark theme font-[iran-sans] `}>
         <MenuProvider>
           <Navbar />
           <MobileNav />

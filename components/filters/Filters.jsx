@@ -26,7 +26,7 @@ export default function Filters(params) {
   }
   return (
     <section className={`w-[90vw]  mx-auto flex flex-col  gap-2 -translate-y-1/3 md:translate-y-0 lg:-translate-y-1/3 rounded-2xl overflow-hidden transition-[max_height] duration-300 shadow-lg shadow-gray-300 dark:shadow-transparent ${moreFilters ? "max-h-40" : "max-h-18"}`}>
-      <Link href="/search?&type=all&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=true&Subtitle=true&page=1" className="text-center text-base sm:text-lg  text-gray-500 dark:text-gray-200 block rounded-2xl py-2.5 transition-colors duration-300 bg-white dark:bg-gray-800 hover:text-orange-400 lg:hidden">
+      <Link href="/search" className="text-center text-base sm:text-lg  text-gray-500 dark:text-gray-200 block rounded-2xl py-2.5 transition-colors duration-300 bg-white dark:bg-gray-800 hover:text-orange-400 lg:hidden">
         جستجوی پیشرفته
       </Link>
       <div className="hidden lg:flex justify-between items-center text-sm p-3 text-gray-500 rounded-2xl  dark:text-gray-200 bg-white dark:bg-gray-800 ">
@@ -90,14 +90,14 @@ export default function Filters(params) {
             <label className="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
               <span className="ms-3 text-xs xl:text-sm font-medium text-nowrap">دوبله فارسی</span>
               <input onChange={(e) => setDouble(e.target.checked)} type="checkbox" value="" className="sr-only peer" />
-              <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
+              <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform  peer-checked:bg-orange-400"></div>
             </label>
           </div>
           <div>
             <label className="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
               <span className="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">زیرنویس فارسی</span>
               <input onChange={(e) => setSubtitle(e.target.checked)} type="checkbox" value="" className="sr-only peer" />
-              <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
+              <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform  peer-checked:bg-orange-400"></div>
             </label>
           </div>
         </div>
