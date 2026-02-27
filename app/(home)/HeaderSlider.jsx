@@ -52,6 +52,11 @@ export default function HeaderSlider({ onActiveIndex }) {
               delay: 6000,
               disableOnInteraction: false,
             }}
+            breakpoints={{
+              1100: {
+                spaceBetween: 10,
+              },
+            }}
             initialSlide={0}
             effect={"slide"}
             spaceBetween={20}
@@ -60,7 +65,7 @@ export default function HeaderSlider({ onActiveIndex }) {
           >
             {list.map((item) => (
               <SwiperSlide className="transition-all! duration-300! w-fit!">
-                <Link href={`/${item.media_type}/${item.id}`} className="w-44 xs:w-40 xl:w-45 rounded-md group flex  duration-500 ">
+                <Link href={`/${item.media_type}/${item.id}`} className="w-44 xs:w-40 xl:w-45 2xl:w-40 rounded-md group flex  duration-500 ">
                   <div className="w-full flex flex-col justify-between gap-2 h-full">
                     <div className="relative grow rounded-md transition-transform duration-300 active">
                       <Image width={160} height={240} className="w-full object-cover rounded-md " src={`https://image.tmdb.org/t/p/original${item.poster_path}_medium`} alt={item.name ? item.name : item.title} onError="this.onerror=null; this.src='/images/default_poster.jpg'" />
