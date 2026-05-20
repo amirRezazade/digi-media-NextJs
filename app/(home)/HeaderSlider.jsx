@@ -24,7 +24,7 @@ export default function HeaderSlider({ onActiveIndex }) {
 
   return (
     <div className=" w-full h-auto select-none text-white ">
-      {list?.length && (
+      {list?.length ? (
         <>
           <div className="hidden sm:flex justify-between fill-gray-300 ">
             <div className="flex gap-2">
@@ -142,6 +142,8 @@ export default function HeaderSlider({ onActiveIndex }) {
             ))}
           </Swiper>
         </>
+      ) : (
+        ""
       )}
     </div>
   );

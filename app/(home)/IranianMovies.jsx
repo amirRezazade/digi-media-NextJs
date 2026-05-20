@@ -5,16 +5,16 @@ import "swiper/css";
 import SectionSlider from "@/components/sectionSlider/SectionSlider";
 import Link from "next/link";
 
-export default function ActionMovie(params) {
+export default function IranianMovies(params) {
   let [list, setList] = useState(null);
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}&with_genres=28&without_genres=16,10751&vote_count.gte=2000`)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}&with_original_language=fa&with_production_countries=IR&sort_by=vote_average.desc`)
       .then((res) => res.json())
       .then((res) => setList(res.results));
   }, []);
 
   return (
-    <div>
+    <div className="mt-11 lg:mt-15 ">
       <div className="flex justify-between items-center  ">
         <div className="flex items-center gap-3">
           <span className="p-1.5 lg:p-2.5 rounded-full border-5 border-orange-400/50">
@@ -35,8 +35,8 @@ export default function ActionMovie(params) {
             </svg> */}
           </span>
           <div className="flex flex-col gap-1">
-            <span className="font-[iran-yekan] text-sm lg:text-base dark:text-white">فیلم های اکشن</span>
-            <span className="text-xs lg:text-sm text-gray-500  dark:text-gray-300">معروف ترین ها</span>
+            <span className="font-[iran-yekan] text-sm lg:text-base dark:text-white">فیلم های ایرانی</span>
+            <span className="text-xs lg:text-sm text-gray-500  dark:text-gray-300">جدید ترین ها</span>
           </div>
         </div>
         <Link href="/search" className="flex items-center gap-2 p-2 lg:p-3.5 text-xs lg:text-sm rounded-full hover:opacity-75 transition-all duration-300 text-gray-500 dark:text-gray-300 bg-gray-300 dark:bg-gray-800">

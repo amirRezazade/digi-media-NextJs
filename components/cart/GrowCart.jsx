@@ -1,26 +1,27 @@
 import Image from "next/image";
 import "swiper/css";
-import { SwiperSlide } from "swiper/react";
-import { genres } from "../utils";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import GenreBtn from "../GenreBtn";
+import defaultPoster from "../../public/images/default_poster.jpg";
 export default function GrowCart({ item, type }) {
-  let router = useRouter();
-
-  function genreLink(e, id) {
-    e.preventDefault();
-    e.stopPropagation();
-    router.push(`/search?genre=${id}`);
-  }
-  //   console.log(item);
-
   return (
     <Link href={`/${type}/${item.id}`} className=" w-full ">
-      <div className="w-full h-9/10 relative rounded-md overflow-hidden lg:h-64 xl:h-72">
-        <div className="w-full h-full overflow-hidden ">
-          <img className="w-full h-full object-cover loading-animation lg:group-hover:opacity-0 transition-opacity duration-600  " src={`https://image.tmdb.org/t/p/original${item.poster_path}_medium`} alt={item.name ? item.name : item.title} />
+      <div className="w-full aspect-2/3 relative rounded-md overflow-hidden   xl:h-72">
+        <div className="w-full h-full overflow-hidden relative">
+          <Image
+            className="w-full h-full object-cover loading-animation lg:group-hover:opacity-0 transition-opacity duration-600"
+            src={`https://image.tmdb.org/t/p/original${item.poster_path}_medium`}
+            alt={item.name ? item.name : item.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onError={(e) => {
+              if (e.target.src !== defaultPoster) {
+                e.target.src = defaultPoster;
+              }
+            }}
+          />
         </div>
-        <div className={`absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-[opacity,visibility] duration-600 `} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${item.backdrop_path}_medium)` }}>
+        <div className={`absolute top-0 left-0  bg-center bg-cover w-full min-h-full  rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-[opacity,visibility] duration-600 `} style={{ backgroundImage: item.backdrop_path ? `url(https://image.tmdb.org/t/p/original${item.backdrop_path}_low)` : `url(https://image.tmdb.org/t/p/original${item.poster_path}_medium)` }}>
           <div className="absolute top-0 left-0 flex flex-col justify-between  w-full min-h-full bg-black/60 px-3 py-3.5">
             <div className=" flex justify-between items-center">
               <span className="flex items-center gap-0.5 text-gray-300">
@@ -59,20 +60,13 @@ export default function GrowCart({ item, type }) {
                   </svg>
                 </span>
               </div>
-              <div className=" hidden pointer-events-none lg:flex gap-2 flex-wrap items-center genre-btns">
-                {item.genre_ids &&
-                  item.genre_ids.map((id) => (
-                    <button className=" pointer-events-auto px-2.5 py-1 cursor-pointer rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-colors duration-300" onClick={(e) => genreLink(e, id)}>
-                      {genres[id]}
-                    </button>
-                  ))}
-              </div>
+              <div className=" hidden pointer-events-none lg:flex gap-2 flex-wrap items-center genre-btns">{item.genre_ids && item.genre_ids.map((id) => <GenreBtn key={id} id={id} />)}</div>
             </div>
           </div>
         </div>
       </div>
       <p dir="ltr" className="block mt-2  h-auto w-full text-center truncate  text-ellipsis transition-colors duration-300 group-hover:text-orange-400 text-black dark:text-white text-sm ">
-        <span className="">${item.name ? item.name : item.title}</span>
+        <span className="">{item.name ? item.name : item.title}</span>
         <span className="opacity-70 ml-2 ">{item.release_date ? item.release_date.slice(0, 4) : ""}</span>
       </p>
     </Link>
