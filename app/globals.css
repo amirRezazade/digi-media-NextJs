@@ -11,7 +11,8 @@
 }
 @font-face {
   font-family: iran-yekan;
-  src: url(../public/fonts/ttf/iranyekanwebbold.ttf) format(ttf), url(../public/fonts/woff/iranyekanwebbold.woff) format(woff);
+  /* src: url(../public/fonts/ttf/iranyekanwebbold.ttf) format(ttf), url(../public/fonts/woff/iranyekanwebbold.woff) format(woff); */
+  src: url(../public/fonts/ttf/Kalameh-Bold.ttf) format(ttf);
 }
 @theme inline {
   --breakpoint-xs: 480px;

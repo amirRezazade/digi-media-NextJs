@@ -10,11 +10,15 @@ import "swiper/css";
 import Image from "next/image";
 
 export default function HeaderSlider({ onActiveIndex }) {
+  // throw new Error("سلام");
   let [list, setList] = useState([]);
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}`)
       .then((res) => res.json())
-      .then((res) => setList(res.results.slice(0, 15)));
+      .then((res) => setList(res.results.slice(0, 15)))
+      .catch((err) => {
+        throw new Error(err);
+      });
   }, []);
 
   function change(index) {
