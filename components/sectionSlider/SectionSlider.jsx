@@ -1,7 +1,7 @@
 import GrowCart from "@/components/cart/GrowCart";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./sectionSlider.css";
-export default function SectionSlider({ list }) {
+export default function SectionSlider({ list, type = "movie" }) {
   return (
     <Swiper
       className="section-slider my-6 lg:my-10 "
@@ -28,7 +28,7 @@ export default function SectionSlider({ list }) {
       {list &&
         list.slice(0, 6).map((item) => (
           <SwiperSlide className=" w-full xl:not-hover:max-w-50  overflow-hidden xl:h-auto  rounded-md xl:hover:grow! xl:hover:max-w-100!  transition-all!  duration-600 group">
-            <GrowCart key={item.id} item={item} type={"movie"} />
+            <GrowCart key={item.id} item={item} type={type} />
           </SwiperSlide>
         ))}
     </Swiper>

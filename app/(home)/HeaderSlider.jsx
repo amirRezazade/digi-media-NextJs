@@ -6,19 +6,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "./header.css";
 import "swiper/css";
-
 import Image from "next/image";
 
 export default function HeaderSlider({ onActiveIndex }) {
-  // throw new Error("سلام");
   let [list, setList] = useState([]);
+
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}`)
-      .then((res) => res.json())
-      .then((res) => setList(res.results.slice(0, 15)))
-      .catch((err) => {
-        throw new Error(err);
-      });
+    async function getMovies() {
+      const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}`);
+      if (!res.ok) throw new Error("خطا");
+      const items = await res.json();
+      setList(items.results.slice(0, 15));
+    }
+    getMovies();
   }, []);
 
   function change(index) {
@@ -71,7 +71,7 @@ export default function HeaderSlider({ onActiveIndex }) {
           >
             {list.map((item) => (
               <SwiperSlide className="transition-all! duration-300! w-fit!">
-                <Link href={`/${item.media_type}/${item.id}`} className="w-44 xs:w-40 xl:w-45 2xl:w-40 rounded-md group flex  duration-500 ">
+                <Link href={`/${item.media_type == "movie" ? "movie" : "series"}/${item.id}`} className="w-44 xs:w-40 xl:w-45 2xl:w-40 rounded-md group flex  duration-500 ">
                   <div className="w-full flex flex-col justify-between gap-2 h-full">
                     <div className="relative grow rounded-md transition-transform duration-300 active">
                       <Image width={160} height={240} className="w-full object-cover rounded-md " src={`https://image.tmdb.org/t/p/original${item.poster_path}_medium`} alt={item.name ? item.name : item.title} onError="this.onerror=null; this.src='/images/default_poster.jpg'" />

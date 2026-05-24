@@ -52,7 +52,7 @@ export default function PopularSeries(params) {
           </span>
         </Link>
       </div>
-      <SectionSlider list={list} />
+      <SectionSlider list={list} type="series" />
     </div>
   );
 }

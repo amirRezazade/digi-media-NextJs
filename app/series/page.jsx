@@ -1,3 +1,3 @@
-export default function page(params) {
+export default function Series(params) {
   return <h3>salam</h3>;
 }
