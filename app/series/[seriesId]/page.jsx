@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import CrewSlider from "./CrewSlider";
 import CastSlider from "./CastSlider";
 import RecommendationsSwiper from "../../../components/Recommendations/RecommendationsSwiper";
+import Trailer from "@/components/trailer/Trailer";
 
 export default function SeriesId() {
   const params = useParams();
@@ -15,11 +16,10 @@ export default function SeriesId() {
   const [recommendations, setRecommendations] = useState({});
   useEffect(() => {
     async function getSeries() {
-      let res = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}&query&&language=fa&append_to_response=credits,videos`);
+      let res = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}&language=fa&append_to_response=credits,videos`);
       if (!res.ok) throw new Error("خطا در دریافت اطلاعات!");
       let data = await res.json();
       setData(data);
-      console.log(data);
 
       // if (list.status_code == 34) {
       //   document.querySelector("header").innerHTML = `<div className="flex justify-center items-center h-[70vh] bg-[100%,auto] bg-bottom text-white bg-no-repeat" style="background-image: url('');">
@@ -178,8 +178,8 @@ export default function SeriesId() {
                     <div className="flex items-center gap-5">
                       <div className="flex items-center gap-2 text-sm text-gray-300">
                         <span className="w-5 h-5 flex items-center justify-center font-bold bg-black border-2 -rotate-30 border-amber-300 rounded-full text-white">m</span>
-                        <span className="hidden sm:inline">امتیاز منتقدین</span>
-                        <span>87</span>
+                        <span className="hidden sm:inline">محبوبیت</span>
+                        <span>{data.popularity}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-gray-300">
                         <svg width="22px" height="22px" viewBox="0 0 128 128" aria-hidden="true" role="img" className="iconify iconify--noto" preserveAspectRatio="xMidYMid meet" fill="#000000">
@@ -208,17 +208,7 @@ export default function SeriesId() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-white sm:w-1/2 md:w-auto ">
-                      <button id="video-play-btn" className=" bg-orange-400 rounded-xl py-2 lg:py-3 md:px-5  grow md:grow-0  flex items-center justify-center gap-1">
-                        <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            {" "}
-                            <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z" fill="#ffffff"></path>{" "}
-                          </g>
-                        </svg>
-                        پخش تریلر
-                      </button>
+                      <Trailer id={id} />
                       <button className=" bg-gray-800 rounded-xl py-2 lg:py-3 md:px-5  grow md:grow-0 flex items-center justify-center gap-1">
                         <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

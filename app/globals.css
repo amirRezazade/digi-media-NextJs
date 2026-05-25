@@ -50,3 +50,7 @@ label {
   min-width: 100% !important;
   /* justify-content: center !important; */
 }
+.lock-scroll {
+  max-height: 100vh;
+  overflow: hidden;
+}

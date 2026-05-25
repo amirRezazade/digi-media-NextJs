@@ -10,8 +10,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function RecommendationsSwiper({ list }) {
-  console.log(list);
-
   return (
     <section className="lg:min-h-[60vh] min-h-[50vh] h-auto">
       <div className="theme px-4 lg:px-13 py-7 relative after:content-['']  after:w-1/1 after:absolute after:h-50 after:top-21 after:right-0 after:bg-orange-400 ">
@@ -63,7 +61,7 @@ export default function RecommendationsSwiper({ list }) {
             <SwiperSlide className=" w-auto rounded-lg overflow-hidden transition-all duration-600 group ">
               <Link href={`/series/${item.id}`} className="relative ">
                 <div className="w-full relative rounded-lg overflow-hidden ">
-                  <Image width={194} height={285} className="object-cover w-full min-h-55 lg:min-h-65 xl:min-h-70 loading-animation" src={`https://image.tmdb.org/t/p/original/${item.poster_path}_medium`} alt="" onError="this.onerror=null; this.src='/images/default_poster.jpg';" />
+                  <Image width={194} height={285} className="object-cover w-full min-h-55 lg:min-h-65 xl:min-h-70 loading-animation" src={`https://image.tmdb.org/t/p/original/${item.poster_path}_medium`} alt={item.original_name} onError="this.onerror=null; this.src='/images/default_poster.jpg';" />
                   <div className="w-full h-full absolute top-0 left-0 bg-linear-to-b from-transparent from-50% to-black/50 to-90% transition-all duration-600 group-hover:opacity-0">
                     <p dir="ltr" className="p-5  px-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">
                       {item.name ? item.name : item.original_name}

@@ -11,7 +11,7 @@ export default function CrewSlider({ crew }) {
     <div class="flex justify-between gap-3 mt-4 grow">
       {mainList.length ? (
         <>
-          <div class=" flex items-center mb-5">
+          <div class="hidden sm:flex items-center mb-5">
             <button class="p-1 cursor-pointer crew-prev aspect-square rounded-full border border-gray-500 dark:border-gray-300">
               <svg class="fill-black rotate-180 dark:fill-white" width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -68,7 +68,7 @@ export default function CrewSlider({ crew }) {
             ))}
           </Swiper>
 
-          <div class=" flex items-center mb-5">
+          <div class="hidden sm:flex items-center mb-5">
             <button class="p-1 cursor-pointer crew-next aspect-square rounded-full border border-gray-500  dark:border-gray-300">
               <svg class="fill-black  dark:fill-white" width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
