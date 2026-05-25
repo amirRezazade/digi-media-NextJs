@@ -5,14 +5,14 @@ import "swiper/css";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CrewSlider({ crew }) {
-  let mainList = crew.length < 15 ? crew : crew.slice(0, 15);
+export default function CastSlider({ cast }) {
+  let mainList = cast.length < 15 ? cast : cast.slice(0, 15);
   return (
     <div class="flex justify-between gap-3 mt-4 grow">
       {mainList.length ? (
         <>
           <div class=" flex items-center mb-5">
-            <button class="p-1 cursor-pointer crew-prev aspect-square rounded-full border border-gray-500 dark:border-gray-300">
+            <button class="p-1 cursor-pointer cast-prev aspect-square rounded-full border border-gray-500 dark:border-gray-300">
               <svg class="fill-black rotate-180 dark:fill-white" width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -30,8 +30,8 @@ export default function CrewSlider({ crew }) {
             spaceBetween={10}
             modules={[Navigation]}
             navigation={{
-              nextEl: ".crew-next",
-              prevEl: ".crew-prev",
+              nextEl: ".cast-next",
+              prevEl: ".cast-prev",
             }}
             breakpoints={{
               500: {
@@ -52,7 +52,7 @@ export default function CrewSlider({ crew }) {
             }}
           >
             {mainList.map((act) => (
-              <SwiperSlide className="shrink-0 group overflow-hidden">
+              <SwiperSlide key={act.id} className="shrink-0 group overflow-hidden">
                 <Link href={`/actors/${act.id}`} className="flex flex-col items-center  gap-1.5">
                   <div className="aspect-square w-full rounded-full overflow-hidden loading-animation shrink-0">
                     <Image width={120} height={120} className="object-cover aspect-square w-full" src={act?.profile_path ? `https://image.tmdb.org/t/p/w185${act.profile_path}` : "/images/default-person.jpg"} alt={act.original_name} />
@@ -69,7 +69,7 @@ export default function CrewSlider({ crew }) {
           </Swiper>
 
           <div class=" flex items-center mb-5">
-            <button class="p-1 cursor-pointer crew-next aspect-square rounded-full border border-gray-500  dark:border-gray-300">
+            <button class="p-1 cursor-pointer cast-next aspect-square rounded-full border border-gray-500  dark:border-gray-300">
               <svg class="fill-black  dark:fill-white" width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -82,7 +82,7 @@ export default function CrewSlider({ crew }) {
           </div>
         </>
       ) : (
-        <p className="flex justify-center items-center w-full ">اطلاعاتی از عوامل این فیلم وجود ندارد!</p>
+        <p className="flex justify-center items-center w-full ">اطلاعاتی از بازیگران این فیلم وجود ندارد!</p>
       )}
     </div>
   );
