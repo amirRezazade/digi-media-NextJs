@@ -8,10 +8,11 @@ import "swiper/css/pagination";
 import "./recommendations.css";
 import Link from "next/link";
 import Image from "next/image";
+import Cart from "../cart/Cart";
 
 export default function RecommendationsSwiper({ list }) {
   return (
-    <section className="lg:min-h-[60vh] min-h-[50vh] h-auto">
+    <section className="lg:min-h-[60vh] min-h-[50vh] h-auto mb-2 lg:mb-8">
       <div className="theme px-4 lg:px-13 py-7 relative after:content-['']  after:w-1/1 after:absolute after:h-50 after:top-21 after:right-0 after:bg-orange-400 ">
         <div className="flex justify-between items-center">
           <div className=" z-1 flex items-center gap-0 max-w-1/2 xs:max-w-2/3 relative grow">
@@ -59,38 +60,7 @@ export default function RecommendationsSwiper({ list }) {
         >
           {list?.map((item) => (
             <SwiperSlide className=" w-auto rounded-lg overflow-hidden transition-all duration-600 group ">
-              <Link href={`/series/${item.id}`} className="relative ">
-                <div className="w-full relative rounded-lg overflow-hidden ">
-                  <Image width={194} height={285} className="object-cover w-full min-h-55 lg:min-h-65 xl:min-h-70 loading-animation" src={`https://image.tmdb.org/t/p/original/${item.poster_path}_medium`} alt={item.original_name} onError="this.onerror=null; this.src='/images/default_poster.jpg';" />
-                  <div className="w-full h-full absolute top-0 left-0 bg-linear-to-b from-transparent from-50% to-black/50 to-90% transition-all duration-600 group-hover:opacity-0">
-                    <p dir="ltr" className="p-5  px-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">
-                      {item.name ? item.name : item.original_name}
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute w-full h-full top-0 left-0 rounded-lg bg-black/60 px-3 py-3.5 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-90 transition-all duration-600">
-                  <div className="absolute top-0 left-0 p-3 text-amber-400 flex justify-between w-full gap-1.5 items-start ">
-                    <span>{item.first_air_date.slice(0, 4)}</span>
-                    <span>{item.media_type === "tv" ? "سریال" : "فیلم"}</span>
-                  </div>
-                  <span className="absolute top-1/2 left-1/2 -translate-1/2">
-                    <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                      <g id="SVGRepo_iconCarrier">
-                        {" "}
-                        <path d="M3 12L3 18.9671C3 21.2763 5.53435 22.736 7.59662 21.6145L10.7996 19.8727M3 8L3 5.0329C3 2.72368 5.53435 1.26402 7.59661 2.38548L20.4086 9.35258C22.5305 10.5065 22.5305 13.4935 20.4086 14.6474L14.0026 18.131" stroke="#cfcfcf" stroke-width="1.5" stroke-linecap="round"></path>{" "}
-                      </g>
-                    </svg>
-                  </span>
-                  <div className=" absolute w-full p-3 bottom-0 left-0 flex justify-end items-center">
-                    <div className="flex items-center gap-1">
-                      <span className="text-xs text-white">10/</span>
-                      <span className="text-base lg:text-2xl text-amber-400 font-bold">{item.vote_average.toFixed(1)}</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <Cart type="series" item={item} />
             </SwiperSlide>
           ))}
         </Swiper>

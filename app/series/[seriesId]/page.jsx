@@ -8,6 +8,7 @@ import CrewSlider from "./CrewSlider";
 import CastSlider from "./CastSlider";
 import RecommendationsSwiper from "../../../components/Recommendations/RecommendationsSwiper";
 import Trailer from "@/components/trailer/Trailer";
+import Filters from "@/components/filters/Filters";
 
 export default function SeriesId() {
   const params = useParams();
@@ -495,6 +496,7 @@ export default function SeriesId() {
       {/* finish credits section  */}
 
       {recommendations.length && <RecommendationsSwiper list={recommendations} />}
+      <Filters />
     </>
   );
 }
