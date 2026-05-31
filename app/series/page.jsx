@@ -1,17 +1,29 @@
-"use client";
-import Cart from "@/components/cart/Cart";
 import Link from "next/link";
-import { useState } from "react";
-import GenreSlider from "./GenreSlider";
+import MainData from "./MainData";
 
-export default function Series(params) {
-  let [series, setSeries] = useState([]);
-  async function getSeries(params) {
-    const res = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}&sort_by=popularity.desc&page=1`);
+export default async function Series({ searchParams }) {
+  const { genre, sortby, query, page } = await searchParams;
+
+  let series = null;
+  try {
+    const res = await fetch(
+      false
+        ? `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}
+${genre ? `&with_genres=${genre}` : ""}
+${sortby ? `&sort_by=${sortby}` : ""}`
+        : `https://api.themoviedb.org/3/search/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query.trim()}${genre ? `&with_genres=${genre}` : ""}`,
+      {
+        next: { revalidate: 3600 }, // یه ساعت کش میمونه
+      }
+    );
     const data = await res.json();
-    setSeries(data.results);
+    series = data.results;
+
+    console.log(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query.trim()}${genre ? `&with_genres=${genre}` : ""}`);
+  } catch (err) {
+    console.error(err);
   }
-  getSeries();
+
   return (
     <section className="relative min-h-screen text-gray-200 bg-cover bg-fixed bg-[url(/images/default-bg.jpg)]">
       <div className="absolute w-full h-full top-0 left-0 bg-black/30 "></div>
@@ -40,40 +52,7 @@ export default function Series(params) {
           </svg>
           <span className=" ">سریال ها</span>
         </div>
-        <h1 className="font-bold text-3xl md:text-5xl mt-15 mb-9">سریال‌ ها</h1>
-        <div className=" flex items-center gap-2">
-          <div className=" rounded-full px-1 lg:px-2 overflow-hidden backdrop-blur-lg border border-gray-400/50">
-            <input type="text" className="p-1 lg:p-2 px-3 border-0 outline-0 text-sm" placeholder="...search" />
-          </div>
-          <div className=" rounded-full px-1 lg:px-2 overflow-hidden backdrop-blur-lg border border-gray-400/50">
-            <select onChange={(e) => setSort(e.target.value)} className="text-xs sm:text-sm border-0 outline-0 cursor-pointer p-1 lg:p-2 ">
-              <option className="bg-gray-900" value="">
-                همه
-              </option>
-              <option className="bg-gray-900" value="sort_by=vote_average.desc">
-                امتیاز
-              </option>
-              <option className="bg-gray-900" value="sort_by=popularity.desc">
-                محبوبیت
-              </option>
-              <option className="bg-gray-900" value="sort_by=release_date.desc">
-                جدبدترین
-              </option>
-              <option className="bg-gray-900" value="sort_by=release_date.asc">
-                قدیمی ترین
-              </option>
-            </select>
-          </div>
-        </div>
-        <GenreSlider />
-        <div className="my-5 md:my-10">
-          <span className="text-sm py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50">243 مورد </span>
-          <div className="mt-5 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4  md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-x-4 xl:gap-x-5 gap-y-6 sm:gap-y-8">
-            {series?.map((item) => (
-              <Cart type="series" item={item} />
-            ))}
-          </div>
-        </div>
+        {series && <MainData initialData={series} />}
       </main>
     </section>
   );
