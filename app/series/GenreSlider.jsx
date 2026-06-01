@@ -1,25 +1,21 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 
 export default function GenreSlider({ activeGenre, onActiveGenre }) {
   const genres = [
     { id: "all", gen: "همه" },
-    { id: 28, gen: "اکشن" },
-    { id: 12, gen: "ماجراجویی" },
-    { id: 35, gen: "کمدی" },
+    { id: 10759, gen: "اکشن و ماجراجویی" },
     { id: 80, gen: "جنایی" },
-    { id: 99, gen: "مستند" },
-    { id: 18, gen: "درام" },
-    { id: 10751, gen: "خانوادگی" },
-    { id: 36, gen: "تاریخی" },
-    { id: 27, gen: "ترسناک" },
     { id: 9648, gen: "معمایی" },
+    { id: 10768, gen: "جنگی" },
+    { id: 10765, gen: "علمی تخیلی و فانتزی" },
     { id: 10749, gen: "عاشقانه" },
-    { id: 878, gen: "علمی تخیلی" },
-    { id: 10752, gen: "جنگی" },
+    { id: 18, gen: "درام" },
+    { id: 99, gen: "مستند" },
+    { id: 10751, gen: "خانوادگی" },
+    { id: 35, gen: "کمدی" },
+    { id: 16, gen: "انیمیشن" },
   ];
 
   return (

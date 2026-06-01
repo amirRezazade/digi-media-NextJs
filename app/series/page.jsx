@@ -2,24 +2,22 @@ import Link from "next/link";
 import MainData from "./MainData";
 
 export default async function Series({ searchParams }) {
-  const { genre, sortby, query, page } = await searchParams;
+  const { genre, sortby } = await searchParams;
 
-  let series = null;
+  let data = null;
   try {
     const res = await fetch(
-      false
-        ? `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}
-${genre ? `&with_genres=${genre}` : ""}
-${sortby ? `&sort_by=${sortby}` : ""}`
-        : `https://api.themoviedb.org/3/search/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query.trim()}${genre ? `&with_genres=${genre}` : ""}`,
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false
+&vote_count.gte=100
+&vote_average.gte=1
+&popularity.gte=5
+${genre ? `&with_genres=${genre}` : ""}&sort_by=${sortby || "popularity.desc"}`,
       {
-        next: { revalidate: 3600 }, // یه ساعت کش میمونه
+        next: { revalidate: 3600 },
       }
     );
-    const data = await res.json();
-    series = data.results;
-
-    console.log(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query.trim()}${genre ? `&with_genres=${genre}` : ""}`);
+    data = await res.json();
+    console.log(data);
   } catch (err) {
     console.error(err);
   }
@@ -52,7 +50,7 @@ ${sortby ? `&sort_by=${sortby}` : ""}`
           </svg>
           <span className=" ">سریال ها</span>
         </div>
-        {series && <MainData initialData={series} />}
+        {data && <MainData data={data} />}
       </main>
     </section>
   );
