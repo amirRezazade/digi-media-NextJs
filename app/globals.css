@@ -54,3 +54,18 @@ label {
   max-height: 100vh;
   overflow: hidden;
 }
+
+.shimmer {
+  background: linear-gradient(90deg, #818181c5 25%, #b8b8b8df 50%, #818181c5 75%);
+  background-size: 500%;
+  animation: shimmer 1200ms infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 100%;
+  }
+  to {
+    background-position: 0 0;
+  }
+}

@@ -9,7 +9,7 @@ export default function GrowCart({ item, type }) {
       <div className="w-full aspect-2/3 relative rounded-md overflow-hidden   xl:h-72">
         <div className="w-full h-full overflow-hidden relative">
           <Image
-            className="w-full h-full object-cover loading-animation lg:group-hover:opacity-0 transition-opacity duration-600"
+            className="w-full h-full object-cover  lg:group-hover:opacity-0 transition-opacity duration-600"
             src={`https://image.tmdb.org/t/p/original${item.poster_path}_medium`}
             alt={item.name ? item.name : item.title}
             fill

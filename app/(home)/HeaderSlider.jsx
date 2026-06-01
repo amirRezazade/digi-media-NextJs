@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import "./header.css";
 import "swiper/css";
-import Image from "next/image";
+import HeaderSliderCart from "@/components/cart/HeaderSliderCart";
 
 export default function HeaderSlider({ onActiveIndex }) {
   let [list, setList] = useState([]);
@@ -74,7 +74,7 @@ export default function HeaderSlider({ onActiveIndex }) {
                 <Link href={`/${item.media_type == "movie" ? "movie" : "series"}/${item.id}`} className="w-44 xs:w-40 xl:w-45 2xl:w-40 rounded-md group flex  duration-500 ">
                   <div className="w-full flex flex-col justify-between gap-2 h-full">
                     <div className="relative grow rounded-md transition-transform duration-300 active">
-                      <Image width={160} height={240} className="w-full object-cover rounded-md " src={`https://image.tmdb.org/t/p/original${item.poster_path}_medium`} alt={item.name ? item.name : item.title} onError="this.onerror=null; this.src='/images/default_poster.jpg'" />
+                      <HeaderSliderCart poster={item.poster_path} name={item.name} />
                       <div className="absolute top-0 left-0 w-full min-h-full bg-black/60 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-90 transition-[opacity,visibility,scale] duration-600">
                         <span className="absolute top-1/2 left-1/2 -translate-1/2">
                           <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

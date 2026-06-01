@@ -1,6 +1,5 @@
 "use client";
 import Cart from "@/components/cart/Cart";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import GenreSlider from "./GenreSlider";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -22,7 +21,7 @@ export default function MainData({ data }) {
     setIsLoading(true);
     const params = new URLSearchParams(searchParams);
     activeGenre !== "all" ? params.set("genre", activeGenre) : params.delete("genre");
-    sortby !== "sort_by=popularity.desc" ? params.set("sortby", sortby) : params.delete("sortby");
+    sortby !== "popularity.desc" ? params.set("sortby", sortby) : params.delete("sortby");
     router.push(`/series?${params.toString()}`);
   }, [activeGenre, sortby]);
 
@@ -36,7 +35,6 @@ export default function MainData({ data }) {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && data.total_pages >= pageRef.current) {
         loadMore();
-        console.log(pageRef.current);
       }
     });
     if (bottomRef.current) observer.observe(bottomRef.current);
@@ -52,8 +50,6 @@ export default function MainData({ data }) {
   &popularity.gte=5
   ${activeGenre !== "all" ? `&with_genres=${activeGenre}` : ""}&sort_by=${sortby || "popularity.desc"}&page=${pageRef.current}`);
       const response = await res.json();
-      console.log(res);
-
       if (!res.ok) setRetry(true);
       else {
         setRetry(false);
@@ -90,7 +86,7 @@ export default function MainData({ data }) {
       </div>
       {isLoading ? (
         <div className="flex justify-center py-10">
-          <span class="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>
+          <span className="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>
         </div>
       ) : data.total_results ? (
         <div className="mt-5 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4  md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-x-4 xl:gap-x-5 gap-y-6 sm:gap-y-8">
@@ -102,7 +98,7 @@ export default function MainData({ data }) {
         <h2 className="text-center text-3xl font-bold py-10">موردی پیدا نشد!</h2>
       )}
       <div ref={bottomRef} className="flex justify-center py-10">
-        {data.total_pages > pageRef.current && !retry && !isLoading && isFetching && <span class="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>}
+        {data.total_pages > pageRef.current && !retry && !isLoading && isFetching && <span className="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>}
       </div>
       {retry && (
         <div className="flex justify-center py-10">
