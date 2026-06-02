@@ -24,7 +24,6 @@ export default async function movieId({ params }) {
     let list = recommendationsResponse.results;
     const randomFive = list.filter((item) => item.poster_path && item.backdrop_path).slice(0, 6);
     recommendations = randomFive;
-    console.log(data);
 
     if (!res.ok || !recommendationsRes.ok) throw new Error("خطا در دریافت اطلاعات!");
   } catch (err) {

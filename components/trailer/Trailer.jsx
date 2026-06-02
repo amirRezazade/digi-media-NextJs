@@ -9,15 +9,18 @@ export default function Trailer({ id, type = "series" }) {
   let [empty, setEmpty] = useState(false);
 
   async function getTrailer() {
-    let response = await fetch(`https://api.themoviedb.org/3/${type == "series" ? "tv" : "movie"}/${id}/videos?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`);
-    if (!response.ok) setError(true);
-    let res = await response.json();
-
-    let list = res.results;
-    let main = list.find((el) => el.type == "Trailer" && el.official == true) || list[0];
-    setData(main);
-    setLoading(false);
-    if (!main) setEmpty(true);
+    try {
+      let response = await fetch(`https://api.themoviedb.org/3/${type == "series" ? "tv" : "movie"}/${id}/videos?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`);
+      if (!response.ok) setError(true);
+      let res = await response.json();
+      let list = res.results;
+      let main = list.find((el) => el.type == "Trailer" && el.official == true) || list[0];
+      setData(main);
+      setLoading(false);
+      if (!main) setEmpty(true);
+    } catch {
+      setError(true);
+    }
   }
 
   function openModal() {
@@ -66,7 +69,7 @@ export default function Trailer({ id, type = "series" }) {
               </g>
             </svg>
           </button>
-          {!data && loading && <span className="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>}
+          {!data && loading && !error && <span className="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>}
           {data && <iframe className="w-full h-2/3 mx-3 md:w-2/3 border border-gray-500" src={`https://www.youtube.com/embed/${data.key}?autoplay=0&controls=1`} title="Trailer" allowFullScreen></iframe>}
           {empty && <p className="text-white text-lg "> ویدیو وجود ندارد!</p>}
           {error && <p className="text-white text-lg "> خطا در دریافت اطلاعات!</p>}
