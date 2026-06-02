@@ -7,9 +7,11 @@ import ProfileCart from "@/components/cart/ProfileCart";
 
 export default function CastSlider({ cast }) {
   let mainList = cast.length < 15 ? cast : cast.slice(0, 15);
+  const list = [...new Map(mainList.map((item) => [item.id, item])).values()];
+
   return (
     <div className="flex justify-between gap-3 mt-4 grow">
-      {mainList.length ? (
+      {list.length ? (
         <>
           <div className="hidden sm:flex items-center mb-5">
             <button className="p-1 cursor-pointer cast-prev aspect-square rounded-full border border-gray-500 dark:border-gray-300">
@@ -51,7 +53,7 @@ export default function CastSlider({ cast }) {
               },
             }}
           >
-            {mainList.map((act) => (
+            {list.map((act) => (
               <SwiperSlide key={act.id} className="shrink-0 group overflow-hidden">
                 <Link href={`/actors/${act.id}`} className="flex flex-col items-center  gap-1.5">
                   <ProfileCart profile={act?.profile_path} name={act.profile_path} />

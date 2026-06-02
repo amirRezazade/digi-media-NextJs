@@ -1,5 +1,7 @@
+"use client";
 import GrowCart from "@/components/cart/GrowCart";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import "./sectionSlider.css";
 export default function SectionSlider({ list, type = "movie" }) {
   return (

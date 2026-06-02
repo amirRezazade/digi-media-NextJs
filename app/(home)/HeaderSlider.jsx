@@ -1,26 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "./header.css";
 import "swiper/css";
 import HeaderSliderCart from "@/components/cart/HeaderSliderCart";
 
-export default function HeaderSlider({ onActiveIndex }) {
-  let [list, setList] = useState([]);
-
-  useEffect(() => {
-    async function getMovies() {
-      const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}`);
-      if (!res.ok) throw new Error("خطا");
-      const items = await res.json();
-      setList(items.results.slice(0, 15));
-    }
-    getMovies();
-  }, []);
-
+export default function HeaderSlider({ list, onActiveIndex }) {
   function change(index) {
     let i = Number(index.slides[index.activeIndex].dataset.swiperSlideIndex);
     onActiveIndex(list[i]);
@@ -117,7 +104,7 @@ export default function HeaderSlider({ onActiveIndex }) {
                           </div>
                           <div className="w-full flex justify-between items-center mt-2 lg:mt-1">
                             <span className="text-orange-400 flex gap-1.5 items-start lg:gap-0.5">
-                              82%
+                              {item.vote_count}
                               <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

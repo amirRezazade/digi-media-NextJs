@@ -6,11 +6,9 @@ import "swiper/css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./recommendations.css";
-import Link from "next/link";
-import Image from "next/image";
 import Cart from "../cart/Cart";
 
-export default function RecommendationsSwiper({ list }) {
+export default function RecommendationsSwiper({ list, type = "series" }) {
   return (
     <section className="lg:min-h-[60vh] min-h-[50vh] h-auto mb-2 lg:mb-8">
       <div className="theme px-4 lg:px-13 py-7 relative after:content-['']  after:w-1/1 after:absolute after:h-50 after:top-21 after:right-0 after:bg-orange-400 ">
@@ -60,7 +58,7 @@ export default function RecommendationsSwiper({ list }) {
         >
           {list?.map((item) => (
             <SwiperSlide className=" w-auto rounded-lg overflow-hidden transition-all duration-600 group ">
-              <Cart type="series" item={item} />
+              <Cart type={type} item={item} />
             </SwiperSlide>
           ))}
         </Swiper>

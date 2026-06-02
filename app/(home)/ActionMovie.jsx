@@ -1,45 +1,60 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import "swiper/css";
 import SectionSlider from "@/components/sectionSlider/SectionSlider";
 import Link from "next/link";
 
-export default function ActionMovie(params) {
-  let [list, setList] = useState(null);
-  useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${"cf30b054d9d7ec861b2a498d97eccdad"}&with_genres=28&without_genres=16,10751&vote_count.gte=2000`)
-      .then((res) => res.json())
-      .then((res) => setList(res.results));
-  }, []);
-
+export default function ActionMovie({ list }) {
   return (
     <div>
       <div className="flex justify-between items-center  ">
         <div className="flex items-center gap-3">
           <span className="p-1.5 lg:p-2.5 rounded-full border-5 border-orange-400/50">
-            {/* <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27px" height="27px" viewBox="0 0 512 512" xml:space="preserve" fill="#ff9800" stroke="#ff9800">
-              <g strokeWidth="0"></g>
-              <g strokeLinecap="round" strokeLinejoin="round"></g>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Video-Player-Movie--Streamline-Ultimate" height={26} width={26}>
+              <desc>{"\n    Video Player Movie Streamline Icon: https://streamlinehq.com\n  "}</desc>
+              <path stroke="#ff9800" strokeLinecap="round" strokeLinejoin="round" d="M21.5 2.5h-19c-1.10457 0 -2 0.89543 -2 2v15c0 1.1046 0.89543 2 2 2h19c1.1046 0 2 -0.8954 2 -2v-15c0 -1.10457 -0.8954 -2 -2 -2" strokeWidth={1} />
+              <path stroke="#ff9800" strokeLinecap="round" strokeLinejoin="round" d="M0.5 6.5h23" strokeWidth={1} />
+              <path stroke="#ff9800" strokeLinecap="round" strokeLinejoin="round" d="M0.5 17.5h23" strokeWidth={1} />
+              <path stroke="#ff9800" d="M3.76001 4.75c-0.13807 0 -0.25 -0.11193 -0.25 -0.25s0.11193 -0.25 0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M3.76001 4.75c0.13807 0 0.25 -0.11193 0.25 -0.25s-0.11193 -0.25 -0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M7.88 4.75c-0.13807 0 -0.25 -0.11193 -0.25 -0.25s0.11193 -0.25 0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M7.88 4.75c0.13808 0 0.25 -0.11193 0.25 -0.25s-0.11192 -0.25 -0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M12 4.75c-0.1381 0 -0.25 -0.11193 -0.25 -0.25s0.1119 -0.25 0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M12 4.75c0.1381 0 0.25 -0.11193 0.25 -0.25s-0.1119 -0.25 -0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M16.12 4.75c-0.1381 0 -0.25 -0.11193 -0.25 -0.25s0.1119 -0.25 0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M16.12 4.75c0.1381 0 0.25 -0.11193 0.25 -0.25s-0.1119 -0.25 -0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M20.24 4.75c-0.1381 0 -0.25 -0.11193 -0.25 -0.25s0.1119 -0.25 0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M20.24 4.75c0.1381 0 0.25 -0.11193 0.25 -0.25s-0.1119 -0.25 -0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M3.76001 19.75c-0.13807 0 -0.25 -0.1119 -0.25 -0.25s0.11193 -0.25 0.25 -0.25" strokeWidth={1} />
+              <path stroke="#ff9800" d="M3.76001 19.75c0.13807 0 0.25 -0.1119 0.25 -0.25s-0.11193 -0.25 -0.25 -0.25" strokeWidth={1} />
               <g>
-                {" "}
-                <style type="text/css"> </style>{" "}
-                <g>
-                  {" "}
-                  <path
-                    className="st0"
-                    d="M343.656,451.109C410,411.438,454.422,338.906,454.422,256c0-125.484-101.719-227.219-227.203-227.219 C101.719,28.781,0,130.516,0,256s101.719,227.219,227.219,227.219H512v-32.109H343.656z M318.484,145.875 c23.547-13.594,53.641-5.531,67.234,18.016s5.531,53.656-18.016,67.25c-23.547,13.578-53.641,5.516-67.234-18.016 C286.859,189.563,294.938,159.469,318.484,145.875z M300.453,297.688c13.609-23.547,43.703-31.609,67.25-18.016 c23.547,13.609,31.609,43.703,18.016,67.25s-43.688,31.609-67.25,18.016C294.938,351.344,286.859,321.234,300.453,297.688z M227.219,72.375c27.188,0,49.219,22.031,49.219,49.219s-22.031,49.25-49.219,49.25s-49.25-22.063-49.25-49.25 S200.031,72.375,227.219,72.375z M249.938,256c0,12.563-10.172,22.719-22.719,22.719c-12.563,0-22.719-10.156-22.719-22.719 s10.156-22.719,22.719-22.719C239.766,233.281,249.938,243.438,249.938,256z M68.703,163.891 c13.594-23.547,43.703-31.609,67.25-18.016s31.609,43.688,18.016,67.25c-13.594,23.531-43.703,31.609-67.25,18.016 C63.188,217.547,55.109,187.438,68.703,163.891z M135.969,364.938c-23.563,13.594-53.656,5.531-67.266-18.016 c-13.578-23.547-5.516-53.656,18.016-67.266c23.547-13.594,53.656-5.516,67.25,18.031S159.5,351.344,135.969,364.938z M177.969,389.203c0-27.188,22.063-49.234,49.25-49.234s49.219,22.047,49.219,49.234s-22.031,49.234-49.219,49.234 S177.969,416.391,177.969,389.203z"
-                  ></path>{" "}
-                </g>{" "}
+                <path stroke="#ff9800" d="M7.88 19.75c-0.13807 0 -0.25 -0.1119 -0.25 -0.25s0.11193 -0.25 0.25 -0.25" strokeWidth={1} />
+                <path stroke="#ff9800" d="M7.88 19.75c0.13808 0 0.25 -0.1119 0.25 -0.25s-0.11192 -0.25 -0.25 -0.25" strokeWidth={1} />
               </g>
-            </svg> */}
+              <g>
+                <path stroke="#ff9800" d="M12 19.75c-0.1381 0 -0.25 -0.1119 -0.25 -0.25s0.1119 -0.25 0.25 -0.25" strokeWidth={1} />
+                <path stroke="#ff9800" d="M12 19.75c0.1381 0 0.25 -0.1119 0.25 -0.25s-0.1119 -0.25 -0.25 -0.25" strokeWidth={1} />
+              </g>
+              <g>
+                <path stroke="#ff9800" d="M16.12 19.75c-0.1381 0 -0.25 -0.1119 -0.25 -0.25s0.1119 -0.25 0.25 -0.25" strokeWidth={1} />
+                <path stroke="#ff9800" d="M16.12 19.75c0.1381 0 0.25 -0.1119 0.25 -0.25s-0.1119 -0.25 -0.25 -0.25" strokeWidth={1} />
+              </g>
+              <g>
+                <path stroke="#ff9800" d="M20.24 19.75c-0.1381 0 -0.25 -0.1119 -0.25 -0.25s0.1119 -0.25 0.25 -0.25" strokeWidth={1} />
+                <path stroke="#ff9800" d="M20.24 19.75c0.1381 0 0.25 -0.1119 0.25 -0.25s-0.1119 -0.25 -0.25 -0.25" strokeWidth={1} />
+              </g>
+              <path
+                stroke="#ff9800"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 12.67c0.1389 -0.0487 0.2592 -0.1393 0.3443 -0.2594 0.0851 -0.12 0.1308 -0.2635 0.1308 -0.4106 0 -0.1472 -0.0457 -0.2907 -0.1308 -0.4107s-0.2054 -0.2106 -0.3443 -0.2593l-5 -2.33003c-0.0497 -0.02467 -0.10446 -0.03751 -0.15997 -0.03751s-0.11027 0.01284 -0.16 0.03751c-0.04498 0.03416 -0.08179 0.07791 -0.10773 0.12807 -0.02595 0.05017 -0.04039 0.10549 -0.04227 0.16193V14.59c0.00188 0.0564 0.01632 0.1117 0.04227 0.1619 0.02594 0.0502 0.06275 0.0939 0.10773 0.1281 0.03922 0.0449 0.089 0.0794 0.14485 0.1004 0.05586 0.0209 0.11604 0.0277 0.17512 0.0196z"
+                strokeWidth={1}
+              />
+            </svg>
           </span>
           <div className="flex flex-col gap-1">
-            <span className="font-[iran-yekan] text-sm lg:text-base dark:text-white">فیلم های اکشن</span>
+            <span className="font-[iran-sans] text-sm lg:text-base dark:text-white">فیلم های اکشن</span>
             <span className="text-xs lg:text-sm text-gray-500  dark:text-gray-300">معروف ترین ها</span>
           </div>
         </div>
-        <Link href="/search" className="flex items-center gap-2 p-2 lg:p-3.5 text-xs lg:text-sm rounded-full hover:opacity-75 transition-all duration-300 text-gray-500 dark:text-gray-300 bg-gray-300 dark:bg-gray-800">
+        <Link href="/movie?genre=10759" className="flex items-center gap-2 p-2 lg:p-3.5 text-xs lg:text-sm rounded-full hover:opacity-75 transition-all duration-300 text-gray-500 dark:text-gray-300 bg-gray-300 dark:bg-gray-800">
           <span> مشاهده همه </span>
           <span>
             <svg className="fill-[#888888] dark:fill-[#c5c5c5]" width="17px" height="17px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

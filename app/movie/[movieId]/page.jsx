@@ -4,27 +4,28 @@ import Link from "next/link";
 import RecommendationsSwiper from "../../../components/Recommendations/RecommendationsSwiper";
 import Trailer from "@/components/trailer/Trailer";
 import Filters from "@/components/filters/Filters";
-import HeaderPoster from "../../../components/cart/HeaderPoster";
-import Credits from "../../../components/credits/Credits";
-
-export default async function SeriesId({ params }) {
-  const { seriesId } = await params;
+import HeaderPoster from "@/components/cart/HeaderPoster";
+import Credits from "@/components/credits/Credits";
+export default async function movieId({ params }) {
+  let { movieId } = await params;
   let data = null;
   let recommendations = null;
   try {
-    let res = await fetch(`https://api.themoviedb.org/3/tv/${seriesId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
+    let res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
       next: { revalidate: 604800 },
     });
     data = await res.json();
 
     //------------ get recommendationsResponse -----------
-    let recommendationsRes = await fetch(`https://api.themoviedb.org/3/tv/${seriesId}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
+    let recommendationsRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
       next: { revalidate: 604800 },
     });
     let recommendationsResponse = await recommendationsRes.json();
     let list = recommendationsResponse.results;
     const randomFive = list.filter((item) => item.poster_path && item.backdrop_path).slice(0, 6);
     recommendations = randomFive;
+    console.log(data);
+
     if (!res.ok || !recommendationsRes.ok) throw new Error("خطا در دریافت اطلاعات!");
   } catch (err) {
     throw new Error(err);
@@ -57,8 +58,8 @@ export default async function SeriesId({ params }) {
                   <path fillRule="evenodd" clipRule="evenodd" d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" fill="#ffffff"></path>{" "}
                 </g>
               </svg>
-              <Link href="/series" className="transition-all duration-300 cursor-pointer hover:text-orange-400">
-                سریال ها
+              <Link href="/movie" className="transition-all duration-300 cursor-pointer hover:text-orange-400">
+                فیلم ها
               </Link>
               <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -68,7 +69,7 @@ export default async function SeriesId({ params }) {
                   <path fillRule="evenodd" clipRule="evenodd" d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" fill="#ffffff"></path>{" "}
                 </g>
               </svg>
-              <span className="transition-all duration-300 cursor-pointer hover:text-orange-400">{data.name}</span>
+              <span className="transition-all duration-300 cursor-pointer hover:text-orange-400">{data.title || data.original_title}</span>
             </div>
             <div className="flex flex-wrap xs:flex-nowrap gap-6 sm:gap-6 items-start  justify-between my-5 xl:my-8 lg:gap-8">
               <div className="flex flex-col items-center grow  gap-9 max-w-[80%] mx-auto xs:max-w-[30%] md:max-w-[25%] xl:max-w-67.5">
@@ -78,8 +79,8 @@ export default async function SeriesId({ params }) {
                   <span className="text-black tracking-tighter font-extrabold text-xs  px-1.5 py-0.5 rounded-md bg-amber-300  mr-2 relative  before:content[''] before:absolute before:w-1.5 before:h-1.5 before:top-1/2 before:left-1/1 before:bg-amber-300 before:z-0 before:rotate-45 before:-translate-1/2 ">IMDB</span>
                 </div>
                 <div className="relative group z-1 grow  min-w-full h-auto">
-                  <Image width={250} height={400} className=" object-cover w-full -z-1 rounded-lg contrast-85 absolute scale-x-80 -translate-y-4 group-hover:translate-y-0 transition-transform duration-300" src={`https://image.tmdb.org/t/p/original${data.poster_path}_low`} alt={data.original_name} />
-                  <Image width={260} height={400} className=" object-cover w-full -z-1 rounded-lg contrast-90 absolute scale-x-90 -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 " src={`https://image.tmdb.org/t/p/original${data.poster_path}_low`} alt={data.original_name} />
+                  <Image width={250} height={400} className=" object-cover w-full -z-1 rounded-lg contrast-85 absolute scale-x-80 -translate-y-4 group-hover:translate-y-0 transition-transform duration-300" src={`https://image.tmdb.org/t/p/original${data.poster_path}_medium`} alt={data.original_name || ""} />
+                  <Image width={260} height={400} className=" object-cover w-full -z-1 rounded-lg contrast-90 absolute scale-x-90 -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 " src={`https://image.tmdb.org/t/p/original${data.poster_path}_medium`} alt={data.original_name || ""} />
                   <HeaderPoster poster={data.poster_path} name={data.original_name} />
                   <button className="absolute top-1/1 left-1/2 -translate-1/2 flex justify-center items-center border border-orange-400 hover:bg-transparent transition-all duration-300 w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-orange-400">
                     <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -127,7 +128,7 @@ export default async function SeriesId({ params }) {
               </div>
               <div className="flex flex-col  gap-6 sm:gap-4 grow w-7/10 sm:mt-8  md:gap-2 ">
                 <div className="flex items-start justify-between  ">
-                  <p className="text-white relative font-extrabold px-2 before:content[''] before:absolute before:w-1.5 before:h-4 before:left-1/1 before:top-1/2 before:-translate-y-1/2 before:bg-orange-400 before:rounded-full  lg:text-xl xl:text-2xl">{data.name}</p>
+                  <p className="text-white relative font-extrabold px-2 before:content[''] before:absolute before:w-1.5 before:h-4 before:left-1/1 before:top-1/2 before:-translate-y-1/2 before:bg-orange-400 before:rounded-full  lg:text-xl xl:text-2xl">{data.title || data.original_title}</p>
                   <div className="hidden sm:flex flex-col items-center ">
                     <div className="flex items-center w-full text-xs divide-x divide-gray-500 xl:text-sm">
                       <span className="flex items-center px-2 group gap-1 cursor-pointer text-white  hover:text-orange-400 transition-all duration-300">
@@ -198,7 +199,7 @@ export default async function SeriesId({ params }) {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-white sm:w-1/2 md:w-auto ">
-                      <Trailer id={seriesId} />
+                      <Trailer id={movieId} type={"movie"} />
                       <button className=" bg-gray-800 rounded-xl py-2 lg:py-3 md:px-5  grow md:grow-0 flex items-center justify-center gap-1">
                         <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -244,20 +245,18 @@ export default async function SeriesId({ params }) {
                     </div>
                     <div className="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-                        <svg width="20px" height="20px" viewBox="0 0 21 21" fill="#000000">
-                          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            {" "}
-                            <g fill="none" fillRule="evenodd" stroke="#ffad49" strokeLinecap="round" strokeLinejoin="round" transform="translate(1 4)">
-                              {" "}
-                              <path d="m13.5 12.5v-6c0-1.1045695-.8954305-2-2-2h-9c-1.1045695 0-2 .8954305-2 2v6c0 1.1045695.8954305 2 2 2h9c1.1045695 0 2-.8954305 2-2z"></path> <path d="m15.5 12.5v-6.99481259c0-1.65685425-1.3431458-3-3-3-.0017276 0-.0034553 0-.0051829 0l-8.9948171.01554432"></path> <path d="m17.5 10.5v-5.99308345c0-2.209139-1.790861-4-4-4-.0023035 0-.004607 0-.0069106 0l-7.9930894.01381519"></path>{" "}
-                            </g>{" "}
-                          </g>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={22} height={22} color={"#ffad49"} fill={"none"}>
+                          <path d="M20.5 12.5C20.5 17.1944 16.6944 21 12 21C7.30558 21 3.5 17.1944 3.5 12.5C3.5 7.80558 7.30558 4 12 4C16.6944 4 20.5 7.80558 20.5 12.5Z" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                          <path d="M5.88 18.7031L3.5 21.0031" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                          <path d="M18.14 18.668L20.5 20.998" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                          <path d="M5 3L2 6" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                          <path d="M22 6L19 3" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                          <path d="M12 8V12.5L14 14.5" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                         </svg>
-                        <span className="text-white text-[10px] font-bold lg:font-normal lg:text-sm">تعداد فصل :</span>
+
+                        <span className="text-white text-[10px] font-bold lg:font-normal lg:text-sm">زمان:</span>
                       </div>
-                      <span className="text-white opacity-80  ">{data.number_of_seasons}</span>
+                      <span className="text-white opacity-80 text-[11px] lg:text-sm">{data.runtime}</span>
                     </div>
                     <div className="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -278,17 +277,18 @@ export default async function SeriesId({ params }) {
                     </div>
                     <div className="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                          <path d="M0 0h24v24H0z" fill="none" />
-                          <g fill="none">
-                            <path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                            <path fill="#ffad49" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 11a1 1 0 1 1 0 2a1 1 0 0 1 0-2m0-9a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1" />
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                          <g id="SVGRepo_iconCarrier">
+                            {" "}
+                            <path opacity="0.15" d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="#ffad49"></path> <path d="M20 8.5V13.5M17.5 11H22.5M8 15H16C18.2091 15 20 16.7909 20 19V21H4V19C4 16.7909 5.79086 15 8 15ZM16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#ffad49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>{" "}
                           </g>
                         </svg>
 
-                        <span className="text-white text-[10px] font-bold lg:font-normal lg:text-sm">وضعیت:</span>
+                        <span className="text-white text-[10px] font-bold lg:font-normal lg:text-sm">رده سنی:</span>
                       </div>
-                      <span className="text-white opacity-75 text-[11px] lg:text-sm">{data.status === "Ended" ? "پایان یافته" : "در حال پخش"}</span>
+                      <span className="text-white opacity-75 text-[11px] lg:text-sm">ندارد</span>
                     </div>
                     <div className="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -302,7 +302,7 @@ export default async function SeriesId({ params }) {
                         </svg>
                         <span className="text-white text-[10px] font-bold lg:font-normal lg:text-sm">سال تولید :</span>
                       </div>
-                      <span className="text-white opacity-75 text-[11px] lg:text-sm">{`${data.first_air_date?.slice(0, 4) || ""} - ${data.last_air_date?.slice(0, 4) || "نا معلوم"}`}</span>
+                      <span className="text-white opacity-75 text-[11px] lg:text-sm">{data.release_date || "نا معلوم"}</span>
                     </div>
                     <div className="flex flex-col md:flex-row md:flex-wrap py-3 gap-y-1 grow  md:justify-center  items-center md:rounded-xl bg-black/45  ">
                       <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -361,20 +361,17 @@ export default async function SeriesId({ params }) {
           </div>
           <div className="flex flex-col  py-2 gap-y-1 grow items-center ">
             <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-              <svg width="20px" height="20px" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                  {" "}
-                  <g fill="none" fillRule="evenodd" stroke="#ffad49" strokeLinecap="round" strokeLinejoin="round" transform="translate(1 4)">
-                    {" "}
-                    <path d="m13.5 12.5v-6c0-1.1045695-.8954305-2-2-2h-9c-1.1045695 0-2 .8954305-2 2v6c0 1.1045695.8954305 2 2 2h9c1.1045695 0 2-.8954305 2-2z"></path> <path d="m15.5 12.5v-6.99481259c0-1.65685425-1.3431458-3-3-3-.0017276 0-.0034553 0-.0051829 0l-8.9948171.01554432"></path> <path d="m17.5 10.5v-5.99308345c0-2.209139-1.790861-4-4-4-.0023035 0-.004607 0-.0069106 0l-7.9930894.01381519"></path>{" "}
-                  </g>{" "}
-                </g>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={22} height={22} color={"#ffad49"} fill={"none"}>
+                <path d="M20.5 12.5C20.5 17.1944 16.6944 21 12 21C7.30558 21 3.5 17.1944 3.5 12.5C3.5 7.80558 7.30558 4 12 4C16.6944 4 20.5 7.80558 20.5 12.5Z" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                <path d="M5.88 18.7031L3.5 21.0031" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                <path d="M18.14 18.668L20.5 20.998" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                <path d="M5 3L2 6" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                <path d="M22 6L19 3" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                <path d="M12 8V12.5L14 14.5" stroke="#ffad49" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
               </svg>
-              <span className="text-black dark:text-white text-[10px]">تعداد فصل :</span>
+              <span className="text-black dark:text-white text-[10px]">زمان :</span>
             </div>
-            <span className="text-black dark:text-white opacity-75 text-[10px]">{data.number_of_seasons}</span>
+            <span className="text-black dark:text-white opacity-75 text-[10px]">{data.runtime}</span>
           </div>
           <div className="flex flex-col  py-2 gap-y-1 grow items-center ">
             <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -395,17 +392,18 @@ export default async function SeriesId({ params }) {
           </div>
           <div className="flex flex-col  py-2 gap-y-1 grow items-center ">
             <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                <path d="M0 0h24v24H0z" fill="none" />
-                <g fill="none">
-                  <path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
-                  <path fill="#ffad49" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 11a1 1 0 1 1 0 2a1 1 0 0 1 0-2m0-9a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1" />
+              <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path opacity="0.15" d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="#ffad49"></path> <path d="M20 8.5V13.5M17.5 11H22.5M8 15H16C18.2091 15 20 16.7909 20 19V21H4V19C4 16.7909 5.79086 15 8 15ZM16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#ffad49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>{" "}
                 </g>
               </svg>
 
-              <span className="text-black dark:text-white text-[10px]">وضعیت:</span>
+              <span className="text-black dark:text-white text-[10px]">رده سنی:</span>
             </div>
-            <span className="text-black dark:text-white opacity-75 text-[10px]">{data.status === "Ended" ? "پایان یافته" : "در حال پخش"}</span>
+            <span className="text-black dark:text-white opacity-75 text-[10px]">ندارد</span>
           </div>
           <div className="flex flex-col  py-2 gap-y-1 grow items-center ">
             <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -419,7 +417,7 @@ export default async function SeriesId({ params }) {
               </svg>
               <span className="text-black dark:text-white text-[10px]">سال تولید :</span>
             </div>
-            <span className="text-black dark:text-white opacity-75 text-[10px]">{`${data.first_air_date?.slice(0, 4) || ""} - ${data.last_air_date?.slice(0, 4) || ""}`}</span>
+            <span className="text-black dark:text-white opacity-75 text-[10px]">{data.release_date} </span>
           </div>
           <div className="flex flex-col  py-2 gap-y-1 grow items-center ">
             <div className="flex flex-col md:flex-row md:w-full md:justify-center gap-1 md:gap-x-2 items-center">
@@ -446,7 +444,7 @@ export default async function SeriesId({ params }) {
       </section>
       {/* finish credits section  */}
 
-      {recommendations && <RecommendationsSwiper list={recommendations} />}
+      {recommendations && <RecommendationsSwiper list={recommendations} type="movie" />}
       <Filters />
     </>
   );

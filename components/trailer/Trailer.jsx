@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function Trailer({ id }) {
+export default function Trailer({ id, type = "series" }) {
   let [open, setOpen] = useState(false);
   let [error, setError] = useState(false);
   let [data, setData] = useState(null);
@@ -9,7 +9,7 @@ export default function Trailer({ id }) {
   let [empty, setEmpty] = useState(false);
 
   async function getTrailer() {
-    let response = await fetch(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`);
+    let response = await fetch(`https://api.themoviedb.org/3/${type == "series" ? "tv" : "movie"}/${id}/videos?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`);
     if (!response.ok) setError(true);
     let res = await response.json();
 

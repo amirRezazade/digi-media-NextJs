@@ -1,5 +1,5 @@
-import CastSlider from "../../../components/credits/CastSlider";
-import CrewSlider from "../../../components/credits/CrewSlider";
+import CastSlider from "./CastSlider";
+import CrewSlider from "./CrewSlider";
 
 export default function Credits({ cast, crew }) {
   return (

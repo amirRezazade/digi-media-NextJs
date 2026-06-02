@@ -3,7 +3,7 @@
 import { useState } from "react";
 import HeaderSlider from "./HeaderSlider";
 import Link from "next/link";
-export default function Header(params) {
+export default function Header({ list }) {
   let [activeIndex, setActiveIndex] = useState(null);
 
   return (
@@ -13,7 +13,7 @@ export default function Header(params) {
           <div className="xs:px-3 md:w-1/2 md:flex md:flex-col justify-evenly gap-12 md:px-0 md:pr-3 lg:gap-10 xl:pr-5">
             <div className="hidden md:flex flex-col items-end gap-5 text-white">
               <span className="text-sm font-extralight font-sans">{activeIndex?.media_type}</span>
-              <span dir="ltr" className="text-4xl font-bold">
+              <span dir="ltr" className=" text-4xl font-bold">
                 {activeIndex?.name || activeIndex?.title}
               </span>
               <div className="flex items-center gap-2.5">
@@ -24,7 +24,7 @@ export default function Header(params) {
                 <span className="bg-amber-300 rounded-md px-2 py-1 font-extrabold text-xs text-black">IMDB</span>
               </div>
             </div>
-            <HeaderSlider onActiveIndex={setActiveIndex} />
+            <HeaderSlider list={list} onActiveIndex={setActiveIndex} />
           </div>
           <div className="hidden h-full w-1/2 md:flex justify-center items-center">
             <Link href={`/${activeIndex?.media_type}/${activeIndex?.id}`} className="w-30 h-30 flex justify-center items-center rounded-full border border-white bg-transparent backdrop-blur-xs hover:scale-110 transition-transform duration-300">
