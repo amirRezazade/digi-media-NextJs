@@ -12,7 +12,7 @@ export default function HeaderPoster({ poster, name }) {
       height={400}
       className={`object-cover w-full z-3 rounded-lg contrast-110 ${!loaded ? "shimmer" : ""}`}
       src={`https://image.tmdb.org/t/p/original${poster}_medium`}
-      alt={name}
+      alt={name || "movie poster"}
       onError={(e) => {
         e.target.src = "/images/default_poster.jpg";
       }}
