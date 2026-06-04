@@ -14,7 +14,7 @@ export default async function Home() {
       next: { revalidate: 604800 },
     });
     const headerRes = await header.json();
-    headerItems = headerRes.results.slice(0, 15);
+    headerItems = headerRes.results?.slice(0, 15);
 
     const actions = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&with_genres=28&without_genres=16,10751&vote_count.gte=2000`, {
       next: { revalidate: 604800 },
