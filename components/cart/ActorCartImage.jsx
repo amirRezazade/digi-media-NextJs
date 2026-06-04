@@ -5,11 +5,11 @@ import { useState } from "react";
 export default function ActorCartImage({ profile, name }) {
   let [loaded, setLoaded] = useState(false);
   return (
-    <div class="aspect-square overflow-hidden">
+    <div className="aspect-square overflow-hidden">
       <Image
         width={250}
         height={250}
-        class={`aspect-square object-cover ${!loaded ? "shimmer" : ""}`}
+        className={`aspect-square object-cover ${!loaded ? "shimmer" : ""}`}
         src={`https://image.tmdb.org/t/p/original${profile}_medium`}
         alt={name}
         onError={(e) => {

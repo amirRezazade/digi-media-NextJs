@@ -29,7 +29,7 @@ export default async function page({ params }) {
   }
 
   return (
-    <main class=" px-3 md:px-6 lg:px-8 xl:px-12 my-8 md:my-7">
+    <main className=" px-3 md:px-6 lg:px-8 xl:px-12 my-8 md:my-7">
       <div className="flex items-center gap-1 text-[11px] text-gray-300 mb-4">
         <span>
           <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,41 +65,41 @@ export default async function page({ params }) {
         </svg>
         <span className="transition-all duration-300 cursor-pointer hover:text-orange-400">{data.name}</span>
       </div>
-      <section class="flex flex-col sm:flex-row items-start gap-5 sm:gap-8">
-        <div class="sm:sticky top-5 lg:static w-[80%] xs:w-full sm:max-w-65 lg:max-w-75 mx-auto h-auto sm:mt-3 flex-row flex-wrap sm:flex-nowrap sm:flex-col bg-white dark:bg-gray-800  flex  gap-2 rounded-3xl overflow-hidden">
+      <section className="flex flex-col sm:flex-row items-start gap-5 sm:gap-8">
+        <div className="sm:sticky top-5 lg:static w-[80%] xs:w-full sm:max-w-65 lg:max-w-75 mx-auto h-auto sm:mt-3 flex-row flex-wrap sm:flex-nowrap sm:flex-col bg-white dark:bg-gray-800  flex  gap-2 rounded-3xl overflow-hidden">
           <ActorProfile profile={data.profile_path} name={data.name} />
-          <div class="grow sm:grow-0 flex  xs:justify-between  flex-col gap-2 px-5 pt-2 items-center">
-            <h1 dir="ltr" class=" text-black dark:text-white font-bold text-2xl font-sans text-center">
+          <div className="grow sm:grow-0 flex  xs:justify-between  flex-col gap-2 px-5 pt-2 items-center">
+            <h1 dir="ltr" className=" text-black dark:text-white font-bold text-2xl font-sans text-center">
               {data.name}
             </h1>
-            <div class="w-full flex  justify-between items-center py-1.5 border-b border-gray-500/30">
-              <span class="text-black dark:text-white text-xs">سن:</span>
-              <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">{age || "----"} سال</span>
+            <div className="w-full flex  justify-between items-center py-1.5 border-b border-gray-500/30">
+              <span className="text-black dark:text-white text-xs">سن:</span>
+              <span className="text-gray-500 dark:text-gray-300 text-xs font-light ">{age || "----"} سال</span>
             </div>
-            <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
-              <span class="text-black dark:text-white text-xs">تاریخ تولد :</span>
-              <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.birthday ? data.birthday : "----"}</span>
+            <div className="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
+              <span className="text-black dark:text-white text-xs">تاریخ تولد :</span>
+              <span className="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.birthday ? data.birthday : "----"}</span>
             </div>
             {data.deathday && (
-              <div class=" w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
-                <span class="text-black dark:text-white text-xs">تاریخ فوت :</span>
-                <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.deathday}</span>
+              <div className=" w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
+                <span className="text-black dark:text-white text-xs">تاریخ فوت :</span>
+                <span className="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.deathday}</span>
               </div>
             )}
-            <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
-              <span class="text-black dark:text-white text-xs">جنسیت :</span>
-              <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.gender == 1 ? "زن" : "مرد"}</span>
+            <div className="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
+              <span className="text-black dark:text-white text-xs">جنسیت :</span>
+              <span className="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.gender == 1 ? "زن" : "مرد"}</span>
             </div>
-            <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
-              <span class="text-black dark:text-white text-xs">محل تولد :</span>
-              <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.place_of_birth ? data.place_of_birth : "----"}</span>
+            <div className="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
+              <span className="text-black dark:text-white text-xs">محل تولد :</span>
+              <span className="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.place_of_birth ? data.place_of_birth : "----"}</span>
             </div>
-            <div class="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
-              <span class="text-black dark:text-white text-xs">حرفه :</span>
-              <span class="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.known_for_department ? data.known_for_department : "-----"}</span>
+            <div className="w-full flex justify-between items-center py-1.5 border-b border-gray-500/30">
+              <span className="text-black dark:text-white text-xs">حرفه :</span>
+              <span className="text-gray-500 dark:text-gray-300 text-xs font-light ">{data.known_for_department ? data.known_for_department : "-----"}</span>
             </div>
             {data.imdb_id && (
-              <a href={`https://www.imdb.com/name/${data.imdb_id}`} target="_blank" class=" bg-orange-400 text-white text-xs rounded-3xl p-2 mt-2 mb-4">
+              <a href={`https://www.imdb.com/name/${data.imdb_id}`} target="_blank" className=" bg-orange-400 text-white text-xs rounded-3xl p-2 mt-2 mb-4">
                 مشاهده پروفایل در IMDb
               </a>
             )}

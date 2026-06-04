@@ -2,19 +2,17 @@ import Link from "next/link";
 import SearchAndShow from "./SearchAndShow";
 
 export default async function page({ searchParams }) {
-  const { query } = await searchParams;
-
-  let actors = null;
+  let { query } = await searchParams;
+  let response = null;
   try {
     const res = !query
       ? await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
           next: { revalidate: 604800 },
         })
-      : await fetch(`https://api.themoviedb.org/3/search/person?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query}`, {
+      : await fetch(`https://api.themoviedb.org/3/search/person?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${encodeURIComponent(query)}`, {
           next: { revalidate: 604800 },
         });
-    let response = await res.json();
-    actors = response.results;
+    response = await res.json();
   } catch (err) {
     throw new Error("خطا در دریافت اطلاعات!");
   }
@@ -46,7 +44,7 @@ export default async function page({ searchParams }) {
           </svg>
           <span className=" ">بازیگر ها</span>
         </div>
-        <SearchAndShow actors={actors} />
+        <SearchAndShow data={response} />
       </main>
     </section>
   );
