@@ -19,7 +19,7 @@ export default function ActorCredits({ credits, actorsId }) {
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     !isCast ? params.set("crew", true) : params.delete("crew");
-    params.set("page", page);
+    page > 1 ? params.set("page", page) : params.delete("page");
     router.push(`/actors/${actorsId}?${params.toString()}`);
   }, [page, isCast]);
 

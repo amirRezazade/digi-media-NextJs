@@ -33,7 +33,7 @@ export default function HeaderSlider({ list, onActiveIndex }) {
             <span className="text-orange-400 lg:text-base">برگزیده ها</span>
           </div>
           <Swiper
-            className="mySwiper py-4! md:mt-2 min-h-auto overflow-hidden!"
+            className="mySwiper  md:mt-2 pb-15! pt-8! min-h-auto overflow-hidden!"
             slidesPerView={"auto"}
             centeredSlides={true}
             modules={[Navigation, Autoplay]}
@@ -50,7 +50,6 @@ export default function HeaderSlider({ list, onActiveIndex }) {
                 spaceBetween: 10,
               },
             }}
-            initialSlide={0}
             effect={"slide"}
             spaceBetween={20}
             loop={true}

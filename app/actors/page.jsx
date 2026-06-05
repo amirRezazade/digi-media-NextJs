@@ -6,15 +6,15 @@ export default async function page({ searchParams }) {
   let response = null;
   try {
     const res = !query
-      ? await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
+      ? await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&page=1`, {
           next: { revalidate: 604800 },
         })
-      : await fetch(`https://api.themoviedb.org/3/search/person?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${encodeURIComponent(query)}`, {
+      : await fetch(`https://api.themoviedb.org/3/search/person?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=1`, {
           next: { revalidate: 604800 },
         });
     response = await res.json();
   } catch (err) {
-    throw new Error("خطا در دریافت اطلاعات!");
+    throw new Error(err);
   }
   return (
     <section className="relative min-h-screen text-gray-200 bg-cover bg-fixed bg-[url(/images/default-bg.jpg)]">

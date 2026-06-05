@@ -14,8 +14,8 @@ export default function GrowCart({ item, type }) {
             className="w-full h-full object-cover  lg:group-hover:opacity-0 transition-opacity duration-600"
             src={`https://image.tmdb.org/t/p/original${item.poster_path}_medium`}
             alt={item.name ? item.name : item.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            width={200}
+            height={288}
             onError={(e) => {
               e.target.src = "/images/default_poster.jpg";
             }}

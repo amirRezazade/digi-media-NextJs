@@ -1,6 +1,7 @@
 import ActorProfile from "@/components/cart/ActorProfile";
 import ActorCredits from "./ActorCredits";
 import Link from "next/link";
+import NotFound from "@/components/NotFound";
 
 export default async function page({ params }) {
   const { actorsId } = await params;
@@ -12,13 +13,13 @@ export default async function page({ params }) {
       next: { revalidate: 604800 },
     });
     data = await person.json();
-
     let year = new Date().getFullYear();
     if (data.deathday) {
       age = data.deathday.slice(0, 4) - data.birthday.slice(0, 4);
     } else {
       age = data.birthday ? year - data.birthday.slice(0, 4) : "";
     }
+    if (data?.status_code == 34) return <NotFound />;
 
     let creditsRes = await fetch(`https://api.themoviedb.org/3/person/${actorsId}/combined_credits?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false`, {
       next: { revalidate: 604800 },
@@ -65,6 +66,7 @@ export default async function page({ params }) {
         </svg>
         <span className="transition-all duration-300 cursor-pointer hover:text-orange-400">{data.name}</span>
       </div>
+
       <section className="flex flex-col sm:flex-row items-start gap-5 sm:gap-8">
         <div className="sm:sticky top-5 lg:static w-[80%] xs:w-full sm:max-w-65 lg:max-w-75 mx-auto h-auto sm:mt-3 flex-row flex-wrap sm:flex-nowrap sm:flex-col bg-white dark:bg-gray-800  flex  gap-2 rounded-3xl overflow-hidden">
           <ActorProfile profile={data.profile_path} name={data.name} />
@@ -105,7 +107,6 @@ export default async function page({ params }) {
             )}
           </div>
         </div>
-
         {credits && <ActorCredits credits={credits} actorsId={actorsId} />}
       </section>
     </main>

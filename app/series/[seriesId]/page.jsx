@@ -1,11 +1,11 @@
 import { genres } from "@/components/utils";
-import Image from "next/image";
 import Link from "next/link";
 import RecommendationsSwiper from "../../../components/Recommendations/RecommendationsSwiper";
 import Trailer from "@/components/trailer/Trailer";
 import Filters from "@/components/filters/Filters";
 import HeaderPoster from "../../../components/cart/HeaderPoster";
 import Credits from "../../../components/credits/Credits";
+import NotFound from "@/components/NotFound";
 
 export default async function SeriesId({ params }) {
   const { seriesId } = await params;
@@ -16,6 +16,7 @@ export default async function SeriesId({ params }) {
       next: { revalidate: 604800 },
     });
     data = await res.json();
+    if (data?.status_code == 34) return <NotFound />;
 
     //------------ get recommendationsResponse -----------
     let recommendationsRes = await fetch(`https://api.themoviedb.org/3/tv/${seriesId}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
@@ -77,21 +78,8 @@ export default async function SeriesId({ params }) {
                   <span className=" text-white font-extrabold lg:text-xl xl:text-3xl ">{data.vote_average?.toFixed(1)}</span>
                   <span className="text-black tracking-tighter font-extrabold text-xs  px-1.5 py-0.5 rounded-md bg-amber-300  mr-2 relative  before:content[''] before:absolute before:w-1.5 before:h-1.5 before:top-1/2 before:left-1/1 before:bg-amber-300 before:z-0 before:rotate-45 before:-translate-1/2 ">IMDB</span>
                 </div>
-                <div className="relative group z-1 grow  min-w-full h-auto">
-                  <Image width={250} height={400} className=" object-cover w-full -z-1 rounded-lg contrast-85 absolute scale-x-80 -translate-y-4 group-hover:translate-y-0 transition-transform duration-300" src={`https://image.tmdb.org/t/p/original${data.poster_path}_low`} alt={data.original_name || " "} />
-                  <Image width={260} height={400} className=" object-cover w-full -z-1 rounded-lg contrast-90 absolute scale-x-90 -translate-y-2 group-hover:translate-y-0 transition-transform duration-300 " src={`https://image.tmdb.org/t/p/original${data.poster_path}_low`} alt={data.original_name || " "} />
-                  <HeaderPoster poster={data.poster_path} name={data.original_name} />
-                  <button className="absolute top-1/1 left-1/2 -translate-1/2 flex justify-center items-center border border-orange-400 hover:bg-transparent transition-all duration-300 w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-orange-400">
-                    <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                      <g id="SVGRepo_iconCarrier">
-                        {" "}
-                        <path fillRule="evenodd" clipRule="evenodd" d="M6.75 6L7.5 5.25H16.5L17.25 6V19.3162L12 16.2051L6.75 19.3162V6ZM8.25 6.75V16.6838L12 14.4615L15.75 16.6838V6.75H8.25Z" fill="#ffffff"></path>{" "}
-                      </g>
-                    </svg>
-                  </button>
-                </div>
+                <HeaderPoster poster={data.poster_path} name={data.original_name} />
+
                 <div className="flex items-center w-full justify-center  gap-2 sm:hidden">
                   <span className="bg-gray-500/70 text-xs rounded-lg px-1.5 py-2 flex items-end gap-1 text-orange-400">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-orange-400">

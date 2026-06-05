@@ -16,7 +16,6 @@ export default function SearchAndShow({ data }) {
   let bottomRef = useRef(null);
   useEffect(() => {
     let time = setTimeout(() => {
-      setIsLoading(true);
       const params = new URLSearchParams(searchParams);
       query.trim().length > 1 ? params.set("query", query.trim()) : params.delete("query");
       router.push(`/actors?${params.toString()}`);
@@ -24,6 +23,10 @@ export default function SearchAndShow({ data }) {
     return () => clearTimeout(time);
   }, [query]);
 
+  function chageQuery(q) {
+    setQuery(q);
+    query.trim().length > 1 && setIsLoading(true);
+  }
   useEffect(() => {
     setIsLoading(false);
     setActors(data.results);
@@ -61,7 +64,7 @@ export default function SearchAndShow({ data }) {
     <>
       <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-5xl mt-15 mb-13">بازیگر ها</h1>
       <div className=" flex flex-wrap items-center justify-between gap-2 my-5 ">
-        <input type="text" className="py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50 outline-0 text-left" dir="ltr" placeholder="search..." value={query} onChange={(e) => setQuery(e.target.value)} />
+        <input type="text" className="py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50 outline-0 text-left" dir="ltr" placeholder="search..." value={query} onChange={(e) => chageQuery(e.target.value)} />
 
         {query.length > 1 && <span className="text-sm py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50">{data.total_results} بازیگر </span>}
       </div>
@@ -71,8 +74,8 @@ export default function SearchAndShow({ data }) {
         </div>
       ) : data.total_results ? (
         <div className="mt-5 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-5 sm:gap-y-6">
-          {actors?.map((actor) => (
-            <ActorCart key={actor.id} actor={actor} />
+          {actors?.map((actor, index) => (
+            <ActorCart key={actor.id + index} actor={actor} />
           ))}
         </div>
       ) : (

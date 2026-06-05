@@ -7,7 +7,7 @@ export default function ActorCart({ actor }) {
     <div className="flex flex-col bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
       <Link href={`/actors/${actor.id}`} className="relative ">
         <div className="absolute w-full h-full top-0 left-0 bg-linear-to-t from-black/30 from-10% to-20% to-transparent text-xs sm:text-sm">
-          <span className="absolute bottom-1 right-1"> ⭐ {actor.popularity.toFixed(1)}</span>
+          <span className="absolute bottom-1 right-1"> ⭐ {actor.popularity?.toFixed(1)}</span>
           <span className="absolute bottom-1 left-1">{actor.known_for_department || "-----"}</span>
         </div>
         <ActorCartImage profile={actor.profile_path} name={actor.name} />
