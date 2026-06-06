@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Cart from "@/components/cart/Cart";
 import ActorCart from "@/components/cart/ActorCart";
@@ -31,7 +31,6 @@ const sortOptions = [
   { id: "popularity.desc", name: "محبوب‌ترین" },
   { id: "release_date.desc", name: "جدیدترین" },
   { id: "vote_average.desc", name: "بهترین امتیاز" },
-  { id: "revenue.desc", name: "پرفروش‌ترین" },
 ];
 
 const countries = [
@@ -68,22 +67,26 @@ export default function SearchPage() {
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const scrollRef = useRef(null);
 
   function handleSearch() {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     setItems([]);
     setIsLoading(true);
+    setError(false);
     const params = new URLSearchParams();
     if (query.trim()) params.set("query", query.trim());
     if (type !== "all") params.set("type", type);
-    if (genre) params.set("genre", genre);
-    if (sort) params.set("sort", sort);
-    if (country) params.set("country", country);
+    if (genre !== "all") params.set("genre", genre);
+    if (sort !== "popularity.desc") params.set("sort", sort);
+    if (country !== "all") params.set("country", country);
     if (fromYear) params.set("fromYear", fromYear);
     if (toYear) params.set("toYear", toYear);
     if (fromRate) params.set("fromRate", fromRate);
     if (toRate) params.set("toRate", toRate);
-    if (page) params.set("page", page);
-    router.push(`/search?${params.toString()}`);
+    if (page != 1) params.set("page", page);
+    router.push(`/search?${params.toString()}`, { scroll: false });
     if (query.length) {
       if (type == "series") SearchByQuery("tv");
       if (type == "movie") SearchByQuery("movie");
@@ -91,6 +94,7 @@ export default function SearchPage() {
     } else {
       if (type == "series") searchSeries();
       if (type == "movie") searchMovie();
+      if (type == "all") searchAll();
     }
   }
   function resetPage() {
@@ -101,40 +105,102 @@ export default function SearchPage() {
     handleSearch();
   }, [page]);
 
-  function searchMovie() {
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-        toRate ? `&vote_average.lte=${toRate}` : ""
-      }&vote_count.gte=100&include_adult=false&page=${page}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setItems(res.results);
-        setIsLoading(false);
-        setTotalPage(res.total_pages);
-      });
+  async function searchMovie() {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
+          toRate ? `&vote_average.lte=${toRate}` : ""
+        }&vote_count.gte=100&include_adult=false&page=${page}`
+      );
+      let res = await response.json();
+      if (!res.ok) setError(true);
+      setItems(res.results);
+      setTotalPage(res.total_pages > 500 ? 500 : res.total_pages);
+    } catch (err) {
+      setError(true);
+      throw new Error("خطا در دریافت داده", err);
+    } finally {
+      setIsLoading(false);
+    }
   }
-  function searchSeries() {
-    fetch(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-        toRate ? `&vote_average.lte=${toRate}` : ""
-      }&vote_count.gte=100&include_adult=false&page=${page}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setItems(res.results);
-        setIsLoading(false);
-        setTotalPage(res.total_pages);
-      });
+  async function searchSeries() {
+    try {
+      const tvSort = sort == "release_date.desc" ? "first_air_date.desc" : sort;
+
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
+          toRate ? `&vote_average.lte=${toRate}` : ""
+        }&vote_count.gte=100&include_adult=false&page=${page}`
+      );
+      let res = await response.json();
+      if (!res.ok) setError(true);
+      setItems(res.results);
+      setTotalPage(res.total_pages > 500 ? 500 : res.total_pages);
+    } catch (err) {
+      setError(true);
+      throw new Error("خطا در دریافت داده", err);
+    } finally {
+      setIsLoading(false);
+    }
   }
-  function SearchByQuery(type) {
-    fetch(`https://api.themoviedb.org/3/search/${type}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query}&page=${page}&include_adult=false`)
-      .then((res) => res.json())
-      .then((res) => {
-        setItems(res.results);
-        setIsLoading(false);
-        setTotalPage(res.total_pages);
+
+  async function searchAll() {
+    const tvSort = sort == "release_date.desc" ? "first_air_date.desc" : sort;
+    try {
+      const [movieRes, tvRes] = await Promise.all([
+        fetch(
+          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
+            toRate ? `&vote_average.lte=${toRate}` : ""
+          }&vote_count.gte=100&include_adult=false&page=${page}`
+        ),
+        fetch(
+          `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
+            toRate ? `&vote_average.lte=${toRate}` : ""
+          }&vote_count.gte=100&include_adult=false&page=${page}`
+        ),
+      ]);
+
+      const movies = await movieRes.json();
+      const tvs = await tvRes.json();
+      if (!movieRes.ok || !tvRes.ok) setError(true);
+      const all = [...movies?.results, ...tvs?.results];
+      const sorted = all.sort((a, b) => {
+        switch (sort) {
+          case "popularity.desc":
+            return b.popularity - a.popularity;
+
+          case "vote_average.desc":
+            return b.vote_average - a.vote_average;
+
+          case "release_date.desc":
+            return new Date(b.release_date || b.first_air_date) - new Date(a.release_date || a.first_air_date);
+
+          default:
+            return b.popularity - a.popularity;
+        }
       });
+      setTotalPage(movies.total_pages + tvs.total_pages > 500 ? 500 : movies.total_pages + tvs.total_pages);
+      setItems(sorted);
+    } catch (err) {
+      setError(true);
+      throw new Error("خطا در دریافت داده", err);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  async function SearchByQuery(type) {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/search/${type}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query}&page=${page}&include_adult=false`);
+      let res = await response.json();
+      if (!res.ok) setError(true);
+      setItems(res.results);
+      setTotalPage(res.total_pages > 500 ? 500 : res.total_pages);
+    } catch (err) {
+      setError(true);
+      throw new Error("خطا در دریافت داده", err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -235,59 +301,18 @@ export default function SearchPage() {
             <span className="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>
           </div>
         )}
-        {!isLoading && !items?.length && (
-          <div className="text-center py-20 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Movie-Cinema-Watch--Streamline-Ultimate" height={50} width={50}>
-              <desc>{"\n    Movie Cinema Watch Streamline Icon: https://streamlinehq.com\n  "}</desc>
-              <path
-                fill="#ff808c"
-                d="M23 16.9844c-0.4262 0.186 -0.7888 0.4922 -1.0436 0.881 -0.2548 0.3889 -0.3908 0.8435 -0.3912 1.3085 0 -0.6342 -0.252 -1.2424 -0.7004 -1.6909 -0.4485 -0.4485 -1.0567 -0.7004 -1.6909 -0.7004 -0.6342 0 -1.2424 0.2519 -1.6909 0.7004 -0.4485 0.4485 -0.7004 1.0567 -0.7004 1.6909 0 -0.6342 -0.252 -1.2424 -0.7004 -1.6909 -0.4485 -0.4485 -1.0567 -0.7004 -1.6909 -0.7004 -0.6342 0 -1.2424 0.2519 -1.6909 0.7004 -0.4485 0.4485 -0.7004 1.0567 -0.7004 1.6909 0 -0.314 -0.0619 -0.625 -0.182 -0.9151 -0.1202 -0.2901 -0.2964 -0.5537 -0.5184 -0.7758 -0.2221 -0.222 -0.4857 -0.3982 -0.7758 -0.5184 -0.2901 -0.1201 -0.60109 -0.182 -0.91511 -0.182 -0.63422 0 -1.24246 0.2519 -1.69091 0.7004 -0.44846 0.4485 -0.7004 1.0567 -0.7004 1.6909 0 -0.314 -0.06184 -0.625 -0.18202 -0.9151 -0.12018 -0.2901 -0.29632 -0.5537 -0.51837 -0.7758 -0.22206 -0.222 -0.48567 -0.3982 -0.77579 -0.5184 -0.29014 -0.1201 -0.60109 -0.182 -0.91512 -0.182 -0.63421 0 -1.24245 0.2519 -1.69091 0.7004 -0.44845 0.4485 -0.70039 1.0567 -0.70039 1.6909 -0.00042 -0.465 -0.13637 -0.9196 -0.3912 -1.3085 -0.25481 -0.3888 -0.61747 -0.695 -1.04358 -0.881V23h22v-6.0156Z"
-                strokeWidth={1}
-              />
-              <path fill="#808080" stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M23 11.5217V2.91305c0 -1.05654 -0.8565 -1.91304 -1.9131 -1.91304H2.91304C1.8565 1.00001 1 1.85651 1 2.91305v8.60865c0 1.0566 0.8565 1.9131 1.91304 1.9131H21.0869c1.0566 0 1.9131 -0.8565 1.9131 -1.9131Z" strokeWidth={1} />
-              <path fill="#e3e3e3" d="M19.174 1.00001H4.82617V13.4348H19.174V1.00001Z" strokeWidth={1} />
-              <path fill="#ffffff" d="M18.2175 1.00001H4.82617V13.4348h0.95652L18.2175 1.00001Z" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M19.174 1.00001H4.82617V13.4348H19.174V1.00001Z" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M1 4.8261h3.82608" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M1 9.6087h3.82608" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M19.1738 4.8261h3.8261" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M19.1738 9.6087h3.8261" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M7.21747 19.6522c0.63422 0 1.24246 0.2519 1.69091 0.7003 0.44846 0.4485 0.7004 1.0568 0.7004 1.691V23H4.82617v-0.9565c0 -0.6342 0.25194 -1.2425 0.70039 -1.691 0.44846 -0.4484 1.0567 -0.7003 1.69091 -0.7003Z" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M12.0002 19.6522c0.6342 0 1.2424 0.2519 1.6909 0.7003 0.4484 0.4485 0.7004 1.0568 0.7004 1.691V23H9.60889v-0.9565c0 -0.6342 0.25193 -1.2425 0.70041 -1.691 0.4485 -0.4484 1.0567 -0.7003 1.6909 -0.7003Z" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M16.7824 19.6522c0.6342 0 1.2424 0.2519 1.691 0.7003 0.4484 0.4485 0.7003 1.0568 0.7003 1.691V23h-4.7826v-0.9565c0 -0.6342 0.252 -1.2425 0.7004 -1.691 0.4485 -0.4484 1.0567 -0.7003 1.6909 -0.7003Z" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M1 22.9999h3.82608v-0.9565c0.00199 -0.4449 -0.12068 -0.8814 -0.35412 -1.2601 -0.23344 -0.3786 -0.5683 -0.6843 -0.96661 -0.8823 -0.39832 -0.1981 -0.84415 -0.2806 -1.28697 -0.2382 -0.44281 0.0424 -0.86489 0.208 -1.21838 0.478" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M22.9999 20.1408c-0.3535 -0.27 -0.7755 -0.4356 -1.2184 -0.478 -0.4428 -0.0424 -0.8886 0.0401 -1.2869 0.2382 -0.3984 0.198 -0.7332 0.5037 -0.9666 0.8823 -0.2334 0.3787 -0.3562 0.8152 -0.3541 1.2601v0.9565h3.826" strokeWidth={1} />
-              <path
-                stroke="#191919"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M23 16.9844c-0.4262 0.186 -0.7888 0.4922 -1.0436 0.881 -0.2548 0.3889 -0.3908 0.8435 -0.3912 1.3085 0 -0.6342 -0.252 -1.2424 -0.7004 -1.6909 -0.4485 -0.4485 -1.0567 -0.7004 -1.6909 -0.7004 -0.6342 0 -1.2424 0.2519 -1.6909 0.7004 -0.4485 0.4485 -0.7004 1.0567 -0.7004 1.6909 0 -0.6342 -0.252 -1.2424 -0.7004 -1.6909 -0.4485 -0.4485 -1.0567 -0.7004 -1.6909 -0.7004 -0.6342 0 -1.2424 0.2519 -1.6909 0.7004 -0.4485 0.4485 -0.7004 1.0567 -0.7004 1.6909 0 -0.314 -0.0619 -0.625 -0.182 -0.9151 -0.1202 -0.2901 -0.2964 -0.5537 -0.5184 -0.7758 -0.2221 -0.222 -0.4857 -0.3982 -0.7758 -0.5184 -0.2901 -0.1201 -0.60109 -0.182 -0.91511 -0.182 -0.63422 0 -1.24246 0.2519 -1.69091 0.7004 -0.44846 0.4485 -0.7004 1.0567 -0.7004 1.6909 0 -0.314 -0.06184 -0.625 -0.18202 -0.9151 -0.12018 -0.2901 -0.29632 -0.5537 -0.51837 -0.7758 -0.22206 -0.222 -0.48567 -0.3982 -0.77579 -0.5184 -0.29014 -0.1201 -0.60109 -0.182 -0.91512 -0.182 -0.63421 0 -1.24245 0.2519 -1.69091 0.7004 -0.44845 0.4485 -0.70039 1.0567 -0.70039 1.6909 -0.00042 -0.465 -0.13637 -0.9196 -0.3912 -1.3085 -0.25481 -0.3888 -0.61747 -0.695 -1.04358 -0.881"
-                strokeWidth={1}
-              />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M2.43457 19.1739v0.4783" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M7.21729 19.1739v0.4783" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M12 19.1739v0.4783" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M16.7827 19.1739v0.4783" strokeWidth={1} />
-              <path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M21.5654 19.1739v0.4783" strokeWidth={1} />
-              <path
-                fill="#66e1ff"
-                d="M15.5393 8.10879c0.1796 -0.06986 0.3339 -0.19235 0.4428 -0.35143 0.1088 -0.15908 0.167 -0.34731 0.167 -0.54005 0 -0.19273 -0.0582 -0.38097 -0.167 -0.54005 -0.1089 -0.15907 -0.2632 -0.28157 -0.4428 -0.35143L9.30373 3.90201c-0.07246 -0.02814 -0.1507 -0.03819 -0.22793 -0.02929 -0.07723 0.00892 -0.15113 0.03651 -0.21528 0.08042 -0.06416 0.0439 -0.11665 0.10278 -0.15293 0.17154 -0.03627 0.06876 -0.05524 0.14533 -0.05525 0.22307v5.73915c0.00001 0.0777 0.01898 0.1543 0.05525 0.223 0.03628 0.0688 0.08877 0.1277 0.15293 0.1716 0.06415 0.0439 0.13805 0.0715 0.21528 0.0804 0.07723 0.0089 0.15547 -0.0012 0.22793 -0.0293l6.23557 -2.42381Z"
-                strokeWidth={1}
-              />
-              <path fill="#c2f3ff" d="M8.79295 10.4245 13.632 5.58549 9.30373 3.90201c-0.07246 -0.02814 -0.1507 -0.03819 -0.22793 -0.02929 -0.07723 0.00892 -0.15113 0.03651 -0.21528 0.08042 -0.06416 0.0439 -0.11665 0.10278 -0.15293 0.17154 -0.03627 0.06876 -0.05524 0.14533 -0.05525 0.22307v5.73915c0.00028 0.1267 0.05085 0.2482 0.14061 0.3376Z" strokeWidth={1} />
-              <path
-                stroke="#191919"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.5393 8.10879c0.1796 -0.06986 0.3339 -0.19235 0.4428 -0.35143 0.1088 -0.15908 0.167 -0.34731 0.167 -0.54005 0 -0.19273 -0.0582 -0.38097 -0.167 -0.54005 -0.1089 -0.15907 -0.2632 -0.28157 -0.4428 -0.35143L9.30373 3.90201c-0.07246 -0.02814 -0.1507 -0.03819 -0.22793 -0.02929 -0.07723 0.00892 -0.15113 0.03651 -0.21528 0.08042 -0.06416 0.0439 -0.11665 0.10278 -0.15293 0.17154 -0.03627 0.06876 -0.05524 0.14533 -0.05525 0.22307v5.73915c0.00001 0.0777 0.01898 0.1543 0.05525 0.223 0.03628 0.0688 0.08877 0.1277 0.15293 0.1716 0.06415 0.0439 0.13805 0.0715 0.21528 0.0804 0.07723 0.0089 0.15547 -0.0012 0.22793 -0.0293l6.23557 -2.42381Z"
-                strokeWidth={1}
-              />
-            </svg>
-            <p className="text-base">جستجو کنید تا نتایج نمایش داده شود</p>
+        <div ref={scrollRef} className="block w-full py-1"></div>
+        <div class=" grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 lg:gap-5 gap-y-6 gap-4 ">{items?.map((item) => (item.media_type == "person" ? <ActorCart key={item.id} actor={item} /> : <Cart key={item.id} type={item.media_type == "movie" || item.release_date ? "movie" : "series"} item={item} />))}</div>
+        {error && !isLoading && !items.length && (
+          <div className="flex justify-center py-10">
+            <button onClick={handleSearch} className="p-2 flex items-center gap-2 backdrop-blur-lg border border-gray-400/50 rounded-full text-sm">
+              خطا در دریافت داده ها!
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#ff8904" className="size-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+            </button>
           </div>
         )}
-
-        <div class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 lg:gap-5 gap-y-6 gap-4 ">{items?.map((item) => (item.media_type == "person" ? <ActorCart key={item.id} actor={item} /> : <Cart key={item.id} type={item.media_type == "movie" || item.release_date ? "movie" : "series"} item={item} />))}</div>
         {totalPage > 1 && <Pagination page={page} totalPage={totalPage} onPage={setPage} />}
       </main>
     </div>
