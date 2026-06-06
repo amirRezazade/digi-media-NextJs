@@ -14,6 +14,7 @@ export default function Trailer({ id, type = "series" }) {
       if (!response.ok) setError(true);
       let res = await response.json();
       let list = res.results;
+
       let main = list.find((el) => el.type == "Trailer" && el.official == true) || list[0];
       setData(main);
       setLoading(false);

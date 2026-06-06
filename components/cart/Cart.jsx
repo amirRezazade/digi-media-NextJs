@@ -3,8 +3,8 @@ import CartImg from "./CartImg";
 
 export default function Cart({ type, item }) {
   return (
-    <Link href={`/${type}/${item.id}`} className="relative group">
-      <div className="w-full relative rounded-lg overflow-hidden ">
+    <Link href={`/${type}/${item.id}`} className="relative group w-full h-full">
+      <div className="w-full h-full relative rounded-lg overflow-hidden ">
         <CartImg poster={item.poster_path} name={item.original_name} />
         <div className="w-full h-full absolute top-0 left-0 bg-linear-to-b from-transparent from-50% to-black/50 to-100% transition-opacity duration-600 group-hover:opacity-0">
           <p dir="ltr" className="py-2  p-3 text-sm absolute bottom-0 left-0  font-extrabold text-white">
@@ -14,7 +14,7 @@ export default function Cart({ type, item }) {
       </div>
       <div className="absolute w-full h-full top-0 left-0 rounded-lg sm:bg-black/60 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.3)_0%,transparent_30%,transparent_70%,rgba(0,0,0,0.1)_100%)] px-3 py-3.5 overflow-hidden sm:opacity-0 sm:invisible sm:group-hover:opacity-100 sm:group-hover:visible sm:group-hover:scale-90 transition-[opacity_visibility] duration-600">
         <div className="absolute top-0 left-0 p-3 text-amber-400 flex justify-between w-full gap-1.5 items-start ">
-          <span>{type == "movie" ? item.release_date.slice(0, 4) : item.first_air_date.slice(0, 4)}</span>
+          <span>{type == "movie" ? item.release_date?.slice(0, 4) : item.first_air_date?.slice(0, 4)}</span>
           <span className="hidden sm:inline-block">{type === "series" ? "سریال" : "فیلم"}</span>
           <div className="flex sm:hidden items-center gap-1">
             <span className="text-xs text-white">10/</span>

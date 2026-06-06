@@ -11,7 +11,7 @@ export default async function movie({ searchParams }) {
 &vote_count.gte=100
 &vote_average.gte=1
 &popularity.gte=5
-${genre ? `&with_genres=${genre}` : ""}&sort_by=${sortby || "popularity.desc"}`,
+${genre ? `&with_genres=${genre}` : ""}&sort_by=${sortby || "popularity.desc"}&page=1`,
       {
         next: { revalidate: 604800 },
       }
