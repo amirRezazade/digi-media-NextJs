@@ -7,6 +7,7 @@ import Filters from "@/components/filters/Filters";
 import HeaderPoster from "@/components/cart/HeaderPoster";
 import Credits from "@/components/credits/Credits";
 import NotFound from "@/components/NotFound";
+import GenreBtn from "@/components/GenreBtn";
 export default async function movieId({ params }) {
   let { movieId } = await params;
   let data = null;
@@ -147,9 +148,7 @@ export default async function movieId({ params }) {
                   <div className="flex flex-col gap-6 sm:gap-5 md:w-6/10 xl:w-6/10 md:gap-8 md:py-5 ">
                     <div id="genres" className="flex flex-wrap items-center gap-2 md:gap-3.5 text-gray-300 text-[11px] lg:text-sm">
                       {data.genres?.map((gen) => (
-                        <Link key={gen.id} href={`/search?${gen.id}`} className="px-2.5 py-0.5 rounded-full border border-gray-400 hover:border-orange-400 hover:text-orange-400 transition-all duration-300">
-                          {genres[gen.id]}
-                        </Link>
+                        <GenreBtn key={gen.id} id={gen.id} />
                       ))}
                     </div>
                     {data.tagline && <p className="text-sm text-white font-extrabold leading-5 lg:text-base xl:text-base">{data.tagline}</p>}
@@ -432,7 +431,7 @@ export default async function movieId({ params }) {
       </section>
       {/* finish credits section  */}
 
-      {recommendations && <RecommendationsSwiper list={recommendations} type="movie" />}
+      {recommendations?.length && <RecommendationsSwiper list={recommendations} type="movie" />}
       <Filters />
     </>
   );

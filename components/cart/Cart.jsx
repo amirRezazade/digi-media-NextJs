@@ -18,7 +18,7 @@ export default function Cart({ type, item }) {
           <span className="hidden sm:inline-block">{type === "series" ? "سریال" : "فیلم"}</span>
           <div className="flex sm:hidden items-center gap-1">
             <span className="text-xs text-white">10/</span>
-            <span className="text-base lg:text-2xl text-amber-400 font-bold">{item.vote_average.toFixed(1)}</span>
+            <span className="text-base lg:text-2xl text-amber-400 font-bold">{item.vote_average?.toFixed(1)}</span>
           </div>
         </div>
         <span className="hidden sm:inline-block absolute top-1/2 left-1/2 -translate-1/2">
@@ -34,7 +34,7 @@ export default function Cart({ type, item }) {
         <div className=" absolute w-full p-3 bottom-0 left-0 flex justify-end items-center">
           <div className="hidden sm:flex items-center gap-1">
             <span className="text-xs text-white">10/</span>
-            <span className="text-base lg:text-2xl text-amber-400 font-bold">{item.vote_average.toFixed(1)}</span>
+            <span className="text-base lg:text-2xl text-amber-400 font-bold">{item.vote_average?.toFixed(1)}</span>
           </div>
         </div>
       </div>

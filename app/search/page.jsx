@@ -6,10 +6,18 @@ import ActorCart from "@/components/cart/ActorCart";
 import Pagination from "@/components/Pagination";
 import NotFound from "@/components/NotFound";
 
+const genreMap = {
+  28: 10759, // اکشن
+  12: 10759, // ماجراجویی
+  53: 10759, // هیجان‌انگیز
+  878: 10765, // علمی‌تخیلی
+  14: 10765, // فانتزی
+  10752: 10768, // جنگی
+};
 const genres = [
   { id: "all", name: "همه" },
   { id: "28", name: "اکشن" },
-  { id: "99", name: "بیوگرافی" },
+  { id: "99", name: "مستند" },
   { id: "36", name: "تاریخی" },
   { id: "80", name: "جنایی" },
   { id: "18", name: "درام" },
@@ -109,10 +117,9 @@ export default function SearchPage() {
   async function searchMovie() {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-          toRate ? `&vote_average.lte=${toRate}` : ""
-        }&vote_count.gte=100&include_adult=false&page=${page}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&page=${page}`
       );
+      // &vote_count.gte=100&include_adult=false&page=${page}
       let res = await response.json();
       if (!response.ok) setError(true);
       else setError(false);
@@ -128,12 +135,10 @@ export default function SearchPage() {
   async function searchSeries() {
     try {
       const tvSort = sort == "release_date.desc" ? "first_air_date.desc" : sort;
+      const tvGenre = genreMap[genre] ?? genre;
 
-      const response = await fetch(
-        `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-          toRate ? `&vote_average.lte=${toRate}` : ""
-        }&vote_count.gte=100&include_adult=false&page=${page}`
-      );
+      const response = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${tvGenre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&page=${page}`);
+      // &vote_count.gte=100&include_adult=false&page=${page}
       let res = await response.json();
       if (!response.ok) setError(true);
       else setError(false);
@@ -149,18 +154,12 @@ export default function SearchPage() {
 
   async function searchAll() {
     const tvSort = sort == "release_date.desc" ? "first_air_date.desc" : sort;
+    const tvGenre = genreMap[genre] ?? genre;
     try {
       const [movieRes, tvRes] = await Promise.all([
-        fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-            toRate ? `&vote_average.lte=${toRate}` : ""
-          }&vote_count.gte=100&include_adult=false&page=${page}`
-        ),
-        fetch(
-          `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-            toRate ? `&vote_average.lte=${toRate}` : ""
-          }&vote_count.gte=100&include_adult=false&page=${page}`
-        ),
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&page=${page}`),
+        // &vote_count.gte=100&include_adult=false&page=${page}
+        fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${tvGenre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&page=${page}`),
       ]);
 
       const movies = await movieRes.json();
@@ -229,7 +228,7 @@ export default function SearchPage() {
           </div>
 
           {/* Filters card */}
-          <div className="text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800 border border-white/7 rounded-2xl p-5 sm:p-6 mb-8">
+          <div className="text-gray-500 dark:text-gray-200 bg-stone-200 dark:bg-gray-800 border border-white/7 rounded-2xl p-5 sm:p-6 mb-8">
             {/* Type tabs */}
             <div className="flex gap-2 mb-6">
               {[

@@ -3,7 +3,7 @@ import CrewSlider from "./CrewSlider";
 
 export default function Credits({ cast, crew }) {
   return (
-    <div className="flex flex-col gap-10 md:flex-row md:gap-0 md:justify-between my-7 sm:my-5 select-none">
+    <div className="flex flex-col gap-10 md:flex-row md:gap-0 md:justify-between my-7 sm:my-5 select-none min-h-35">
       <div className="flex flex-col text-white md:max-w-[48%] grow">
         <div className="flex gap-2 items-center">
           <span>

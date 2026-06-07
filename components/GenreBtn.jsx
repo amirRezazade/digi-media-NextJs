@@ -10,7 +10,7 @@ export default function GenreBtn({ id }) {
     router.push(`/search?genre=${id}`);
   }
   return (
-    <button className=" pointer-events-auto px-2.5 py-1 cursor-pointer rounded-full border text-xs hover:text-orange-400 hover:border-orange-400 transition-colors duration-300" onClick={(e) => genreLink(e, id)}>
+    <button className=" pointer-events-auto px-2.5 py-1 cursor-pointer rounded-full border border-gray-400 text-xs hover:text-orange-400 hover:border-orange-400 transition-colors duration-300" onClick={(e) => genreLink(e, id)}>
       {genres[id]}
     </button>
   );
