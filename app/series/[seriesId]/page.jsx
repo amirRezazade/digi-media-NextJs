@@ -78,7 +78,7 @@ export default async function SeriesId({ params }) {
                   <span className=" text-white font-extrabold lg:text-xl xl:text-3xl ">{data.vote_average?.toFixed(1)}</span>
                   <span className="text-black tracking-tighter font-extrabold text-xs  px-1.5 py-0.5 rounded-md bg-amber-300  mr-2 relative  before:content[''] before:absolute before:w-1.5 before:h-1.5 before:top-1/2 before:left-1/1 before:bg-amber-300 before:z-0 before:rotate-45 before:-translate-1/2 ">IMDB</span>
                 </div>
-                <HeaderPoster poster={data.poster_path} name={data.original_name} />
+                <HeaderPoster poster={data.poster_path} name={data.original_name} type={"tv"} id={data.id} />
 
                 <div className="flex items-center w-full justify-center  gap-2 sm:hidden">
                   <span className="bg-gray-500/70 text-xs rounded-lg px-1.5 py-2 flex items-end gap-1 text-orange-400">

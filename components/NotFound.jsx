@@ -1,3 +1,3 @@
-export default function NotFound(params) {
-  return <p className="text-black dark:text-white text-center py-10">شخص مورد نظر یافت نشد!</p>;
+export default function NotFound() {
+  return <h2 className="text-center text-3xl font-bold py-10">موردی پیدا نشد!</h2>;
 }

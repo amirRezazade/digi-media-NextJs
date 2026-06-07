@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Cart from "@/components/cart/Cart";
 import ActorCart from "@/components/cart/ActorCart";
 import Pagination from "@/components/Pagination";
+import NotFound from "@/components/NotFound";
 
 const genres = [
   { id: "all", name: "همه" },
@@ -113,7 +114,8 @@ export default function SearchPage() {
         }&vote_count.gte=100&include_adult=false&page=${page}`
       );
       let res = await response.json();
-      if (!res.ok) setError(true);
+      if (!response.ok) setError(true);
+      else setError(false);
       setItems(res.results);
       setTotalPage(res.total_pages > 500 ? 500 : res.total_pages);
     } catch (err) {
@@ -133,7 +135,8 @@ export default function SearchPage() {
         }&vote_count.gte=100&include_adult=false&page=${page}`
       );
       let res = await response.json();
-      if (!res.ok) setError(true);
+      if (!response.ok) setError(true);
+      else setError(false);
       setItems(res.results);
       setTotalPage(res.total_pages > 500 ? 500 : res.total_pages);
     } catch (err) {
@@ -163,6 +166,7 @@ export default function SearchPage() {
       const movies = await movieRes.json();
       const tvs = await tvRes.json();
       if (!movieRes.ok || !tvRes.ok) setError(true);
+      else setError(false);
       const all = [...movies?.results, ...tvs?.results];
       const sorted = all.sort((a, b) => {
         switch (sort) {
@@ -192,7 +196,8 @@ export default function SearchPage() {
     try {
       const response = await fetch(`https://api.themoviedb.org/3/search/${type}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query}&page=${page}&include_adult=false`);
       let res = await response.json();
-      if (!res.ok) setError(true);
+      if (!response.ok) setError(true);
+      else setError(false);
       setItems(res.results);
       setTotalPage(res.total_pages > 500 ? 500 : res.total_pages);
     } catch (err) {
@@ -302,8 +307,9 @@ export default function SearchPage() {
           </div>
         )}
         <div ref={scrollRef} className="block w-full py-1"></div>
-        <div class=" grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 lg:gap-5 gap-y-6 gap-4 ">{items?.map((item) => (item.media_type == "person" ? <ActorCart key={item.id} actor={item} /> : <Cart key={item.id} type={item.media_type == "movie" || item.release_date ? "movie" : "series"} item={item} />))}</div>
-        {error && !isLoading && !items.length && (
+        {items.length > 0 && <div class=" grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 lg:gap-5 gap-y-6 gap-4 ">{items?.map((item) => (item.media_type == "person" ? <ActorCart key={item.id} actor={item} /> : <Cart key={item.id} type={item.media_type == "movie" || item.release_date ? "movie" : "series"} item={item} />))}</div>}
+        {!items.length && !isLoading && !error && <NotFound />}
+        {error && !isLoading && (
           <div className="flex justify-center py-10">
             <button onClick={handleSearch} className="p-2 flex items-center gap-2 backdrop-blur-lg border border-gray-400/50 rounded-full text-sm">
               خطا در دریافت داده ها!

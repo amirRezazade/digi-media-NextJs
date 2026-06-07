@@ -1,5 +1,6 @@
 "use client";
 import ActorCart from "@/components/cart/ActorCart";
+import NotFound from "@/components/NotFound";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -79,7 +80,7 @@ export default function SearchAndShow({ data }) {
           ))}
         </div>
       ) : (
-        <h2 className="text-center text-3xl font-bold py-10">موردی پیدا نشد!</h2>
+        <NotFound />
       )}
       <div ref={bottomRef} className="flex justify-center py-10">
         {data.total_pages > pageRef.current && !retry && !isLoading && isFetching && <span className="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>}
