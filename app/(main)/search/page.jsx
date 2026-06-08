@@ -276,19 +276,19 @@ export default function SearchPage() {
 
             {/* Toggles + Submit */}
             <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-white/7">
-              <div class=" flex items-center gap-0 sm:gap-2 xl:gap-4">
+              <div className=" flex items-center gap-0 sm:gap-2 xl:gap-4">
                 <div>
-                  <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
-                    <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap">دوبله فارسی</span>
-                    <input type="checkbox" checked={dubbed} onChange={(e) => setDubbed(e.target.checked)} class="sr-only peer" />
-                    <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
+                  <label className="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
+                    <span className="ms-3 text-xs xl:text-sm font-medium text-nowrap">دوبله فارسی</span>
+                    <input type="checkbox" checked={dubbed} onChange={(e) => setDubbed(e.target.checked)} className="sr-only peer" />
+                    <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
                   </label>
                 </div>
                 <div>
-                  <label class="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
-                    <span class="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">زیرنویس فارسی</span>
-                    <input type="checkbox" checked={subtitled} onChange={(e) => setSubtitled(e.target.checked)} class="sr-only peer" />
-                    <div class="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
+                  <label className="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
+                    <span className="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">زیرنویس فارسی</span>
+                    <input type="checkbox" checked={subtitled} onChange={(e) => setSubtitled(e.target.checked)} className="sr-only peer" />
+                    <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
                   </label>
                 </div>
               </div>
@@ -306,7 +306,7 @@ export default function SearchPage() {
           </div>
         )}
         <div ref={scrollRef} className="block w-full py-1"></div>
-        {items.length > 0 && <div class=" grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 lg:gap-5 gap-y-6 gap-4 ">{items?.map((item) => (item.media_type == "person" ? <ActorCart key={item.id} actor={item} /> : <Cart key={item.id} type={item.media_type == "movie" || item.release_date ? "movie" : "series"} item={item} />))}</div>}
+        {items.length > 0 && <div className=" grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 lg:gap-5 gap-y-6 gap-4 ">{items?.map((item) => (item.media_type == "person" ? <ActorCart key={item.id} actor={item} /> : <Cart key={item.id} type={item.media_type == "movie" || item.release_date ? "movie" : "series"} item={item} />))}</div>}
         {!items.length && !isLoading && !error && <NotFound />}
         {error && !isLoading && (
           <div className="flex justify-center py-10">

@@ -17,7 +17,7 @@ export default function MobileNav(params) {
         </span>
         <span>خانه</span>
       </Link>
-      <Link href={"/favorites"} className="flex flex-col justify-center items-center gap-1">
+      <Link href={"/profile/watch-list"} className="flex flex-col justify-center items-center gap-1">
         <span>
           <svg className="dark:fill-[#c5c5c5] fill-[#888888]" width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -29,7 +29,7 @@ export default function MobileNav(params) {
         </span>
         <span>علاقه مندی ها</span>
       </Link>
-      <Link href={"/my-account"} className="flex flex-col justify-center items-center gap-1">
+      <Link href={"/profile"} className="flex flex-col justify-center items-center gap-1">
         <span>
           <svg className="dark:fill-[#c5c5c5] fill-[#888888]" width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

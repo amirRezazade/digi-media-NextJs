@@ -56,7 +56,7 @@ export default function Menu(params) {
         </li>
         <li className={`overflow-clip max-h-15 ${openIndex == 1 ? "max-h-90" : ""} theme rounded-lg lg:text-xs transition-[max_height] duration-300 lg:w-auto lg:h-full lg:dark:bg-transparent lg:relative lg:overflow-visible group`}>
           <div className="flex items-center justify-between p-2  lg:p-0">
-            <Link href="/search?&type=movie&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=false&Subtitle=false&page=1" className="flex justify-between items-center w-full">
+            <Link href="/movie" className="flex justify-between items-center w-full">
               <div className="flex items-center gap-4 lg:gap-1 xl:gap-4">
                 <span className="lg:group-hover:scale-120 transition-transform duration-300 fill-orange-400">
                   <svg width="30" height="30" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" className="jam jam-movie">
@@ -73,41 +73,51 @@ export default function Menu(params) {
           </div>
           <ul className="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:flex-wrap lg:gap-4 lg:top-20 lg:-right-25 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-[740px] lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs">
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">جدول باکس آفیس</button>
-            </li>
-            <li>
-              <Link href="/search?&type=movie&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=false&Subtitle=false&page=1&sort=sort_by=vote_average.desc" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+              <Link href="/movie" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
                 250 فیلم برتر IMDb
               </Link>
             </li>
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">کالکشن ها</button>
+              <Link href={"/movie?sortby=release_date.desc"} className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                جدیدترین فیلم ها
+              </Link>
             </li>
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">جوایز اسکار</button>
+              <Link href="/movie?genre=28" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                فیلم های اکشن
+              </Link>
             </li>
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">جوایز گلدن گلوب</button>
+              <Link href="/movie?genre=878" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                فیلم های علمی تخیلی
+              </Link>
             </li>
             <li>
-              <Link href="/search?type=movie&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=true&Subtitle=false&page=1" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+              <Link href="/movie?genre=878" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                انیمیشن ها
+              </Link>
+            </li>
+            <li>
+              <Link href="/movie" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
                 فیلم های دوبله فارسی
               </Link>
             </li>
             <li>
-              <Link href="/search?&type=movie&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=&Subtitle=true&page=1" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+              <Link href="/movie" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
                 فیلم های زیرنویس فارسی
               </Link>
             </li>
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">فیلم های دارای پخش آنلاین</button>
+              <Link href="/movie" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                فیلم های دارای پخش آنلاین
+              </Link>
             </li>
-            <Image className="absolute bottom-0 left-0 hidden lg:block" src={joker} alt="dark-logo" />
+            <Image className="absolute bottom-0 left-0 hidden lg:block" width={203} height={232} src={joker} alt="joker" />
           </ul>
         </li>
         <li className={`overflow-clip max-h-15 ${openIndex == 2 ? "max-h-80" : ""} theme rounded-lg  lg:text-xs transition-[max_height] duration-300 lg:w-auto lg:h-full lg:dark:bg-transparent lg:relative lg:overflow-visible group`}>
           <div className="flex items-center justify-between p-2  lg:p-0">
-            <Link href="/search?&type=tv&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=false&Subtitle=false&page=1" className="flex justify-between items-center w-full">
+            <Link href="/series" className="flex justify-between items-center w-full">
               <div className="flex items-center gap-4 lg:gap-1 xl:gap-4">
                 <span className="lg:group-hover:scale-120 transition-transform duration-300 fill-orange-400">
                   <svg width="30" height="30" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -125,34 +135,36 @@ export default function Menu(params) {
           </div>
           <ul className="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:pb-30 lg:flex-wrap lg:gap-4 lg:top-20 lg:-right-60 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-[740px] lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs">
             <li>
-              <Link href="/search?&type=tv&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=false&Subtitle=false&page=1" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+              <Link href="/series" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
                 تمامی سریال ها
               </Link>
             </li>
             <li>
-              <Link href="/search?&type=tv&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=false&Subtitle=false&page=1&sort=sort_by=vote_average.desc" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+              <Link href="/series" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
                 250 سریال برتر IMDb
               </Link>
             </li>
             <li>
-              <Link href="/search?type=tv&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=true&Subtitle=false&page=1" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
-                سریال های دوبله فارسی
+              <Link href="/series?genre=10759" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                سریال های اکشن و ماجراجویی
               </Link>
             </li>
             <li>
-              <Link href="/search?&type=tv&country=&genre=&fromYear=0&toYear=0&fromPoint=&toPoint=&age=&double=false&Subtitle=true&page=1" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
-                سریال های زیرنویس فارسی
+              <Link href="/series?genre=10768" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                سریال های جنگی
               </Link>
             </li>
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">سریال های دارای پخش آنلاین</button>
+              <Link href="/series?genre=10751" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                سریال های خانوادگی
+              </Link>
             </li>
-            <Image className="absolute bottom-0 left-0 hidden lg:block" src={breakingBad} alt="dark-logo" />
+            <Image className="absolute bottom-0 left-0 hidden lg:block" src={breakingBad} alt="breaking bad" />
           </ul>
         </li>
         <li className={`overflow-clip max-h-15 ${openIndex == 3 ? "max-h-50" : ""} theme rounded-lg p-2 flex items-center flex-wrap justify-between lg:p-0 lg:text-xs transition-[max_height] duration-300 lg:w-auto lg:h-full lg:dark:bg-transparent lg:relative lg:overflow-visible group`}>
           <button onClick={() => setOpenIndex((prev) => (prev == 3 ? null : 3))} className="flex justify-between items-center w-full">
-            <div className="flex items-center gap-4 lg:gap-1 xl:gap-4">
+            <Link href={"/actors"} className="flex items-center gap-4 lg:gap-1 xl:gap-4">
               <span className="lg:group-hover:scale-120 transition-transform duration-300">
                 <svg fill="#ff9800" width="30px" height="30px" viewBox="0 -64 640 640" xmlns="http://www.w3.org/2000/svg">
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -162,19 +174,23 @@ export default function Menu(params) {
                   </g>
                 </svg>
               </span>
-              <span className="flex flex-col">
+              <div className="flex flex-col">
                 <span className="text-black dark:text-white">هنرمندان</span>
                 <span className="text-orange-400 text-sm font-mono">ARTISTS</span>
-              </span>
-            </div>
+              </div>
+            </Link>
             <span className=" ml-2 w-8 h-10 transition-transform duration-300 lg:hidden hover:-rotate-90 relative before:content-[''] before:absolute before:w-3 before:h-3   before:border-b-2 before:border-l-2 before:top-1/2 before:left-1/2 before:rotate-45 before:-translate-1/2 before:border-gray-500 dark:before:border-white  "></span>
           </button>
           <ul className="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:flex-wrap lg:gap-45 lg:flex-row lg:top-20 lg:-right-80 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-[740px] lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs">
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">ستارگان</button>
+              <Link href={"/actors"} className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                ستارگان
+              </Link>
             </li>
             <li>
-              <button className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">کارگردان ها</button>
+              <Link href={"/actors"} className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
+                کارگردان ها
+              </Link>
             </li>
             <Image src={leonardo} alt="leonardo" className="absolute bottom-0 left-0 hidden lg:block" />
           </ul>

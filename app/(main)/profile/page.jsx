@@ -27,7 +27,7 @@ export default function Profile() {
 
   return (
     <div className="bg-cover bg-fixed bg-[url(/images/default-bg.jpg)]  text-gray-200 pt-20 pb-10">
-      <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-5  backdrop-blur-md border border-gray-500/40 rounded-2xl ">
+      <main className="relative z-1 max-w-4xl mx-auto px-4 sm:px-6 py-5  backdrop-blur-md border border-gray-500/40 rounded-2xl ">
         {/* Header */}
         <div className="flex items-center gap-4 mb-4">
           <div className=" rounded-2xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-2xl shrink-0">

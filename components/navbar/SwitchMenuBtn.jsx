@@ -1,9 +1,15 @@
 "use client";
 
 import { useMenu } from "@/context/menuContext";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SwitchMenuBtn(params) {
-  const { isOpen, toggleMenu } = useMenu();
+  const { isOpen, toggleMenu, closeMenu } = useMenu();
+  const pathname = usePathname();
+  useEffect(() => {
+    closeMenu();
+  }, [pathname]);
   return (
     <button onClick={toggleMenu} className="flex flex-col justify-center items-center ">
       <span>

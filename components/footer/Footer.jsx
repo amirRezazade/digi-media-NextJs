@@ -4,8 +4,8 @@ import ScrollToTop from "./ScrollToTop";
 export default function Footer(params) {
   return (
     <footer className="theme mt-5 lg:mt-10 pt-7 text-black dark:text-gray-200 ">
-      <div className="  pb-10 lg:pb-4 px-3 md:px-6 lg:px-8 xl:px-12 xl:py-8  bg-[url('/images/footer-bg.png')]  bg-cover flex flex-col gap-5 md:flex-row md:justify-between">
-        <div className="flex flex-col items-center gap-6 md:gap-4 md:w-auto md:order-2 lg:px-10">
+      <div className=" grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4  gap-y-4 gap-x-3 items-start pb-10 lg:pb-4 px-3 md:px-6 lg:px-8 xl:px-12 xl:py-8  bg-[url('/images/footer-bg.png')]  bg-cover ">
+        <div className="xs:col-span-2  flex flex-col items-center gap-6 md:gap-4 md:w-auto md:order-2 lg:px-10">
           <p className="text-xs lg:text-sm leading-9 text-center">هدف از ایجاد دیجی مدیا ارائه خدمات کیفی در سطح عالی بود که سایت های فیلم و سریال قادر به رقابت با سایت های قدرتمند خارجی و ایرانی باشند. دیجی مدیا متشکل از بهترین و کامل ترین امکانات هر سایت فیلم و سریال می باشد و سطح کیفی خود را تا آخر حفظ خواهد نمود</p>
           <h3 className=" ">دیجی مدیا در شبکه های اجتماعی</h3>
           <div className="flex gap-2 items-center">
@@ -80,23 +80,28 @@ export default function Footer(params) {
             </span>
             <span className="">دسترسی سریع</span>
           </div>
-          <ul className=" mt-4 px-3 ">
+          <ul className=" flex flex-col gap-3 mt-4 px-3 ">
             <li>
               <Link href="/" className="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
                 صفحه نخست
               </Link>
             </li>
-            <li className="my-3">
+            <li className="">
               <button className="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">بلاگ</button>
             </li>
             <li>
-              <Link href="/my-account" className=" text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
-                پنل کاربری
+              <Link href="/profile" className=" text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
+                پروفایل
+              </Link>
+            </li>
+            <li>
+              <Link href="/profile/watch-list" className=" text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
+                علاقه مندی ها
               </Link>
             </li>
           </ul>
         </div>
-        <div className="felx flex-col  mt-4 md:order-3 md:min-w-2/6 lg:min-w-1/4">
+        <div className="felx flex-col  xs:mt-4 md:order-3 md:min-w-2/6 lg:min-w-1/4">
           <div className="flex items-center">
             <span>
               <svg width="22" height="22" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
@@ -110,12 +115,12 @@ export default function Footer(params) {
             </span>
             <span className="  mx-2"> ابزار های سایت</span>
           </div>
-          <button className="flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mt-5 mb-3">
+          <button className="w-full flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mt-5 mb-3">
             <div className="flex flex-col gap-1.5">
               <span className="text-orange-400 text-sm">درخواستی دارید</span>
               <span className="text-xs">دیجی مدیا برای شما قرار میدهد</span>
             </div>
-            <span>
+            <span className="md:hidden lg:inline">
               <svg width="28px" height="28px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -126,15 +131,24 @@ export default function Footer(params) {
               </svg>
             </span>
           </button>
-          <button className="flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mb-3">
+          <button className="w-full flex items-center justify-between dark:bg-gray-700 bg-white py-2 px-3 rounded-xl mb-3">
             <div className="flex flex-col gap-1.5">
               <span className="text-sky-500 text-sm">وبلاگ دیجی مدیا</span>
               <span className="text-xs">اخبار دنیای فیلم و سریال را با ما تجربه کنید</span>
             </div>
+            <span className="md:hidden lg:inline">
+              <svg fill="#1fa2f0" width="28px" height="28px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" stroke="#1fa2f0">
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path d="M172.2 226.8c-14.6-2.9-28.2 8.9-28.2 23.8V301c0 10.2 7.1 18.4 16.7 22 18.2 6.8 31.3 24.4 31.3 45 0 26.5-21.5 48-48 48s-48-21.5-48-48V120c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24v248c0 89.5 82.1 160.2 175 140.7 54.4-11.4 98.3-55.4 109.7-109.7 17.4-82.9-37-157.2-112.5-172.2zM209 0c-9.2-.5-17 6.8-17 16v31.6c0 8.5 6.6 15.5 15 15.9 129.4 7 233.4 112 240.9 241.5.5 8.4 7.5 15 15.9 15h32.1c9.2 0 16.5-7.8 16-17C503.4 139.8 372.2 8.6 209 0zm.3 96c-9.3-.7-17.3 6.7-17.3 16.1v32.1c0 8.4 6.5 15.3 14.8 15.9 76.8 6.3 138 68.2 144.9 145.2.8 8.3 7.6 14.7 15.9 14.7h32.2c9.3 0 16.8-8 16.1-17.3-8.4-110.1-96.5-198.2-206.6-206.7z"></path>
+                </g>
+              </svg>
+            </span>
           </button>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-2 pt-2 pb-12 xs:pb-2!">
+      <div className="flex items-center justify-center gap-2 pt-2 pb-12 xs:pb-2! mb-14 lg:mb-0">
         <p className="text-xs">«طراحی و توسعه توسط امیر رضازاده — 2026»</p>
         <a href="https://github.com/amirRezazade" target="-blank" className="px-2 py-1 fill-white">
           <svg width="25px" height="25px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" className="jam jam-github">
