@@ -4,6 +4,7 @@ import Link from "next/link";
 import SwichTheme from "./SwichTheme";
 import Menu from "./Menu";
 import NavbarSearchInput from "./NavbarSearchInput";
+import NavbarUserNameBtn from "./NavbarUserNameBtn";
 
 export default function Navbar(params) {
   return (
@@ -25,19 +26,7 @@ export default function Navbar(params) {
         <span className="bg-orange-400 text-white px-1.5 p-0.5 rounded-lg text-xs absolute -right-1 -top-1">2</span>
       </div>
       <SwichTheme />
-      <Link href="/auth" className="flex items-center gap-1 p-2 ml-4 bg-orange-400 text-white rounded-xl text-xs 2xl:ml-15">
-        <span>
-          <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <circle cx="12" cy="7" r="4" stroke="#ffffff" strokeWidth="2"></circle>
-              <path d="M16 21H8.00001C5.79087 21 3.84014 19.0616 4.99177 17.1763C6.11781 15.333 8.2972 14 12 14C15.7028 14 17.8822 15.333 19.0082 17.1763C20.1599 19.0616 18.2091 21 16 21Z" stroke="#ffffff" strokeWidth="2"></path>
-            </g>
-          </svg>
-        </span>
-        <span>ورود / عضویت</span>
-      </Link>
+      <NavbarUserNameBtn />
 
       <div className="w-full h-full flex  items-end justify-between">
         <div className="theme w-16 h-16 rounded-tl-full hidden sm:inline"></div>

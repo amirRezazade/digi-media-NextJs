@@ -1,7 +1,5 @@
-import { genres } from "@/components/utils";
-import Image from "next/image";
 import Link from "next/link";
-import RecommendationsSwiper from "../../../components/Recommendations/RecommendationsSwiper";
+import RecommendationsSwiper from "@/components/Recommendations/RecommendationsSwiper";
 import Trailer from "@/components/trailer/Trailer";
 import Filters from "@/components/filters/Filters";
 import HeaderPoster from "@/components/cart/HeaderPoster";

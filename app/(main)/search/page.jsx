@@ -215,13 +215,13 @@ export default function SearchPage() {
         <div className=" max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
           {/* Title */}
           <div className="text-center mb-10">
-            <h1 className="text-2xl sm:text-4xl font-extrabold mb-2 bg-linear-to-l from-orange-400 to-white bg-clip-text text-transparent">جستجوی حرفه‌ای</h1>
+            <h1 className="text-3xl xs:text-4xl lg:text-5xl font-bold mb-3 bg-linear-to-l from-orange-500 to-orange-50 bg-clip-text text-transparent">جستجوی حرفه‌ای</h1>
             <p className=" text-sm">فیلم‌ها، سریال‌ها و هنرمندان مورد علاقه‌ات رو پیدا کن</p>
           </div>
 
           {/* Search input */}
           <div className="relative mb-6">
-            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && resetPage()} placeholder="نام فیلم، سریال یا بازیگر را بنویسید..." className="w-full text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800 border border-white/8 rounded-2xl py-4 pr-5 pl-36 text-base  placeholder-slate-400 outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/15 transition-all" />
+            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && resetPage()} placeholder="نام فیلم، سریال یا بازیگر را بنویسید..." className="w-full text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800 border border-white/8 rounded-2xl py-4 pr-5 pl-36 text-sm sm:text-base   outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/15 transition-all" />
             <button onClick={resetPage} className="absolute left-2 top-1/2 -translate-y-1/2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all active:scale-95">
               🔍 جستجو
             </button>
@@ -236,14 +236,14 @@ export default function SearchPage() {
                 { id: "movie", label: "فیلم" },
                 { id: "series", label: "سریال" },
               ].map((t) => (
-                <button key={t.id} onClick={() => setType(t.id)} className={`px-5 py-2 rounded-lg text-sm font-bold border transition-all ${type === t.id ? "bg-orange-500 border-orange-500 text-white" : "border-white/10  hover:border-orange-500 hover:text-orange-400 bg-transparent"}`}>
+                <button key={t.id} onClick={() => setType(t.id)} className={`px-5 py-2 rounded-lg text-sm bg-white dark:bg-gray-800 border transition-colors ${type === t.id ? "bg-orange-500 border-orange-500 text-orange-400" : "border-white/10  hover:border-orange-500 hover:text-orange-400 bg-transparent"}`}>
                   {t.label}
                 </button>
               ))}
             </div>
 
             {/* Filter grid */}
-            <div className="grid grid-cols-2 xs:grid-cols-3  gap-3 mb-4 text-xs md:text-sm">
+            <div className="grid grid-cols-2 xs:grid-cols-3  gap-3 mb-4 text-xs md:text-sm  ">
               <FilterSelect label="ژانر" value={genre} onChange={setGenre} options={genres} />
               <FilterSelect label="کشور" value={country} onChange={setCountry} options={countries} />
               <div className="col-span-2 xs:col-span-1">
@@ -252,14 +252,14 @@ export default function SearchPage() {
             </div>
 
             {/* Range row */}
-            <div className="grid grid-cols-2 gap-3 mb-5">
+            <div className="grid grid-cols-2 gap-3 mb-5 text-gray-500 dark:text-gray-200">
               {/* Year range */}
               <div>
                 <label className="block text-xs  mb-2 uppercase tracking-wide font-medium">بازه سال</label>
                 <div className="flex items-center gap-2">
-                  <input type="number" placeholder="از" value={fromYear} onChange={(e) => setFromYear(e.target.value)} className="w-full bg-[#161e2e] border border-white/8 rounded-lg px-3 py-2.5 text-sm text-slate-200 placeholder-slate-400 outline-none focus:border-orange-500 transition-all" />
+                  <input type="text" maxLength="4" onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))} placeholder="از" value={fromYear} onChange={(e) => setFromYear(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-white/8 rounded-lg px-3 py-2.5 text-sm  placeholder-slate-400 outline-none focus:border-orange-500 transition-colors" />
                   <span className=" text-sm shrink-0">تا</span>
-                  <input type="number" placeholder="تا" value={toYear} onChange={(e) => setToYear(e.target.value)} className="w-full bg-[#161e2e] border border-white/8 rounded-lg px-3 py-2.5 text-sm text-slate-200 placeholder-slate-400 outline-none focus:border-orange-500 transition-all" />
+                  <input type="text" maxLength="4" onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))} placeholder="تا" value={toYear} onChange={(e) => setToYear(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-white/8 rounded-lg px-3 py-2.5 text-sm  placeholder-slate-400 outline-none focus:border-orange-500 transition-colors" />
                 </div>
               </div>
 
@@ -267,9 +267,9 @@ export default function SearchPage() {
               <div>
                 <label className="block text-xs  mb-2 uppercase tracking-wide font-medium">بازه امتیاز</label>
                 <div className="flex items-center gap-2">
-                  <input type="number" placeholder="از" min="0" max="10" value={fromRate} onChange={(e) => setFromRate(e.target.value)} className="w-full bg-[#161e2e] border border-white/8 rounded-lg px-3 py-2.5 text-sm text-slate-200 placeholder-slate-400 outline-none focus:border-orange-500 transition-all" />
+                  <input type="text" maxLength="1" onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))} placeholder="از" value={fromRate} onChange={(e) => setFromRate(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-white/8 rounded-lg px-3 py-2.5 text-sm  placeholder-slate-400 outline-none focus:border-orange-500 transition-colors" />
                   <span className=" text-sm shrink-0">تا</span>
-                  <input type="number" placeholder="تا" min="0" max="10" value={toRate} onChange={(e) => setToRate(e.target.value)} className="w-full bg-[#161e2e] border border-white/8 rounded-lg px-3 py-2.5 text-sm text-slate-200 placeholder-slate-400 outline-none focus:border-orange-500 transition-all" />
+                  <input type="text" maxLength="1" onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))} placeholder="تا" value={toRate} onChange={(e) => setToRate(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-white/8 rounded-lg px-3 py-2.5 text-sm  placeholder-slate-400 outline-none focus:border-orange-500 transition-colors" />
                 </div>
               </div>
             </div>
@@ -328,7 +328,7 @@ function FilterSelect({ label, value, onChange, options }) {
   return (
     <div>
       <label className="block mb-2 uppercase tracking-wide font-medium">{label}</label>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full bg-[#161e2e] border border-white/8 rounded-lg px-3 py-2.5  text-slate-200 outline-none focus:border-orange-500 transition-all cursor-pointer appearance-none">
+      <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-white/8 rounded-lg px-3 py-2.5  outline-none focus:border-orange-500 transition-all cursor-pointer appearance-none">
         {options.map((o) => (
           <option key={o.id} value={o.id}>
             {o.name}

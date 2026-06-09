@@ -1,10 +1,9 @@
-import { genres } from "@/components/utils";
 import Link from "next/link";
-import RecommendationsSwiper from "../../../components/Recommendations/RecommendationsSwiper";
+import RecommendationsSwiper from "@/components/Recommendations/RecommendationsSwiper";
 import Trailer from "@/components/trailer/Trailer";
 import Filters from "@/components/filters/Filters";
-import HeaderPoster from "../../../components/cart/HeaderPoster";
-import Credits from "../../../components/credits/Credits";
+import HeaderPoster from "@/components/cart/HeaderPoster";
+import Credits from "@/components/credits/Credits";
 import NotFound from "@/components/NotFound";
 import GenreBtn from "@/components/GenreBtn";
 

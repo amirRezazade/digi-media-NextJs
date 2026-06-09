@@ -1,16 +1,37 @@
 "use client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 
 export default function Auth(params) {
   let [loginPasswordType, setLoginPasswordType] = useState("password");
   let [registerPasswordType, setRegisterPasswordType] = useState("password");
-  let [shownForm, setShownForm] = useState("login");
+  let [shownForm, setShownForm] = useState("register");
+  let [loginError, setLoginError] = useState(false);
+  let name = useRef(null);
+  let emailRef = useRef(null);
+  let passwordRef = useRef(null);
+  let router = useRouter();
 
+  function LoginSubmit(e) {
+    e.preventDefault();
+    setLoginError(true);
+  }
+  function registerSubmit(e) {
+    e.preventDefault();
+    let obj = {
+      name: name.current.value.trim(),
+      email: emailRef.current.value.trim(),
+      password: passwordRef.current.value.trim(),
+      bio: "",
+    };
+    document.cookie = `user=${encodeURIComponent(JSON.stringify(obj))}; path=/; max-age=${60 * 60 * 24 * 14}`;
+    router.push(`/`);
+  }
   return (
     <div className="h-screen flex justify-center items-center  bg-cover bg-no-repeat bg-[url(/images/default-bg.jpg)] select-none">
       <div className="max-w-75 sm:max-w-88 bg-black/40 backdrop-blur-md rounded-2xl py-3 sm:py-5 sm:px-3.5 text-white overflow-hidden">
         <div id="forms" className="flex transition-all duration-300">
-          <form action="index.html" className={`${shownForm == "register" ? "-translate-x-full" : ""} w-full min-h-full flex flex-col gap-5 items-center justify-between shrink-0 px-5 transition-transform duration-300`}>
+          <form onSubmit={(e) => LoginSubmit(e)} className={`${shownForm == "register" ? "-translate-x-full" : ""} w-full min-h-full flex flex-col gap-5 items-center justify-between shrink-0 px-5 transition-transform duration-300`}>
             <h2 className="text-2xl">Login</h2>
             <div className="w-full flex justify-between items-end border-b-2 py-1.5 border-white">
               <div className="grow">
@@ -99,9 +120,13 @@ export default function Auth(params) {
                   Forgot password?
                 </button>
               </div>
-              <button type="submit" className="cursor-pointer w-full py-2.5 rounded-md bg-orange-400">
-                Login
-              </button>
+              <div>
+                {loginError && <p className="text-sm text-red-500 text-center">User not found!</p>}
+
+                <button type="submit" className="cursor-pointer w-full py-2.5 rounded-md bg-orange-400">
+                  Login
+                </button>
+              </div>
               <p className="text-sm text-center">
                 Don't have account?
                 <button type="button" onClick={(e) => setShownForm("register")} className="mx-1 inline-block opacity-60 hover:opacity-100 hover:underline">
@@ -111,12 +136,12 @@ export default function Auth(params) {
             </div>
           </form>
 
-          <form action="index.html" className={`${shownForm == "login" ? "" : "-translate-x-full"} w-full h-full flex flex-col items-center gap-6 shrink-0 px-5 transition-transform duration-300`}>
+          <form onSubmit={(e) => registerSubmit(e)} className={`${shownForm == "login" ? "" : "-translate-x-full"} w-full h-full flex flex-col items-center gap-6 shrink-0 px-5 transition-transform duration-300`}>
             <h2 className="text-2xl">Registration</h2>
             <div className="w-full flex justify-between items-end border-b-2 py-1.5 border-white">
               <div className="grow">
                 <div className="relative">
-                  <input className="peer border-0 outline-0 w-full" type="text" placeholder=" " required minLength="3" maxLength="20" name="register-username" id="register-username" />
+                  <input ref={name} className="peer border-0 outline-0 w-full" type="text" placeholder=" " required minLength="3" maxLength="20" name="register-username" id="register-username" />
 
                   <label
                     htmlFor="register-username"
@@ -127,7 +152,7 @@ export default function Auth(params) {
            peer-focus:text-sm
            "
                   >
-                    user Name
+                    Name
                   </label>
                 </div>
               </div>
@@ -141,7 +166,7 @@ export default function Auth(params) {
             <div className="w-full flex justify-between items-end border-b-2 py-1.5 border-white">
               <div className="grow">
                 <div className="relative">
-                  <input className=" peer border-0 outline-0 w-full" type="email" required placeholder=" " name="register-email" id="register-email" />
+                  <input ref={emailRef} className=" peer border-0 outline-0 w-full" type="email" required placeholder=" " name="register-email" id="register-email" />
 
                   <label
                     htmlFor="register-email"
@@ -168,7 +193,7 @@ export default function Auth(params) {
             <div className="w-full flex justify-between items-end border-b-2 py-1.5 border-white">
               <div className="grow">
                 <div className="relative">
-                  <input className="peer border-0 outline-0 w-full" type={registerPasswordType} placeholder=" " pattern="(?=.*\d)(?=.*[a-z]).{6,}" required name="register-password" id="register-password" />
+                  <input ref={passwordRef} className="peer border-0 outline-0 w-full" type={registerPasswordType} placeholder=" " pattern="(?=.*\d)(?=.*[a-z]).{6,}" required name="register-password" id="register-password" />
 
                   <label
                     htmlFor="register-password"

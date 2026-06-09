@@ -1,19 +1,40 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
-  const [profile, setProfile] = useState({
-    name: "علی رضایی",
-    email: "ali@example.com",
-    bio: "سینما دوست و منتقد فیلم",
-    avatar: null,
-  });
+  const [profile, setProfile] = useState({});
   const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState(profile);
+  const [draft, setDraft] = useState({
+    name: "",
+    email: "",
+    password: "",
+    bio: "",
+  });
   const [saved, setSaved] = useState(false);
 
-  function handleSave() {
+  useEffect(() => {
+    function getCookie(name) {
+      const value = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith(`${name}=`))
+        ?.split("=")[1];
+      return value ? JSON.parse(decodeURIComponent(value)) : null;
+    }
+
+    const user = getCookie("user");
+    const safeUser = {
+      name: user.name ?? "",
+      email: user.email ?? "",
+      password: user.password ?? "",
+      bio: user.bio ?? "",
+    };
+    setProfile(safeUser);
+    setDraft(safeUser);
+  }, []);
+  function handleSave(e) {
+    e.preventDefault();
+    document.cookie = `user=${encodeURIComponent(JSON.stringify(draft))}; path=/; max-age=${60 * 60 * 24 * 14}`;
     setProfile(draft);
     setEditing(false);
     setSaved(true);
@@ -61,8 +82,8 @@ export default function Profile() {
             </svg>
           </div>
           <div>
-            <h1 className="text-xl font-bold  mb-2">{profile.name}</h1>
-            <p className="text-sm text-gray-300">{profile.email}</p>
+            <h1 className="text-xl font-bold  mb-2">{profile?.name}</h1>
+            <p className="text-sm text-gray-300">{profile?.email}</p>
           </div>
         </div>
 
@@ -92,30 +113,48 @@ export default function Profile() {
 
           {saved && <div className="mb-4 bg-green-500/10 border border-green-500/30 text-green-400 text-sm rounded-xl px-4 py-3">✅ اطلاعات با موفقیت ذخیره شد</div>}
 
-          <div className="space-y-5">
-            <Field label="نام و نام خانوادگی" value={editing ? draft.name : profile.name} editing={editing} onChange={(v) => setDraft((p) => ({ ...p, name: v }))} />
-            <Field label="ایمیل" value={editing ? draft.email : profile.email} editing={editing} type="email" onChange={(v) => setDraft((p) => ({ ...p, email: v }))} />
+          <form onSubmit={(e) => handleSave(e)} className="space-y-5">
+            <div>
+              <label htmlFor="name" className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">
+                نام و نام خانوادگی*
+              </label>
+              <input type="text" disabled={!editing} required minLength="3" id="name" maxLength="20" value={editing ? draft.name : profile.name ?? ""} onChange={(e) => setDraft((p) => ({ ...p, name: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all" />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">
+                ایمیل*
+              </label>
+              <input type="email" disabled={!editing} required id="email" value={editing ? draft.email : profile.email ?? ""} onChange={(e) => setDraft((p) => ({ ...p, email: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all" />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">
+                رمزعبور*
+              </label>
+              <input disabled={!editing} type="password" required pattern="(?=.*\d)(?=.*[a-z]).{6,}" id="password" value={editing ? draft.password : profile.password ?? ""} onChange={(e) => setDraft((p) => ({ ...p, password: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all" />
+            </div>
+
             <div>
               <label className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">بیوگرافی</label>
-              {editing ? <textarea value={draft.bio} onChange={(e) => setDraft((p) => ({ ...p, bio: e.target.value }))} rows={3} className="w-full border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all resize-none" /> : <p className="text-sm  border border-gray-400/80 rounded-xl px-4 py-3 min-h-18">{profile.bio || "—"}</p>}
+              <textarea value={editing ? draft.bio : profile.bio ?? ""} disabled={!editing} onChange={(e) => setDraft((p) => ({ ...p, bio: e.target.value }))} rows={3} className="w-full border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all resize-none" />
             </div>
 
             {editing && (
               <div className="flex gap-3 pt-2">
-                <button onClick={handleSave} className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-6 py-2.5 rounded-xl transition-colors active:scale-95">
+                <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-6 py-2.5 rounded-xl transition-colors active:scale-95">
                   ذخیره
                 </button>
-                <button onClick={handleCancel} className=" border border-gray-500/40 hover:border-gray-300 transition-colors font-bold text-sm px-6 py-2.5 rounded-xl ">
+                <button type="button" onClick={handleCancel} className=" border border-gray-500/40 hover:border-gray-300 transition-colors font-bold text-sm px-6 py-2.5 rounded-xl ">
                   انصراف
                 </button>
               </div>
             )}
-          </div>
+          </form>
 
           {/* Danger zone */}
           <div className="mt-5 pt-4 border-t border-gray-500/40">
             <h3 className="text-sm font-bold text-red-400 mb-3">ناحیه خطر</h3>
-            <button className="text-sm text-red-400 hover:text-red-300 border border-red-500/30 hover:border-red-400/50 px-4 py-2 rounded-xl transition-all">حذف حساب کاربری</button>
+            <button className="text-sm text-red-400 hover:text-red-300 border border-red-500/30 hover:border-red-400/50 px-4 py-2 mx-4 rounded-xl transition-colors">خروج</button>
+            <button className="text-sm text-red-400 hover:text-red-300 border border-red-500/30 hover:border-red-400/50 px-4 py-2 rounded-xl transition-colors">حذف حساب کاربری</button>
           </div>
         </div>
       </main>
