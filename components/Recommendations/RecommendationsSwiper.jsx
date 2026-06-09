@@ -10,7 +10,7 @@ import Cart from "../cart/Cart";
 
 export default function RecommendationsSwiper({ list, type = "series" }) {
   return (
-    <section className="lg:min-h-[60vh] min-h-[50vh] h-auto mb-2 lg:mb-8">
+    <section className=" h-auto mb-2 lg:mb-8">
       <div className="theme px-4 lg:px-13 py-7 relative after:content-['']  after:w-1/1 after:absolute after:h-50 after:top-21 after:right-0 after:bg-orange-400 ">
         <div className="flex justify-between items-center">
           <div className=" z-1 flex items-center gap-0 max-w-1/2 xs:max-w-2/3 relative grow">

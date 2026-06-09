@@ -16,7 +16,7 @@ export default function NavbarUserNameBtn(params) {
     return value ? JSON.parse(decodeURIComponent(value)) : null;
   }
   return (
-    <Link href={user?.name ? "/profile" : "/auth"} className="flex items-center gap-1 p-2 ml-4 bg-orange-400 text-white rounded-xl text-xs 2xl:ml-15 max-w-22  ">
+    <Link href={user?.name ? "/profile" : "/auth"} className="flex items-center justify-center gap-1 p-2 ml-4 bg-orange-400 text-white rounded-xl text-xs 2xl:ml-15  w-22  ">
       <span>
         <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

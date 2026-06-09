@@ -34,8 +34,10 @@ export default function HeaderSlider({ list, onActiveIndex }) {
           </div>
           <Swiper
             className="mySwiper  md:mt-2 pb-15! pt-8! min-h-auto overflow-hidden!"
-            slidesPerView={"auto"}
+            slidesPerView={2}
             centeredSlides={true}
+            spaceBetween={20}
+            loop={true}
             modules={[Navigation, Autoplay]}
             navigation={{
               nextEl: ".my-next",
@@ -46,23 +48,42 @@ export default function HeaderSlider({ list, onActiveIndex }) {
               disableOnInteraction: false,
             }}
             breakpoints={{
-              1100: {
-                spaceBetween: 10,
+              480: {
+                speed: 300,
+                slidesPerView: 2.8,
+              },
+              640: {
+                slidesPerView: 3.8,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              830: {
+                slidesPerView: 2.5,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+              1200: {
+                slidesPerView: 3.5,
+              },
+              1400: {
+                slidesPerView: 4,
+              },
+              1600: {
+                slidesPerView: 4.5,
               },
             }}
-            effect={"slide"}
-            spaceBetween={20}
-            loop={true}
             onTransitionEnd={(active) => change(active)}
           >
             {list.map((item) => (
-              <SwiperSlide className="transition-all! duration-300! w-fit!">
-                <Link href={`/${item.media_type == "movie" ? "movie" : "series"}/${item.id}`} className="w-44 xs:w-40 xl:w-45 2xl:w-40 rounded-md group flex  duration-500 ">
+              <SwiperSlide className="transition-all! duration-300! ">
+                <Link href={`/${item.media_type == "movie" ? "movie" : "series"}/${item.id}`} className="w-full rounded-md group flex  duration-500 ">
                   <div className="w-full flex flex-col justify-between gap-2 h-full">
                     <div className="relative grow rounded-md transition-transform duration-300 active">
                       <HeaderSliderCart poster={item.poster_path} name={item.name} />
-                      <div className="absolute top-0 left-0 w-full min-h-full bg-black/60 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-90 transition-[opacity,visibility,scale] duration-600">
-                        <span className="absolute top-1/2 left-1/2 -translate-1/2">
+                      <div className="absolute top-0 left-0 w-full min-h-full sm:bg-black/60 bg-linear-to-t from-black/40 to-25% to-transparent rounded-md sm:opacity-0 sm:invisible group-hover:opacity-100 group-hover:visible sm:group-hover:scale-90 transition-[opacity,visibility,scale] duration-600">
+                        <span className="hidden sm:inline absolute top-1/2 left-1/2 -translate-1/2">
                           <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -71,8 +92,8 @@ export default function HeaderSlider({ list, onActiveIndex }) {
                             </g>
                           </svg>
                         </span>
-                        <div className="absolute w-full bottom-0 right-0 p-3 text-base lg:p-1">
-                          <div className="flex flex-col items-start gap-1">
+                        <div className="absolute w-full bottom-0 right-0 p-2 text-base lg:p-1">
+                          <div className="hidden sm:flex flex-col items-start gap-1">
                             <span className=" flex flex-row-reverse items-center text-xs gap-1">
                               زیر نویس
                               <svg width="18px" height="18px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#fff">
@@ -102,9 +123,9 @@ export default function HeaderSlider({ list, onActiveIndex }) {
                             </span>
                           </div>
                           <div className="w-full flex justify-between items-center mt-2 lg:mt-1">
-                            <span className="text-orange-400 flex gap-1.5 items-start lg:gap-0.5">
+                            <span className="text-orange-400 flex gap-0.5 items-center lg:gap-0.5">
                               {item.vote_count}
-                              <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
@@ -117,7 +138,7 @@ export default function HeaderSlider({ list, onActiveIndex }) {
                             </span>
                             <span className="flex items-center gap-0.5">
                               <span className="text-xs">10/</span>
-                              <span className="text-base text-orange-400 font-bold">{item.vote_average.toFixed(1)}</span>
+                              <span className="text-lg text-orange-400 font-bold">{item.vote_average.toFixed(1)}</span>
                             </span>
                           </div>
                         </div>

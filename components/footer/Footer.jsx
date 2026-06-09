@@ -148,7 +148,7 @@ export default function Footer(params) {
           </button>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-2 pt-2 pb-12 xs:pb-2! mb-14 lg:mb-0">
+      <div className="flex items-center justify-center gap-2 pt-2  xs:pb-2! mb-14 lg:mb-0">
         <p className="text-xs">«طراحی و توسعه توسط امیر رضازاده — 2026»</p>
         <a href="https://github.com/amirRezazade" target="-blank" className="px-2 py-1 fill-white">
           <svg width="25px" height="25px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" className="jam jam-github">

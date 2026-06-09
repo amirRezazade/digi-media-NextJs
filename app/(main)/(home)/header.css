@@ -1,15 +1,7 @@
-.mySwiper .swiper-wrapper {
-  width: fit-content !important;
-  display: flex !important;
-  gap: 5px;
-}
 .mySwiper .swiper-slide-active {
   transform: scale(1) rotate(0deg) !important;
 }
-@media screen and (max-width: 480px) {
-  .mySwiper .swiper-slide {
-    width: 50%;
-  }
+@media screen and (max-width: 479px) {
   .mySwiper .swiper-slide-prev {
     transform: scale(0.8) rotate(10deg) !important;
   }
@@ -18,7 +10,6 @@
     transform: scale(0.8) rotate(-10deg) !important;
   }
 }
-/* @media screen and (min-width: 530px) { */
 .mySwiper .swiper-slide-active div .active {
   border: 2px solid #ff9800;
   position: relative;

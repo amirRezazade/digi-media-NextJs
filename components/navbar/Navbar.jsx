@@ -8,7 +8,7 @@ import NavbarUserNameBtn from "./NavbarUserNameBtn";
 
 export default function Navbar(params) {
   return (
-    <nav className="bg-[url('/images/navbar/navbar.png')]  transition-all duration-300 lg:sticky lg:top-0  z-99 bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3">
+    <nav className="bg-[url('/images/navbar/navbar.png')]  transition-all duration-300 lg:sticky top-0 z-99 bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3">
       <span className="text-white ml-auto mr-1 sm:mr-4 md:mr-8 text-xs sm:text-sm hidden xs:inline-block">
         <span className="hidden sm:inline">جهت نمایش عکس ها و تریلر ها</span> vpn خود را روشن کنید
       </span>
@@ -28,7 +28,7 @@ export default function Navbar(params) {
       <SwichTheme />
       <NavbarUserNameBtn />
 
-      <div className="w-full h-full flex  items-end justify-between">
+      <div className="w-full h-full flex  items-end justify-between ">
         <div className="theme w-16 h-16 rounded-tl-full hidden sm:inline"></div>
         <Link href="/" className="hidden xs:inline-block px-3 w-30 sm:w-35 h-10 sm:h-13 border-b-5 border-stone-200 dark:border-gray-900">
           <Image width={116} height={35} src={lightLogo} alt="light-logo" />

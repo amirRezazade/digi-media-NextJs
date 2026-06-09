@@ -8,26 +8,22 @@ export default function SearchAndShow({ data }) {
   let router = useRouter();
   let searchParams = useSearchParams();
   let [actors, setActors] = useState(data?.results);
-
   let [query, setQuery] = useState(searchParams.get("query") || "");
   let [isLoading, setIsLoading] = useState(false);
   let [retry, setRetry] = useState(false);
   let [isFetching, setIsFetching] = useState(false);
   let pageRef = useRef(2);
   let bottomRef = useRef(null);
-  useEffect(() => {
-    let time = setTimeout(() => {
-      const params = new URLSearchParams(searchParams);
-      query.trim().length > 1 ? params.set("query", query.trim()) : params.delete("query");
-      router.push(`/actors?${params.toString()}`);
-    }, 1200);
-    return () => clearTimeout(time);
-  }, [query]);
 
-  function chageQuery(q) {
-    setQuery(q);
-    query.trim().length > 1 && setIsLoading(true);
+  function search() {
+    const params = new URLSearchParams(searchParams);
+    if (query.trim().length > 1) {
+      setIsLoading(true);
+      params.set("query", query.trim());
+      router.push(`/actors?${params.toString()}`);
+    } else params.delete("query");
   }
+
   useEffect(() => {
     setIsLoading(false);
     setActors(data.results);
@@ -64,10 +60,15 @@ export default function SearchAndShow({ data }) {
   return (
     <>
       <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-5xl mt-15 mb-13">بازیگر ها</h1>
-      <div className=" flex flex-wrap items-center justify-between gap-2 my-5 ">
-        <input type="text" className="py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50 outline-0 text-left" dir="ltr" placeholder="search..." value={query} onChange={(e) => chageQuery(e.target.value)} />
+      <div className=" flex flex-col xs:flex-row xs:items-center justify-between gap-2 my-5 ">
+        <div className="flex gap-2">
+          <input type="text" className="py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50 outline-0 text-left" dir="ltr" placeholder="search..." value={query} onChange={(e) => setQuery(e.target.value.trim())} onKeyDown={(e) => e.key == "Enter" && search()} />
+          <button onClick={search} className="rounded-2xl bg-orange-400 text-white px-2 xs:px-5 py-1 text-sm">
+            جستجو
+          </button>
+        </div>
 
-        {query.length > 1 && <span className="text-sm py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50">{data.total_results} بازیگر </span>}
+        <span className="text-sm w-fit self-end py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50">{data.total_results} بازیگر </span>
       </div>
       {isLoading ? (
         <div className="flex justify-center py-10">

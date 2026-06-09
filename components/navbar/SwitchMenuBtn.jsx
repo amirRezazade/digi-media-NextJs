@@ -11,7 +11,7 @@ export default function SwitchMenuBtn(params) {
     closeMenu();
   }, [pathname]);
   return (
-    <button onClick={toggleMenu} className="flex flex-col justify-center items-center ">
+    <button onClick={toggleMenu} className="flex flex-col justify-center items-center min-w-10">
       <span>
         <svg className="dark:stroke-[#c5c5c5] stroke-[#888888]" width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
