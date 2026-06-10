@@ -8,6 +8,7 @@ import NotFound from "@/components/NotFound";
 import GenreBtn from "@/components/GenreBtn";
 
 export default async function SeriesId({ params }) {
+  throw new Error("dfg");
   const { seriesId } = await params;
   let data = null;
   let recommendations = null;

@@ -65,7 +65,7 @@ export default function MainData({ data }) {
 
   return (
     <>
-      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-5xl mt-15 mb-13">{activeGenre === "all" ? "سریال ها" : "سریال های " + genres[activeGenre]}</h1>
+      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl xl:text-5xl mt-15 mb-13">{activeGenre === "all" || data ? "سریال ها" : "سریال های " + genres[activeGenre]}</h1>
 
       <GenreSlider activeGenre={activeGenre} onActiveGenre={setActiveGenre} />
       <div className=" flex items-center justify-between gap-2 my-5 ">
