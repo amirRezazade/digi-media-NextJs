@@ -56,7 +56,7 @@ export default function CastSlider({ cast }) {
             {list.map((act) => (
               <SwiperSlide key={act.id} className="shrink-0 group overflow-hidden">
                 <Link href={`/actors/${act.id}`} className="flex flex-col items-center  gap-1.5">
-                  <ProfileCart profile={act?.profile_path} name={act.profile_path} />
+                  <ProfileCart profile={act?.profile_path} name={act.profile_path} gender={act.gender} />
 
                   <div className="flex flex-col items-left w-full gap-0.5 mt-1 ">
                     <p dir="ltr" className="text-sm overflow-hidden text-black truncate block  dark:text-white text-center group-hover:text-orange-400 transition-all duration-300">

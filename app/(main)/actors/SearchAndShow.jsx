@@ -17,11 +17,17 @@ export default function SearchAndShow({ data }) {
 
   function search() {
     const params = new URLSearchParams(searchParams);
-    if (query.trim().length > 1) {
-      setIsLoading(true);
-      params.set("query", query.trim());
-      router.push(`/actors?${params.toString()}`);
-    } else params.delete("query");
+
+    const value = query.trim();
+
+    setIsLoading(true);
+    if (value) {
+      params.set("query", value);
+    } else {
+      params.delete("query");
+    }
+
+    router.push(`/actors?${params.toString()}`);
   }
 
   useEffect(() => {

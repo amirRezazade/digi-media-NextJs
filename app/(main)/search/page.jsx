@@ -228,7 +228,7 @@ export default function SearchPage() {
           </div>
 
           {/* Filters card */}
-          <div className="text-gray-500 dark:text-gray-200 bg-stone-200 dark:bg-gray-800 border border-white/7 rounded-2xl p-5 sm:p-6 mb-8">
+          <div className="text-gray-500 dark:text-gray-200 bg-stone-200 dark:bg-gray-800 border border-white/7 rounded-2xl p-5 sm:p-6 ">
             {/* Type tabs */}
             <div className="flex gap-2 mb-6">
               {[
@@ -305,9 +305,17 @@ export default function SearchPage() {
             <span className="size-12 rounded-full border-4 border-orange-400 border-t-transparent border-b-transparent animate-spin"></span>
           </div>
         )}
-        <div ref={scrollRef} className="block w-full py-1"></div>
+        <div ref={scrollRef} className="block w-full py-1">
+          {query && !isLoading && !error && (
+            <div className="flex justify-between gap-2 flex-wrap mb-5">
+              <span class="text-sm py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50">نتایج مرتبط با: {query}</span>
+              <span class="text-sm py-1 px-3 rounded-full bg-transparent backdrop-blur-xl border border-gray-400/50">{query.length} مورد</span>
+            </div>
+          )}
+        </div>
         {items.length > 0 && <div className=" grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 lg:gap-5 gap-y-6 gap-4 ">{items?.map((item) => (item.media_type == "person" ? <ActorCart key={item.id} actor={item} /> : <Cart key={item.id} type={item.media_type == "movie" || item.release_date ? "movie" : "series"} item={item} />))}</div>}
-        {!items.length && !isLoading && !error && <NotFound />}
+
+        {!items.length && !isLoading && !error && <span className="text-center block sm:text-lg">موردی پیدا نشد!</span>}
         {error && !isLoading && (
           <div className="flex justify-center py-10">
             <button onClick={handleSearch} className="p-2 flex items-center gap-2 backdrop-blur-lg border border-gray-400/50 rounded-full text-sm">

@@ -69,7 +69,7 @@ export default async function page({ params }) {
 
       <section className="flex flex-col sm:flex-row items-start gap-5 sm:gap-8">
         <div className="sm:sticky top-5 lg:static w-[80%] xs:w-full sm:max-w-65 lg:max-w-75 mx-auto h-auto sm:mt-3 flex-row flex-wrap sm:flex-nowrap sm:flex-col bg-white dark:bg-gray-800  flex  gap-2 rounded-3xl overflow-hidden">
-          <ActorProfile profile={data.profile_path} name={data.name} />
+          <ActorProfile profile={data.profile_path} name={data.name} gender={data.gender} />
           <div className="grow sm:grow-0 flex  xs:justify-between  flex-col gap-2 px-5 pt-2 items-center">
             <h1 dir="ltr" className=" text-black dark:text-white font-bold text-2xl font-sans text-center">
               {data.name}

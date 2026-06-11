@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function ActorProfile({ profile, name }) {
+export default function ActorProfile({ profile, name, gender = 0 }) {
   let [loaded, setLoaded] = useState(false);
   return (
     <div className="w-full xs:min-w-20 xs:max-w-50 max-h-75 sm:max-w-80 sm:max-h-80 sm:w-full overflow-hidden">
@@ -13,7 +13,7 @@ export default function ActorProfile({ profile, name }) {
         src={`https://image.tmdb.org/t/p/original${profile}_medium`}
         alt={name}
         onError={(e) => {
-          e.target.src = "/images/default-person.jpg";
+          e.target.src = gender == 1 ? "/images/default-person-women.jpg" : "/images/default-person.jpg";
         }}
         onLoad={() => setLoaded(true)}
       />

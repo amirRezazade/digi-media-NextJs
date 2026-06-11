@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function ProfileCart({ profile, name }) {
+export default function ProfileCart({ profile, name, gender = 0 }) {
   let [loaded, setLoaded] = useState(false);
 
   return (
@@ -15,7 +15,7 @@ export default function ProfileCart({ profile, name }) {
         src={`https://image.tmdb.org/t/p/w185${profile}`}
         alt={name || "person"}
         onError={(e) => {
-          e.target.src = "/images/default-person.jpg";
+          e.target.src = gender == 1 ? "/images/default-person-women.jpg" : "/images/default-person.jpg";
         }}
         onLoad={() => setLoaded(true)}
       />

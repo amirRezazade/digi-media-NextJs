@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ActorCartImage from "./ActorCartImage";
-import Image from "next/image";
 
 export default function ActorCart({ actor }) {
   return (
@@ -10,7 +9,7 @@ export default function ActorCart({ actor }) {
           <span className="absolute bottom-1 right-1"> ⭐ {actor.popularity?.toFixed(1)}</span>
           <span className="absolute bottom-1 left-1">{actor.known_for_department || "-----"}</span>
         </div>
-        <ActorCartImage profile={actor.profile_path} name={actor.name} />
+        <ActorCartImage profile={actor.profile_path} name={actor.name} gender={actor.gender} />
       </Link>
       <div className=" px-2 py-2">
         <h1 dir="ltr" className=" text-black dark:text-white font-bold text-sm md:text-base text-center">
