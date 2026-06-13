@@ -1,13 +1,15 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function NavbarUserNameBtn(params) {
+  const pathname = usePathname();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     setUser(getCookie("user"));
-  }, []);
+  }, [pathname]);
   function getCookie(name) {
     const value = document.cookie
       .split("; ")

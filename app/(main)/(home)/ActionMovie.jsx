@@ -50,7 +50,7 @@ export default function ActionMovie({ list }) {
             </svg>
           </span>
           <div className="flex flex-col gap-1">
-            <span className="font-[iran-sans] text-sm lg:text-base dark:text-white">فیلم های اکشن</span>
+            <span className="font-bold text-sm lg:text-base dark:text-white">فیلم های اکشن</span>
             <span className="text-xs lg:text-sm text-gray-500  dark:text-gray-300">معروف ترین ها</span>
           </div>
         </div>

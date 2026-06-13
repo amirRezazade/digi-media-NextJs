@@ -6,13 +6,20 @@ import HeaderPoster from "@/components/cart/HeaderPoster";
 import Credits from "@/components/credits/Credits";
 import NotFound from "@/components/NotFound";
 import GenreBtn from "@/components/GenreBtn";
+
+export async function getMovie(id) {
+  let res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
+    next: { revalidate: 604800 },
+  });
+  return res.json();
+}
 export async function generateMetadata({ params }) {
   const { movieId } = await params;
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`);
-  const movie = await res.json();
+  let data = await getMovie(movieId);
+
   return {
-    title: `digi-media | ${movie.original_title}`,
-    description: movie.overview || `صفحه ${movie.original_title}`,
+    title: `digi-media | ${data ? data.original_title : ""}`,
+    description: data.overview || `صفحه ${data.original_title}`,
   };
 }
 
@@ -21,10 +28,8 @@ export default async function movieId({ params }) {
   let data = null;
   let recommendations = null;
   try {
-    let res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
-      next: { revalidate: 604800 },
-    });
-    data = await res.json();
+    data = await getMovie(movieId);
+
     if (data?.status_code == 34) return <NotFound />;
     //------------ get recommendationsResponse -----------
     let recommendationsRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
@@ -35,7 +40,7 @@ export default async function movieId({ params }) {
     const randomFive = list.filter((item) => item.poster_path && item.backdrop_path).slice(0, 6);
     recommendations = randomFive;
 
-    if (!res.ok || !recommendationsRes.ok) throw new Error("خطا در دریافت اطلاعات!");
+    if (!recommendationsRes.ok) throw new Error("خطا در دریافت اطلاعات!");
   } catch (err) {
     throw new Error(err);
   }

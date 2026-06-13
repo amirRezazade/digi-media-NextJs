@@ -5,15 +5,6 @@
   --foreground: #171717;
 }
 
-@font-face {
-  font-family: iran-sans;
-  src: url(../public/fonts/woff/IRANSansX-Medium.woff) format(woff), url(../public/fonts/woff/IRANSansX-Medium.woff2) format(woff2);
-}
-@font-face {
-  font-family: iran-yekan;
-  /* src: url(../public/fonts/ttf/iranyekanwebbold.ttf) format(ttf), url(../public/fonts/woff/iranyekanwebbold.woff) format(woff); */
-  src: url(../public/fonts/ttf/Kalameh-Bold.ttf) format(ttf);
-}
 @theme inline {
   --breakpoint-xs: 480px;
   --breakpoint-sm: 640px;
@@ -22,8 +13,6 @@
   --breakpoint-xl: 1280px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-iran-sans: "iran-sans";
-  --font-iran-yekan: "iran-yekan";
 }
 @custom-variant dark (&:where(.dark, .dark *));
 

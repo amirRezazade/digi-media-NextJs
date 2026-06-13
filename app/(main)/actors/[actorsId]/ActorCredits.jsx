@@ -12,27 +12,27 @@ export default function ActorCredits({ credits, actorsId }) {
   cast = [...new Map(credits.cast.map((item) => [item.id, item])).values()];
   crew = [...new Map(credits.crew.map((item) => [item.id, item])).values()];
 
-  let [isCast, setIsCast] = useState(searchParams.get("crew") ? false : true);
-  let [page, setPage] = useState(searchParams.get("page") ? Number(searchParams.get("page")) : 1);
-  let [totalPage, setTotalPage] = useState(searchParams.get("crew") ? Math.ceil(crew.length / 12) : Math.ceil(cast.length / 12));
-  let [list, setList] = useState(searchParams.get("crew") ? crew.slice(page * 12 - 12, 12) : cast.slice(page * 12 - 12, 12));
+  let isCast = !searchParams.get("crew");
+  let page = Number(searchParams.get("page")) || 1;
+  const totalPage = isCast ? Math.ceil(cast.length / 12) : Math.ceil(crew.length / 12);
+  const list = isCast ? cast.slice((page - 1) * 12, page * 12) : crew.slice((page - 1) * 12, page * 12);
 
-  useEffect(() => {
+  function setParams(newPage = page, newIsCast = isCast) {
     const params = new URLSearchParams(searchParams);
-    !isCast ? params.set("crew", true) : params.delete("crew");
-    page > 1 ? params.set("page", page) : params.delete("page");
-    router.push(`/actors/${actorsId}?${params.toString()}`);
-  }, [page, isCast]);
+    if (!newIsCast) params.set("crew", "true");
+    else params.delete("crew");
 
-  useEffect(() => {
-    setList(isCast ? cast.slice(page * 12 - 12, page * 12) : crew.slice(page * 12 - 12, page * 12));
-  }, [page]);
+    if (newPage > 1) params.set("page", newPage);
+    else params.delete("page");
+
+    router.push(`/actors/${actorsId}?${params.toString()}`);
+  }
+  function changePage(n) {
+    setParams(n, isCast);
+  }
 
   function changeIsCast(flag) {
-    setIsCast(flag ? true : false);
-    setTotalPage(Math.ceil(flag ? cast.length / 12 : crew.length / 12));
-    setList(flag ? cast.slice(page * 12 - 12, page * 12) : crew.slice(page * 12 - 12, page * 12));
-    setPage(1);
+    setParams(1, flag);
   }
 
   return (
@@ -58,7 +58,7 @@ export default function ActorCredits({ credits, actorsId }) {
         ))}
       </div>
 
-      {totalPage > 1 && <Pagination page={page} totalPage={totalPage} onPage={setPage} />}
+      {totalPage > 1 && <Pagination page={page} totalPage={totalPage} onPage={(n) => changePage(n)} />}
     </div>
   );
 }

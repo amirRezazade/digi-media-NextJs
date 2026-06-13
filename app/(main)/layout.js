@@ -1,36 +1,17 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
 import { MenuProvider } from "@/context/menuContext";
 import Navbar from "@/components/navbar/Navbar";
 import MobileNav from "@/components/navbar/MobileNav";
 import Footer from "@/components/footer/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata = {
-  title: "digi-media",
-  description: "بهترین سایت معرفی فیلم و سریال",
-};
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="fa" dir="rtl">
-      <body className={` dark theme font-[iran-sans] `}>
-        <MenuProvider>
-          <Navbar />
-          <MobileNav />
-          {children}
-        </MenuProvider>
-        <Footer />
-      </body>
-    </html>
+    <>
+      <MenuProvider>
+        <Navbar />
+        <MobileNav />
+        {children}
+      </MenuProvider>
+      <Footer />
+    </>
   );
 }

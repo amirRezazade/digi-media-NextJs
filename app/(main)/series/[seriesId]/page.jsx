@@ -7,13 +7,20 @@ import Credits from "@/components/credits/Credits";
 import NotFound from "@/components/NotFound";
 import GenreBtn from "@/components/GenreBtn";
 
+export async function getSerie(id) {
+  let res = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
+    next: { revalidate: 604800 },
+  });
+
+  return res.json();
+}
 export async function generateMetadata({ params }) {
   const { seriesId } = await params;
-  const res = await fetch(`https://api.themoviedb.org/3/tv/${seriesId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`);
-  const series = await res.json();
+  let data = await getSerie(seriesId);
+
   return {
-    title: `digi-media | ${series.original_name}`,
-    description: series.overview || `صفحه ${series.original_name}`,
+    title: `digi-media | ${data ? data.original_name : ""}`,
+    description: data.overview || `صفحه ${data.original_name}`,
   };
 }
 export default async function SeriesId({ params }) {
@@ -21,10 +28,7 @@ export default async function SeriesId({ params }) {
   let data = null;
   let recommendations = null;
   try {
-    let res = await fetch(`https://api.themoviedb.org/3/tv/${seriesId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
-      next: { revalidate: 604800 },
-    });
-    data = await res.json();
+    data = await getSerie(seriesId);
     if (data?.status_code == 34) return <NotFound />;
 
     //------------ get recommendationsResponse -----------
@@ -35,7 +39,7 @@ export default async function SeriesId({ params }) {
     let list = recommendationsResponse.results;
     const randomFive = list.filter((item) => item.poster_path && item.backdrop_path).slice(0, 6);
     recommendations = randomFive;
-    if (!res.ok || !recommendationsRes.ok) throw new Error("خطا در دریافت اطلاعات!");
+    if (!recommendationsRes.ok) throw new Error("خطا در دریافت اطلاعات!");
   } catch (err) {
     throw new Error(err);
   }
