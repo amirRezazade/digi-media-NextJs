@@ -43,6 +43,7 @@ export default function Profile() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
+    document.title = "digi-media | profile";
     function getCookie(name) {
       const value = document.cookie
         .split("; ")

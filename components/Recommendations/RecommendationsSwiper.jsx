@@ -7,7 +7,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./recommendations.css";
 import Cart from "../cart/Cart";
-
+const roundIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="180" height="60" viewBox="0 0 180 65">
+    <path fill="#ff8904" d="M-870 60.36H52.255c48.145 0 77.582-60 125.275-60h629.53c30.635 0 0 0 55.47 8.09l-10 2114.458H75.47C44.835 231 0 227.377 0 222.908V68.45"></path>
+  </svg>
+);
 export default function RecommendationsSwiper({ list, type = "series" }) {
   return (
     <section className=" h-auto mb-2 lg:mb-8">
@@ -22,15 +26,7 @@ export default function RecommendationsSwiper({ list, type = "series" }) {
               </svg>
               <span className="text-white  text-sm hidden xs:inline-block text-nowrap"> پیشنهاد میکنیم تماشا کنید</span>
             </span>
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="180" height="60" viewBox="0 0 180 65">
-                <g>
-                  <g>
-                    <path fill="#ff8904" d="M-870 60.36h922.255c48.145 0 77.582-60 125.275-60h629.53c30.635 0 0 0 55.47 8.09l-10 2114.458c0 0-0 0-55.47 0H75.47C44.835 231 0 227.377 0 222.908L0 68.45c0 24.835-8.092 55.47-8.092z" />
-                  </g>
-                </g>
-              </svg>
-            </span>
+            <span>{roundIcon()}</span>
           </div>
           <div className="flex Recommendations-pagination justify-end  xs:max-w-25 text-white "></div>
         </div>

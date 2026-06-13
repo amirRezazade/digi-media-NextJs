@@ -7,6 +7,15 @@ import Credits from "@/components/credits/Credits";
 import NotFound from "@/components/NotFound";
 import GenreBtn from "@/components/GenreBtn";
 
+export async function generateMetadata({ params }) {
+  const { seriesId } = await params;
+  const res = await fetch(`https://api.themoviedb.org/3/tv/${seriesId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`);
+  const series = await res.json();
+  return {
+    title: `digi-media | ${series.original_name}`,
+    description: series.overview || `صفحه ${series.original_name}`,
+  };
+}
 export default async function SeriesId({ params }) {
   const { seriesId } = await params;
   let data = null;

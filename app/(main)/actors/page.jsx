@@ -1,6 +1,9 @@
 import Link from "next/link";
 import SearchAndShow from "./SearchAndShow";
-
+export const metadata = {
+  title: "digi-media | بازیگرها",
+  description: "لیست باریگرهای محبوب",
+};
 export default async function page({ searchParams }) {
   let { query } = await searchParams;
   let response = null;
@@ -16,6 +19,7 @@ export default async function page({ searchParams }) {
   } catch (err) {
     throw new Error(err);
   }
+
   return (
     <section className="relative min-h-screen text-gray-200 bg-cover bg-fixed bg-[url(/images/default-bg.jpg)]">
       <div className="absolute w-full h-full top-0 left-0 bg-black/30 "></div>

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import MainData from "./MainData";
-
+export const metadata = {
+  title: "digi-media | فیلم ها",
+  description: "لیست فیلم‌های روز دنیا",
+};
 export default async function movie({ searchParams }) {
   const { genre, sortby } = await searchParams;
 

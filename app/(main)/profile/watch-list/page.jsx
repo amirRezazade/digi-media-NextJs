@@ -12,6 +12,9 @@ export default function watchList(params) {
   let [retry, setRetry] = useState(1);
 
   useEffect(() => {
+    document.title = "digi-media | watch-list";
+  }, []);
+  useEffect(() => {
     setShowList([]);
     watchListRef.current = getWatchlist();
     if (watchListRef.current.movie.length) getMovies();

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import MainData from "./MainData";
-
+export const metadata = {
+  title: "digi-media | سریال ها",
+  description: "لیست سریال های روز دنیا",
+};
 export default async function Series({ searchParams }) {
   const { genre, sortby } = await searchParams;
 

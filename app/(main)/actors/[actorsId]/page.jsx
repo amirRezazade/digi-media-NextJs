@@ -3,6 +3,15 @@ import ActorCredits from "./ActorCredits";
 import Link from "next/link";
 import NotFound from "@/components/NotFound";
 
+export async function generateMetadata({ params }) {
+  const { actorsId } = await params;
+  const res = await fetch(`https://api.themoviedb.org/3/person/${actorsId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`);
+  const data = await res.json();
+  return {
+    title: `digi-media | ${data.name}`,
+    description: data.biography?.slice(0, 150) || `صفحه ${data.name}`,
+  };
+}
 export default async function page({ params }) {
   const { actorsId } = await params;
   let data = null;
@@ -27,6 +36,7 @@ export default async function page({ params }) {
     credits = await creditsRes.json();
   } catch (err) {
     throw new Error("خطا در دریافت اطلاعات!" + err);
+  } finally {
   }
 
   return (

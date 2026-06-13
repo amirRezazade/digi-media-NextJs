@@ -6,6 +6,16 @@ import HeaderPoster from "@/components/cart/HeaderPoster";
 import Credits from "@/components/credits/Credits";
 import NotFound from "@/components/NotFound";
 import GenreBtn from "@/components/GenreBtn";
+export async function generateMetadata({ params }) {
+  const { movieId } = await params;
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`);
+  const movie = await res.json();
+  return {
+    title: `digi-media | ${movie.original_title}`,
+    description: movie.overview || `صفحه ${movie.original_title}`,
+  };
+}
+
 export default async function movieId({ params }) {
   let { movieId } = await params;
   let data = null;
