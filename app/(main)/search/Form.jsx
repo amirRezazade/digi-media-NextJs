@@ -59,8 +59,8 @@ export default function Form({ query, onQuery, resetPage, type, onType, genre, o
 
       {/* Search input */}
       <div className="relative mb-6">
-        <input type="text" value={query} onChange={(e) => onQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && resetPage()} placeholder="نام فیلم، سریال یا بازیگر را بنویسید..." className="w-full text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800 border border-white/8 rounded-2xl py-4 pr-5 pl-36 text-sm sm:text-base   outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/15 transition-all" />
-        <button onClick={resetPage} className="absolute left-2 top-1/2 -translate-y-1/2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all active:scale-95">
+        <input type="text" value={query} onChange={(e) => onQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && resetPage()} placeholder="نام فیلم، سریال یا بازیگر را بنویسید..." className="w-full text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800 border border-white/8 rounded-2xl py-4 pr-5 pl-36 text-sm sm:text-base   outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/15 transition-colors" />
+        <button onClick={resetPage} className="absolute left-2 top-1/2 -translate-y-1/2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-transform active:scale-95">
           🔍 جستجو
         </button>
       </div>
@@ -119,18 +119,18 @@ export default function Form({ query, onQuery, resetPage, type, onType, genre, o
               <label className="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
                 <span className="ms-3 text-xs xl:text-sm font-medium text-nowrap">دوبله فارسی</span>
                 <input type="checkbox" checked={dubbed} onChange={(e) => onDubbed(e.target.checked)} className="sr-only peer" />
-                <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
+                <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform  peer-checked:bg-orange-400"></div>
               </label>
             </div>
             <div>
               <label className="inline-flex flex-col xl:flex-row items-center gap-1 xl:gap-4 cursor-pointer">
                 <span className="ms-3 text-xs xl:text-sm font-medium text-nowrap  ">زیرنویس فارسی</span>
                 <input type="checkbox" checked={subtitled} onChange={(e) => onSubtitled(e.target.checked)} className="sr-only peer" />
-                <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-orange-400"></div>
+                <div className="relative w-11 h-6  rounded-full peer bg-stone-200 dark:bg-gray-900 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-transform  peer-checked:bg-orange-400"></div>
               </label>
             </div>
           </div>
-          <button onClick={resetPage} className="mr-auto bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-6 py-2.5 rounded-xl transition-all active:scale-95">
+          <button onClick={resetPage} className="mr-auto bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-6 py-2.5 rounded-xl transition-transform active:scale-95">
             اعمال فیلترها
           </button>
         </div>
@@ -142,7 +142,7 @@ function FilterSelect({ label, value, onChange, options }) {
   return (
     <div>
       <label className="block mb-2 uppercase tracking-wide font-medium">{label}</label>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-white/8 rounded-lg px-3 py-2.5  outline-none focus:border-orange-500 transition-all cursor-pointer appearance-none">
+      <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full bg-white dark:bg-gray-800 border border-white/8 rounded-lg px-3 py-2.5  outline-none focus:border-orange-500 transition-colors cursor-pointer appearance-none">
         {options.map((o) => (
           <option key={o.id} value={o.id}>
             {o.name}

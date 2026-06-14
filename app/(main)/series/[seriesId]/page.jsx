@@ -60,7 +60,7 @@ export default async function SeriesId({ params }) {
                   </g>
                 </svg>
               </span>
-              <Link href="/" className="transition-all duration-300 cursor-pointer hover:text-orange-400">
+              <Link href="/" className="transition-colors duration-300 cursor-pointer hover:text-orange-400">
                 خانه
               </Link>
               <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +71,7 @@ export default async function SeriesId({ params }) {
                   <path fillRule="evenodd" clipRule="evenodd" d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" fill="#ffffff"></path>{" "}
                 </g>
               </svg>
-              <Link href="/series" className="transition-all duration-300 cursor-pointer hover:text-orange-400">
+              <Link href="/series" className="transition-colors duration-300 cursor-pointer hover:text-orange-400">
                 سریال ها
               </Link>
               <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,7 +82,7 @@ export default async function SeriesId({ params }) {
                   <path fillRule="evenodd" clipRule="evenodd" d="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" fill="#ffffff"></path>{" "}
                 </g>
               </svg>
-              <span className="transition-all duration-300 cursor-pointer hover:text-orange-400">{data.name}</span>
+              <span className="transition-colors duration-300 cursor-pointer hover:text-orange-400">{data.name}</span>
             </div>
             <div className="flex flex-wrap xs:flex-nowrap gap-6 sm:gap-6 items-start  justify-between my-5 xl:my-8 lg:gap-8">
               <div className="flex flex-col items-center grow  gap-9 max-w-[80%] mx-auto xs:max-w-[30%] md:max-w-[25%] xl:max-w-67.5">
@@ -131,7 +131,7 @@ export default async function SeriesId({ params }) {
                   <p className="text-white relative font-extrabold px-2 before:content[''] before:absolute before:w-1.5 before:h-4 before:left-1/1 before:top-1/2 before:-translate-y-1/2 before:bg-orange-400 before:rounded-full  lg:text-xl xl:text-2xl">{data.name}</p>
                   <div className="hidden sm:flex flex-col items-center ">
                     <div className="flex items-center w-full text-xs divide-x divide-gray-500 xl:text-sm">
-                      <span className="flex items-center px-2 group gap-1 cursor-pointer text-white  hover:text-orange-400 transition-all duration-300">
+                      <span className="flex items-center px-2 group gap-1 cursor-pointer text-white  hover:text-orange-400 transition-colors duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-gray-300 transition-colors group-hover:text-orange-400">
                           <path
                             strokeLinecap="round"
@@ -141,7 +141,7 @@ export default async function SeriesId({ params }) {
                         </svg>
                         پسندیدن
                       </span>
-                      <span className="flex items-start px-2 group gap-1 cursor-pointer text-white  hover:text-orange-400 transition-all duration-300">
+                      <span className="flex items-start px-2 group gap-1 cursor-pointer text-white  hover:text-orange-400 transition-colors duration-300">
                         نپسندیدن
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="rotate-180 size-5 text-gray-300 transition-colors duration-300 group-hover:text-orange-400 ">
                           <path

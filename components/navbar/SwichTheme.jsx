@@ -52,7 +52,7 @@ export default function SwichTheme(params) {
           </g>
         </svg>
       </span>
-      <span className="absolute bg-white rounded-full w-6 h-6 left-1 transition-all duration-300 translate-x-7.5 dark:translate-x-0"></span>
+      <span className="absolute bg-white rounded-full w-6 h-6 left-1 transition-transform duration-300 translate-x-7.5 dark:translate-x-0"></span>
     </button>
   );
 }

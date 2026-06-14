@@ -30,7 +30,7 @@ export default function Auth(params) {
   return (
     <div dir="ltr" className="h-screen flex justify-center items-center  bg-cover bg-no-repeat bg-[url(/images/default-bg.jpg)] select-none">
       <div className="max-w-75 sm:max-w-88 bg-black/40 backdrop-blur-md rounded-2xl py-3 sm:py-5 sm:px-3.5 text-white overflow-hidden">
-        <div id="forms" className={`flex transition-all duration-300 ${shownForm == "register" ? "-translate-x-1/1" : ""}`}>
+        <div className={`flex transition-transform duration-300 ${shownForm == "register" ? "-translate-x-1/1" : ""}`}>
           <form onSubmit={(e) => LoginSubmit(e)} className={` w-full min-h-full flex flex-col gap-5 items-center justify-between shrink-0 px-5 transition-transform duration-300`}>
             <h2 className="text-2xl">Login</h2>
             <div className="w-full flex justify-between items-end border-b-2 py-1.5 border-white">

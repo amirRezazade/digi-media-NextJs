@@ -5,26 +5,15 @@ import SwichTheme from "./SwichTheme";
 import Menu from "./Menu";
 import NavbarSearchInput from "./NavbarSearchInput";
 import NavbarUserNameBtn from "./NavbarUserNameBtn";
+import WatchListBtn from "./WatchListBtn";
 
 export default function Navbar(params) {
   return (
-    <nav className="bg-[url('/images/navbar/navbar.png')]  transition-all duration-300 lg:sticky top-0 z-99 bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3">
+    <nav className="bg-[url('/images/navbar/navbar.png')]  lg:sticky top-0 z-99 bg-center bg-no-repeat pt-3 flex items-center justify-end flex-wrap gap-x-4 gap-y-3">
       <span className="text-white ml-auto mr-1 sm:mr-4 md:mr-8 text-xs sm:text-sm hidden xs:inline-block">
         <span className="hidden sm:inline">جهت نمایش عکس ها و تریلر ها</span> vpn خود را روشن کنید
       </span>
-      <div className="w-9 h-9 rounded-full relative bg-gray-700 flex justify-center items-center cursor-pointer">
-        <span>
-          <svg fill="#fff" width="20" height="20" viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet">
-            <path
-              className="clr-i-outline clr-i-outline-path-1"
-              d="M32.51,27.83A14.4,14.4,0,0,1,30,24.9a12.63,12.63,0,0,1-1.35-4.81V15.15A10.81,10.81,0,0,0,19.21,4.4V3.11a1.33,1.33,0,1,0-2.67,0V4.42A10.81,10.81,0,0,0,7.21,15.15v4.94A12.63,12.63,0,0,1,5.86,24.9a14.4,14.4,0,0,1-2.47,2.93,1,1,0,0,0-.34.75v1.36a1,1,0,0,0,1,1h27.8a1,1,0,0,0,1-1V28.58A1,1,0,0,0,32.51,27.83ZM5.13,28.94a16.17,16.17,0,0,0,2.44-3,14.24,14.24,0,0,0,1.65-5.85V15.15a8.74,8.74,0,1,1,17.47,0v4.94a14.24,14.24,0,0,0,1.65,5.85,16.17,16.17,0,0,0,2.44,3Z"
-            ></path>
-            <path className="clr-i-outline clr-i-outline-path-2" d="M18,34.28A2.67,2.67,0,0,0,20.58,32H15.32A2.67,2.67,0,0,0,18,34.28Z"></path>
-            <rect x="0" y="0" width="36" height="36" fillOpacity="0" />
-          </svg>
-        </span>
-        <span className="bg-orange-400 text-white px-1.5 p-0.5 rounded-lg text-xs absolute -right-1 -top-1">2</span>
-      </div>
+      <WatchListBtn />
       <SwichTheme />
       <NavbarUserNameBtn />
 

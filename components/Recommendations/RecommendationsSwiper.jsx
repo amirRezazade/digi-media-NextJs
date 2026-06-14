@@ -53,7 +53,7 @@ export default function RecommendationsSwiper({ list, type = "series" }) {
           }}
         >
           {list?.map((item) => (
-            <SwiperSlide className=" w-auto rounded-lg overflow-hidden transition-all duration-600 group ">
+            <SwiperSlide className=" w-auto rounded-lg overflow-hidden  group ">
               <Cart type={type} item={item} />
             </SwiperSlide>
           ))}

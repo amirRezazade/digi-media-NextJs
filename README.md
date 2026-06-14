@@ -12,7 +12,7 @@
 [![TMDB API](https://img.shields.io/badge/Powered_by-TMDB_API-01D277?style=flat&logo=themoviedatabase&logoColor=white)](https://www.themoviedb.org/)
 [![Deploy](https://img.shields.io/badge/Deployed_on-Netlify-00C7B7?style=flat&logo=netlify&logoColor=white)](https://www.netlify.com/)
 
-[🔗 مشاهده دمو آنلاین](https://digi-media-next.netlify.app/) · [📂 مشاهده کد](https://github.com/amirRezazade/digi-media-NextJs)
+[🔗 مشاهده دمو آنلاین](https://digi-media-next.netlify.app/)
 
 </div>
 
@@ -143,11 +143,11 @@ NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key_here
 
 ## 🚀 ایده‌ها برای توسعه‌های آینده
 
-- [ ] اتصال احراز هویت به یک بک‌اند واقعی و دیتابیس
-- [ ] افزودن سیستم نظردهی و امتیازدهی کاربران
-- [ ] پشتیبانی کامل از چند زبان (فارسی / انگلیسی)
-- [ ] افزودن تست‌های واحد و یکپارچه‌سازی (Jest, Testing Library)
-- [ ] بهبود بیشتر SEO و عملکرد (Performance)
+- اتصال احراز هویت به یک بک‌اند واقعی و دیتابیس
+- افزودن سیستم نظردهی و امتیازدهی کاربران
+- پشتیبانی کامل از چند زبان (فارسی / انگلیسی)
+- افزودن تست‌های واحد و یکپارچه‌سازی (Jest, Testing Library)
+- بهبود بیشتر SEO و عملکرد (Performance)
 
 <br>
 

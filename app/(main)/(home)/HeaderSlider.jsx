@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import HeaderSliderCart from "@/components/cart/HeaderSliderCart";
 import "./header.css";
 import "swiper/css";
-import HeaderSliderCart from "@/components/cart/HeaderSliderCart";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function HeaderSlider({ list, onActiveIndex }) {
   function change(index) {
@@ -77,7 +79,7 @@ export default function HeaderSlider({ list, onActiveIndex }) {
             onTransitionEnd={(active) => change(active)}
           >
             {list.map((item) => (
-              <SwiperSlide className="transition-all! duration-300! ">
+              <SwiperSlide className="transition-all! duration-300! max-w-60">
                 <Link href={`/${item.media_type == "movie" ? "movie" : "series"}/${item.id}`} className="w-full rounded-md group flex  duration-500 ">
                   <div className="w-full flex flex-col justify-between gap-2 h-full">
                     <div className="relative grow rounded-md transition-transform duration-300 active">

@@ -148,24 +148,24 @@ export default function Profile() {
               <label htmlFor="name" className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">
                 نام و نام خانوادگی*
               </label>
-              <input type="text" disabled={!editing} required minLength="3" id="name" maxLength="20" value={editing ? draft.name : profile.name ?? ""} onChange={(e) => setDraft((p) => ({ ...p, name: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all" />
+              <input type="text" disabled={!editing} required minLength="3" id="name" maxLength="20" value={editing ? draft.name : profile.name ?? ""} onChange={(e) => setDraft((p) => ({ ...p, name: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-colors" />
             </div>
             <div>
               <label htmlFor="email" className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">
                 ایمیل*
               </label>
-              <input type="email" disabled={!editing} required id="email" value={editing ? draft.email : profile.email ?? ""} onChange={(e) => setDraft((p) => ({ ...p, email: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all" />
+              <input type="email" disabled={!editing} required id="email" value={editing ? draft.email : profile.email ?? ""} onChange={(e) => setDraft((p) => ({ ...p, email: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-colors" />
             </div>
             <div>
               <label htmlFor="password" className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">
                 رمزعبور*
               </label>
-              <input disabled={!editing} type="password" required pattern="(?=.*\d)(?=.*[a-z]).{6,}" id="password" value={editing ? draft.password : profile.password ?? ""} onChange={(e) => setDraft((p) => ({ ...p, password: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all" />
+              <input disabled={!editing} type="password" required pattern="(?=.*\d)(?=.*[a-z]).{6,}" id="password" value={editing ? draft.password : profile.password ?? ""} onChange={(e) => setDraft((p) => ({ ...p, password: e.target.value.trim() }))} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-colors" />
             </div>
 
             <div>
               <label className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">بیوگرافی</label>
-              <textarea value={editing ? draft.bio : profile.bio ?? ""} disabled={!editing} onChange={(e) => setDraft((p) => ({ ...p, bio: e.target.value }))} rows={3} className="w-full border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all resize-none" />
+              <textarea value={editing ? draft.bio : profile.bio ?? ""} disabled={!editing} onChange={(e) => setDraft((p) => ({ ...p, bio: e.target.value }))} rows={3} className="w-full border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-colors resize-none" />
             </div>
 
             {editing && (
@@ -205,7 +205,7 @@ function Field({ label, value, editing, type = "text", onChange }) {
   return (
     <div>
       <label className="block text-xs text-gray-300 mb-2 uppercase tracking-wide font-medium">{label}</label>
-      {editing ? <input type={type} value={value} onChange={(e) => onChange(e.target.value)} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-all" /> : <p className="text-sm  border border-gray-400/80 rounded-xl px-4 py-3">{value}</p>}
+      {editing ? <input type={type} value={value} onChange={(e) => onChange(e.target.value)} className="w-full  border border-gray-400/80 rounded-xl px-4 py-3 text-sm  outline-none focus:border-orange-500 transition-colors" /> : <p className="text-sm  border border-gray-400/80 rounded-xl px-4 py-3">{value}</p>}
     </div>
   );
 }

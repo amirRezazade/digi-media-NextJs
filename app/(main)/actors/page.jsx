@@ -35,7 +35,7 @@ export default async function page({ searchParams }) {
               </g>
             </svg>
           </span>
-          <Link href="/" className="transition-all duration-300 cursor-pointer hover:text-orange-400">
+          <Link href="/" className="transition-colors duration-300 cursor-pointer hover:text-orange-400">
             خانه
           </Link>
           <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

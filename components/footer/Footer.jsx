@@ -9,8 +9,8 @@ export default function Footer(params) {
           <p className="text-xs lg:text-sm leading-9 text-center">هدف از ایجاد دیجی مدیا ارائه خدمات کیفی در سطح عالی بود که سایت های فیلم و سریال قادر به رقابت با سایت های قدرتمند خارجی و ایرانی باشند. دیجی مدیا متشکل از بهترین و کامل ترین امکانات هر سایت فیلم و سریال می باشد و سطح کیفی خود را تا آخر حفظ خواهد نمود</p>
           <h3 className=" ">دیجی مدیا در شبکه های اجتماعی</h3>
           <div className="flex gap-2 items-center">
-            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg className="transition-all duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-colors duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-colors duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -18,8 +18,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg className="transition-all duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-colors duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-colors duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -33,8 +33,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg className="transition-all duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-colors duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-colors duration-300 group-hover:fill-sky-500 fill-gray-500 dark:fill-white" width="22px" height="22px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -46,8 +46,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg className="transition-all duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="26" height="26" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-colors duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-colors duration-300 group-hover:fill-rose-600 fill-gray-500 dark:fill-white" width="26" height="26" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0" fill="none" width="20" height="20" />
 
                 <g>
@@ -55,8 +55,8 @@ export default function Footer(params) {
                 </g>
               </svg>
             </button>
-            <button className="w-9 h-9 rounded-full transition-all duration-300 hover:bg-white group flex justify-center items-center">
-              <svg className="transition-all duration-300 group-hover:fill-blue-500 fill-gray-500 dark:fill-white" width="26px" height="26px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <button className="w-9 h-9 rounded-full transition-colors duration-300 hover:bg-white group flex justify-center items-center">
+              <svg className="transition-colors duration-300 group-hover:fill-blue-500 fill-gray-500 dark:fill-white" width="26px" height="26px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -82,20 +82,20 @@ export default function Footer(params) {
           </div>
           <ul className=" flex flex-col gap-3 mt-4 px-3 ">
             <li>
-              <Link href="/" className="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
+              <Link href="/" className="text-xs lg:text-sm transition-colors duration-300 font-extralight hover:opacity-100 opacity-75">
                 صفحه نخست
               </Link>
             </li>
             <li className="">
-              <button className="text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">بلاگ</button>
+              <button className="text-xs lg:text-sm transition-colors duration-300 font-extralight hover:opacity-100 opacity-75">بلاگ</button>
             </li>
             <li>
-              <Link href="/profile" className=" text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
+              <Link href="/profile" className=" text-xs lg:text-sm transition-colors duration-300 font-extralight hover:opacity-100 opacity-75">
                 پروفایل
               </Link>
             </li>
             <li>
-              <Link href="/profile/watch-list" className=" text-xs lg:text-sm transition-all duration-300 font-extralight hover:opacity-100 opacity-75">
+              <Link href="/profile/watch-list" className=" text-xs lg:text-sm transition-colors duration-300 font-extralight hover:opacity-100 opacity-75">
                 علاقه مندی ها
               </Link>
             </li>

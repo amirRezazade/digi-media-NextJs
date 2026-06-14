@@ -54,7 +54,7 @@ export default function ActionMovie({ list }) {
             <span className="text-xs lg:text-sm text-gray-500  dark:text-gray-300">معروف ترین ها</span>
           </div>
         </div>
-        <Link href="/movie?genre=10759" className="flex items-center gap-2 p-2 lg:p-3.5 text-xs lg:text-sm rounded-full hover:opacity-75 transition-all duration-300 text-gray-500 dark:text-gray-300 bg-gray-300 dark:bg-gray-800">
+        <Link href="/movie?genre=10759" className="flex items-center gap-2 p-2 lg:p-3.5 text-xs lg:text-sm rounded-full hover:opacity-75 transition-colors duration-300 text-gray-500 dark:text-gray-300 bg-gray-300 dark:bg-gray-800">
           <span> مشاهده همه </span>
           <span>
             <svg className="fill-[#888888] dark:fill-[#c5c5c5]" width="17px" height="17px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

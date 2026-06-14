@@ -7,7 +7,7 @@ export default function CreditsCart({ elem }) {
   let [loaded, setLoaded] = useState(false);
 
   return (
-    <Link href={`/${elem.media_type == "movie" ? "movie" : "series"}/${elem.id}`} className=" w-auto  rounded-2xl overflow-hidden transition-all duration-600 group">
+    <Link href={`/${elem.media_type == "movie" ? "movie" : "series"}/${elem.id}`} className=" w-auto  rounded-2xl overflow-hidden group">
       <div className="relative h-full">
         <div className="w-full h-full relative rounded-lg overflow-hidden">
           <Image
@@ -21,7 +21,7 @@ export default function CreditsCart({ elem }) {
             }}
             onLoad={() => setLoaded(true)}
           />
-          <div className="w-full h-full absolute top-0 left-0 bg-linear-to-b from-transparent from-50% to-black/50 to-90% transition-all duration-600 group-hover:opacity-0">
+          <div className="w-full h-full absolute top-0 left-0 bg-linear-to-b from-transparent from-50% to-black/50 to-90% transition-opacity duration-600 group-hover:opacity-0">
             <p dir="ltr" className="py-2.5 sm:py-5 px-1.5 sm:px-3 text-xs  sm:text-sm absolute bottom-0 left-0  font-extrabold text-white">
               {elem.original_title ? elem.original_title : elem.name}
             </p>

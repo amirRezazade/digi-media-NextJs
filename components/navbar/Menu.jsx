@@ -71,7 +71,7 @@ export default function Menu(params) {
             </Link>
             <span onClick={() => setOpenIndex((prev) => (prev == 1 ? null : 1))} className=" ml-2 w-8 h-10 transition-transform duration-300 lg:hidden hover:-rotate-90 relative before:content-[''] before:absolute before:w-3 before:h-3   before:border-b-2 before:border-l-2 before:top-1/2 before:left-1/2 before:rotate-45 before:-translate-1/2 before:border-gray-500 dark:before:border-white  "></span>
           </div>
-          <ul className="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:flex-wrap lg:gap-4 lg:top-20 lg:-right-25 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-[740px] lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs">
+          <ul className="w-full overflow-hidden text-black dark:text-white list-disc ps-10 pt-5 pb-3 transition-all duration-300 marker:text-orange-400 flex flex-col gap-3 text-xs lg:absolute lg:text-sm lg:pr-13 lg:pl-50 lg:py-12 lg:flex-wrap lg:gap-4 lg:top-20 lg:-right-25 lg:opacity-0 lg:invisible lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:top-1/1 lg:w-185 lg:h-70 lg:rounded-2xl lg:bg-gray-300/60 lg:dark:bg-gray-900/60 lg:backdrop-blur-xs">
             <li>
               <Link href="/movie" className="inline-flex justify-between items-center hover:text-orange-400 hover:-translate-x-1 transition-transform duration-300">
                 250 فیلم برتر IMDb

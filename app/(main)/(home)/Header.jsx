@@ -8,7 +8,7 @@ export default function Header({ list }) {
 
   return (
     <header className="h-auto md:h-[85vh] bg-gray-900  ">
-      <div className="relative pt-4 sm:py-7 md:py-0 h-full bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left transition-all duration-300 " style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${activeIndex?.backdrop_path}_low) , url('/images/default-bg.jpg')` }}>
+      <div className="relative pt-4 sm:py-7 md:py-0 h-full bg-no-repeat bg-cover bg-center xl:bg-size-[80%_100%] xl:bg-top-left " style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${activeIndex?.backdrop_path}_low) , url('/images/default-bg.jpg')` }}>
         <div className="abslute bg-transparent md:bg-linear-to-r md:from-transparent md:to-gray-950 to-70% h-full md:flex md:justify-center md:items-center">
           <div className="xs:px-3 md:w-1/2 md:flex md:flex-col justify-evenly gap-12 md:px-0 md:pr-3 lg:gap-10 xl:pr-5">
             <div className="hidden md:flex flex-col items-end gap-5 text-white">

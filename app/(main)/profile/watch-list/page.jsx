@@ -72,7 +72,7 @@ export default function watchList(params) {
               { id: "movie", label: "فیلم‌ها" },
               { id: "series", label: "سریال‌ها" },
             ].map((f) => (
-              <button key={f.id} onClick={() => setFilterType(f.id)} className={`px-4 py-2 rounded-lg text-sm  border transition-all ${filterType === f.id ? "bg-orange-500 border-orange-500 text-white" : "border-gray-400/50  hover:border-orange-500 hover:text-orange-400 "} transition-colors`}>
+              <button key={f.id} onClick={() => setFilterType(f.id)} className={`px-4 py-2 rounded-lg text-sm  border  ${filterType === f.id ? "bg-orange-500 border-orange-500 text-white" : "border-gray-400/50  hover:border-orange-500 hover:text-orange-400 "} transition-colors`}>
                 {f.label}
               </button>
             ))}
