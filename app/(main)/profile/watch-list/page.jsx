@@ -23,20 +23,21 @@ export default function watchList(params) {
     async function getMovies() {
       const results = await Promise.all(
         watchListRef?.current?.movie?.map((id) =>
-          fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`)
+          fetch(`/api/tmdb/movie/${id}`)
             .then((r) => r.json())
-            .catch((e) => setError(true))
-        )
+            .catch((e) => setError(true)),
+        ),
       );
+
       setMovies(results);
     }
     async function getSeries() {
       const results = await Promise.all(
         watchListRef?.current?.series?.map((id) =>
-          fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`)
+          fetch(`/api/tmdb/tv/${id}`)
             .then((r) => r.json())
-            .catch((e) => setError(true))
-        )
+            .catch((e) => setError(true)),
+        ),
       );
       setSeries(results);
     }
@@ -97,7 +98,7 @@ export default function watchList(params) {
           {showList?.length !== 0 && (
             <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-4">
               {showList?.map((item) => (
-                <Cart key={item.id} type={item.release_date ? "movie" : "series"} item={item} />
+                <Cart key={item.id} type={item?.release_date ? "movie" : "series"} item={item} />
               ))}
             </div>
           )}

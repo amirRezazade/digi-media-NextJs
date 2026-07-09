@@ -49,7 +49,7 @@ export default function SearchAndShow({ data }) {
     try {
       setIsFetching(true);
       setRetry(false);
-      const res = !query ? await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&page=${pageRef.current}`) : await fetch(`https://api.themoviedb.org/3/search/person?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${encodeURIComponent(query.trim())}&page=${pageRef.current}`);
+      const res = !query ? await fetch(`api/tmdb/person/popular?page=${pageRef.current}`) : await fetch(`api/tmdb/search/person?query=${encodeURIComponent(query.trim())}&page=${pageRef.current}`);
       const response = await res.json();
       if (!res.ok) setRetry(true);
       else {

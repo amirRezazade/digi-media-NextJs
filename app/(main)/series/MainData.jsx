@@ -44,11 +44,7 @@ export default function MainData({ data }) {
     try {
       setIsFetching(true);
       setRetry(false);
-      const res = await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false
-  &vote_count.gte=100
-  &vote_average.gte=1
-  &popularity.gte=5
-  ${activeGenre !== "all" ? `&with_genres=${activeGenre}` : ""}&sort_by=${sortby || "popularity.desc"}&page=${pageRef.current}`);
+      const res = await fetch(`api/tmdb/discover/tv?include_adult=false&vote_count.gte=100&vote_average.gte=1&popularity.gte=5${activeGenre !== "all" ? `&with_genres=${activeGenre}` : ""}&sort_by=${sortby || "popularity.desc"}&page=${pageRef.current}`);
       const response = await res.json();
       if (!res.ok) setRetry(true);
       else {

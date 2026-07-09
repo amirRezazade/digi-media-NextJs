@@ -10,7 +10,7 @@ export default function Trailer({ id, type = "series" }) {
 
   async function getTrailer() {
     try {
-      let response = await fetch(`https://api.themoviedb.org/3/${type == "series" ? "tv" : "movie"}/${id}/videos?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`);
+      let response = await fetch(`/api/tmdb/${type == "series" ? "tv" : "movie"}/${id}/videos`);
       if (!response.ok) setError(true);
       let res = await response.json();
       let list = res.results;

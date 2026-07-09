@@ -44,7 +44,8 @@ export default function MainData({ data }) {
     try {
       setIsFetching(true);
       setRetry(false);
-      const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false
+      // /api/tmdb/discover/movie?...
+      const res = await fetch(`/api/tmdb/discover/movie?include_adult=false
   &vote_count.gte=100
   &vote_average.gte=1
   &popularity.gte=5

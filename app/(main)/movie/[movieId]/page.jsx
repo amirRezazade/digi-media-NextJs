@@ -8,7 +8,7 @@ import NotFound from "@/components/NotFound";
 import GenreBtn from "@/components/GenreBtn";
 
 export async function getMovie(id) {
-  let res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
+  let res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=fa&append_to_response=credits,videos`, {
     next: { revalidate: 604800 },
   });
   return res.json();
@@ -32,7 +32,7 @@ export default async function movieId({ params }) {
 
     if (data?.status_code == 34) return <NotFound />;
     //------------ get recommendationsResponse -----------
-    let recommendationsRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
+    let recommendationsRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${process.env.TMDB_API_KEY}`, {
       next: { revalidate: 604800 },
     });
     let recommendationsResponse = await recommendationsRes.json();

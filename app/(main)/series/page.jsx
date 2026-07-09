@@ -10,14 +10,14 @@ export default async function Series({ searchParams }) {
   let data = null;
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.TMDB_API_KEY}&include_adult=false
 &vote_count.gte=100
 &vote_average.gte=1
 &popularity.gte=5
 ${genre ? `&with_genres=${genre}` : ""}&sort_by=${sortby || "popularity.desc"}&page=1`,
       {
         next: { revalidate: 604800 },
-      }
+      },
     );
     data = await res.json();
   } catch (err) {

@@ -4,7 +4,7 @@ import Link from "next/link";
 import NotFound from "@/components/NotFound";
 
 export async function getActor(id) {
-  let res = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`, {
+  let res = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.TMDB_API_KEY}`, {
     next: { revalidate: 604800 },
   });
 
@@ -20,8 +20,11 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function page({ params }) {
+export default async function page({ params, searchParams }) {
   const { actorsId } = await params;
+  const sp = new URLSearchParams(await searchParams);
+  const pageParam = Number(sp?.get("page")) || 1;
+  const isCast = !sp?.get("crew");
   let data = null;
   let age;
   let credits = null;
@@ -36,7 +39,7 @@ export default async function page({ params }) {
     }
     if (data?.status_code == 34) return <NotFound />;
 
-    let creditsRes = await fetch(`https://api.themoviedb.org/3/person/${actorsId}/combined_credits?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false`, {
+    let creditsRes = await fetch(`https://api.themoviedb.org/3/person/${actorsId}/combined_credits?api_key=${process.env.TMDB_API_KEY}&include_adult=false`, {
       next: { revalidate: 604800 },
     });
     credits = await creditsRes.json();
@@ -121,7 +124,7 @@ export default async function page({ params }) {
             )}
           </div>
         </div>
-        {credits && <ActorCredits credits={credits} actorsId={actorsId} />}
+        {credits && <ActorCredits credits={credits} actorsId={actorsId} page={pageParam} isCast={isCast} />}
       </section>
     </main>
   );

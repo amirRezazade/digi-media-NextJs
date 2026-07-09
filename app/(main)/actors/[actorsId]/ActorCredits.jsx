@@ -3,17 +3,16 @@
 import CreditsCart from "@/components/cart/CreditsCart";
 import Pagination from "@/components/Pagination";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
-export default function ActorCredits({ credits, actorsId }) {
+export default function ActorCredits({ credits, actorsId, page = 1, isCast = true }) {
   let router = useRouter();
   let searchParams = useSearchParams();
   let { cast, crew } = credits;
   cast = [...new Map(credits.cast.map((item) => [item.id, item])).values()];
   crew = [...new Map(credits.crew.map((item) => [item.id, item])).values()];
 
-  let isCast = !searchParams.get("crew");
-  let page = Number(searchParams.get("page")) || 1;
+  // let isCast = !searchParams.get("crew");
+  // let page = Number(searchParams.get("page")) || 1;
   const totalPage = isCast ? Math.ceil(cast.length / 12) : Math.ceil(crew.length / 12);
   const list = isCast ? cast.slice((page - 1) * 12, page * 12) : crew.slice((page - 1) * 12, page * 12);
 

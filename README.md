@@ -128,7 +128,7 @@ npm run dev
 برای اجرای پروژه به یک کلید API از **TMDB** نیاز دارید. کافیست در ریشه پروژه یک فایل `.env.local` بسازید و مقدار زیر را در آن قرار دهید:
 
 ```env
-NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key_here
+TMDB_API_KEY=your_tmdb_api_key_here
 ```
 
 کلید API را می‌توانید به‌صورت رایگان از [سایت TMDB](https://www.themoviedb.org/settings/api) دریافت کنید.

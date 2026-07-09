@@ -78,11 +78,7 @@ export default function Search(params) {
   }
   async function searchMovie() {
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-          toRate ? `&vote_average.lte=${toRate}` : ""
-        }&vote_count.gte=10&include_adult=false&page=${page}`
-      );
+      const response = await fetch(`/api/tmdb/discover/movie?${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&vote_count.gte=10&include_adult=false&page=${page}`);
       // &vote_count.gte=100&include_adult=false&page=${page}
       let res = await response.json();
       if (!response.ok) setError(true);
@@ -101,11 +97,7 @@ export default function Search(params) {
       const tvSort = sort == "release_date.desc" ? "first_air_date.desc" : sort;
       const tvGenre = genreMap[genre] ?? genre;
 
-      const response = await fetch(
-        `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${tvGenre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-          toRate ? `&vote_average.lte=${toRate}` : ""
-        }&vote_count.gte=10&include_adult=false&page=${page}`
-      );
+      const response = await fetch(`/api/tmdb/discover/tv?${genre !== "all" ? `&with_genres=${tvGenre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&vote_count.gte=10&include_adult=false&page=${page}`);
       // &vote_count.gte=100&include_adult=false&page=${page}
       let res = await response.json();
       if (!response.ok) setError(true);
@@ -125,17 +117,9 @@ export default function Search(params) {
     const tvGenre = genreMap[genre] ?? genre;
     try {
       const [movieRes, tvRes] = await Promise.all([
-        fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-            toRate ? `&vote_average.lte=${toRate}` : ""
-          }&vote_count.gte=10&include_adult=false&page=${page}`
-        ),
+        fetch(`/api/tmdb/discover/movie?${genre !== "all" ? `&with_genres=${genre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${sort}${fromYear ? `&primary_release_date.gte=${fromYear}-01-01` : ""}${toYear ? `&primary_release_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&vote_count.gte=10&include_adult=false&page=${page}`),
         // &vote_count.gte=100&include_adult=false&page=${page}
-        fetch(
-          `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}${genre !== "all" ? `&with_genres=${tvGenre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${
-            toRate ? `&vote_average.lte=${toRate}` : ""
-          }&vote_count.gte=10&include_adult=false&page=${page}`
-        ),
+        fetch(`/api/tmdb/discover/tv?${genre !== "all" ? `&with_genres=${tvGenre}` : ""}${country !== "all" ? `&with_origin_country=${country}` : ""}&sort_by=${tvSort}${fromYear ? `&first_air_date.gte=${fromYear}-01-01` : ""}${toYear ? `&first_air_date.lte=${toYear}-12-31` : ""}${fromRate ? `&vote_average.gte=${fromRate}` : "&vote_average.gte=1"}${toRate ? `&vote_average.lte=${toRate}` : ""}&vote_count.gte=10&include_adult=false&page=${page}`),
       ]);
 
       const movies = await movieRes.json();
@@ -169,7 +153,7 @@ export default function Search(params) {
   }
   async function SearchByQuery(type) {
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/search/${type}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&query=${query}&page=${page}&include_adult=false`);
+      const response = await fetch(`/api/tmdb/search/${type}?query=${query}&page=${page}&include_adult=false`);
       let res = await response.json();
       if (!response.ok) setError(true);
       else setError(false);
