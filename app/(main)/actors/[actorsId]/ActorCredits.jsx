@@ -10,9 +10,6 @@ export default function ActorCredits({ credits, actorsId, page = 1, isCast = tru
   let { cast, crew } = credits;
   cast = [...new Map(credits.cast.map((item) => [item.id, item])).values()];
   crew = [...new Map(credits.crew.map((item) => [item.id, item])).values()];
-
-  // let isCast = !searchParams.get("crew");
-  // let page = Number(searchParams.get("page")) || 1;
   const totalPage = isCast ? Math.ceil(cast.length / 12) : Math.ceil(crew.length / 12);
   const list = isCast ? cast.slice((page - 1) * 12, page * 12) : crew.slice((page - 1) * 12, page * 12);
 
