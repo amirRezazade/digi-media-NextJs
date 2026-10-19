@@ -10,9 +10,9 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![TMDB API](https://img.shields.io/badge/Powered_by-TMDB_API-01D277?style=flat&logo=themoviedatabase&logoColor=white)](https://www.themoviedb.org/)
-[![Deploy](https://img.shields.io/badge/Deployed_on-Netlify-00C7B7?style=flat&logo=netlify&logoColor=white)](https://www.netlify.com/)
+[![Deploy](https://img.shields.io/badge/Deployed_on-Vercel-00C7B7?style=flat&logo=vercel&logoColor=white)](https://www.vercel.com/)
 
-[🔗 مشاهده دمو آنلاین](https://digi-media-next.netlify.app/)
+[🔗 مشاهده دمو آنلاین](https://digi-media-next.vercel.app/)
 
 </div>
 
@@ -31,7 +31,7 @@
 
 نسخه اول این پروژه با **HTML, CSS و JavaScript خام** پیاده‌سازی شده بود؛ پس از یادگیری Next.js، کل پروژه از ابتدا و با معماری App Router، کامپوننت‌های قابل استفاده مجدد و رویکرد مدرن‌تر بازنویسی شد. هدف از این بازسازی، تجربه‌ی پیاده‌سازی یک پروژه واقعی و کامل با Next.js و تمرین الگوهای رایج فرانت‌اند (Server/Client Components، Middleware، Caching، Pagination و ...) بوده است.
 
-> 💡 برای تجربه کامل و تعاملی، از [دمو آنلاین پروژه](https://digi-media-next.netlify.app/) دیدن کنید.
+> 💡 برای تجربه کامل و تعاملی، از [دمو آنلاین پروژه](https://digi-media-next.vercel.app/) دیدن کنید.
 
 <br>
 
@@ -74,7 +74,7 @@
 | اسلایدر     | [Swiper.js](https://swiperjs.com/)                       |
 | منبع داده   | [TMDB API](https://www.themoviedb.org/documentation/api) |
 | احراز هویت  | کوکی + Middleware در Next.js                             |
-| دیپلوی      | [Netlify](https://www.netlify.com/)                      |
+| دیپلوی      | [vercel](https://www.vercel.com/)                      |
 
 <br>
 
